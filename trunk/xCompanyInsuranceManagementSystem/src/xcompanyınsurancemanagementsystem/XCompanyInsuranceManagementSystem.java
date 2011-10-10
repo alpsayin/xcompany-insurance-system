@@ -17,7 +17,11 @@ public class XCompanyInsuranceManagementSystem
     public static void main(String[] args)
     {
         System.out.println("Hello Google SVN!");
+
+        System.out.print("mertmert");
+
         
         System.out.println("alp is here :)");
+
     }
 }
