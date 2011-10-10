@@ -43,8 +43,20 @@ public class SerializableTrial
             FileInputStream cfis = new FileInputStream("customers.bin");
             ObjectInputStream clois = new ObjectInputStream(clfis);
             ObjectInputStream cois = new ObjectInputStream(cfis);
-            Customer c = (Customer)cois.readObject();
-            Claim cl = (Claim)clois.readObject();
+            Object co = cois.readObject();
+            System.out.println(co.getClass().getCanonicalName());
+            Customer c;
+            if(co.getClass().equals(Customer.class))
+                c = (Customer)co;
+            else
+                throw new ClassCastException("Customer cast exception");
+            
+            Claim cl;
+            Object clo = clois.readObject();
+            if(clo.getClass().equals(Claim.class))
+                cl = (Claim)clo;
+            else
+                throw new ClassCastException("Claim cast exception");
             System.out.println(c.getClaimslist());
             System.out.println(cl.getItsCustomer());
             clois.close();
