@@ -6,36 +6,38 @@ package xcompanyims;
 
 
 
-public class ClaimControl {
-	public boolean add() {
-            return true;
-	}
-	
-	public boolean changeStatus() {
-            return true;
-	}
-	
-	private boolean notifyCustomer() {
-	    return true;
-	}
-	
-	private boolean notifyGarage() {
-	    return true;
-	}
-	
-	public boolean assignClaimHandler() {
-	    return true;
-	}
-	
-	public boolean assignFinancer() {
-	    return true;
-	}
-	
-	public boolean checkInsurance() {
-	    return true;
-	}
-	
-	private boolean checkValidation() {
-	    return true;
-	}
+public class ClaimControl 
+{
+    public boolean add() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean changeStatus() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    private boolean notifyCustomer() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    private boolean notifyGarage() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean assignClaimHandler() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean assignFinancer() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean checkInsurance() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    private boolean checkValidation() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
 }

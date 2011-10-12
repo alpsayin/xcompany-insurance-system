@@ -5,28 +5,32 @@ package xcompanyims;
 
 
 
-public class AccountControl {
-	public boolean add() {
-            return true;
-	}
-	
-	public boolean modify() {
-            return true;
-	}
-	
-	public boolean delete() {
-            return true;
-	}
-	
-	public boolean resetPassword() {
-            return true;
-	}
-	
-	public boolean changePassword() {
-            return true;
-	}
-	
-	public boolean login() {
-            return true;
-	}
+public class AccountControl 
+{
+    public boolean add() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean modify() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+
+    public boolean delete() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+
+    public boolean resetPassword() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean changePassword() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
+    public boolean login() 
+    {
+        throw new UnsupportedOperationException("not yet implemented!");
+    }
 }
