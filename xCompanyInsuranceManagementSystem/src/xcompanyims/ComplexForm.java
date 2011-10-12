@@ -6,5 +6,6 @@ package xcompanyims;
 
 
 
-public class ComplexForm extends Form {
+public class ComplexForm extends Form 
+{
 }
