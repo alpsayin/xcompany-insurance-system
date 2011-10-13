@@ -2,6 +2,7 @@ package xcompany.structures;
 
 //  @ File Name : Claim.java
 
+import xcompany.structures.form.Form;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -16,8 +17,8 @@ public class Claim
     private String description;
     private int id;
     private ClaimHandler claimHandler;
-    private String status;
-    private String type;
+    private ClaimStatus status;
+    private ClaimType type;
     private Form form;
     private double damage;
     private Calendar dateOfCrash;
@@ -72,22 +73,6 @@ public class Claim
     {
         this.claimHandler = claimHandler;
     }
-    public String getStatus()
-    {
-        return status;
-    }
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-    public String getType()
-    {
-        return type;
-    }
-    public void setType(String type)
-    {
-        this.type = type;
-    }
     public Form getForm()
     {
         return form;
@@ -135,5 +120,29 @@ public class Claim
     public void setEmailsList(ArrayList<Email> emailsList)
     {
         this.emailsList = emailsList;
+    }
+    public ClaimStatus getStatus()
+    {
+        return status;
+    }
+    public void setStatus(ClaimStatus status)
+    {
+        this.status = status;
+    }
+    public ClaimType getType()
+    {
+        return type;
+    }
+    public void setType(ClaimType type)
+    {
+        this.type = type;
+    }
+    public enum ClaimType
+    {
+        SimpleClaim, ComplexClaim
+    }
+    public enum ClaimStatus
+    {
+        Reported, WaitingForms, Registered, Assigned, Rejected, ApprovedPendingPayment, ApprovedPaymentInProcess, ApprovedPaymentComplete
     }
 }
