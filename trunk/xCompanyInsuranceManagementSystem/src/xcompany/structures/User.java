@@ -115,7 +115,18 @@ public class User implements Serializable
     }
     @Override public String toString()
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+       
+        String newLine = "\n";
+
+        return "Id: " + id + newLine
+            + "Name: " + name + newLine
+            + "Surname: " + surname + newLine
+            + "Username: " + username + newLine
+            + "Email: " + email + newLine
+            + "Password: " + password + newLine
+            + "Address: " + address ;
+           
+       
     }
     public static int generateId()
     {

@@ -32,8 +32,17 @@ public class AccountControl
     {
         throw new UnsupportedOperationException("not yet implemented!");
     }
-    public boolean login() 
+    public User login(String username, String password)
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        DatabaseControl db = new DatabaseControl();
+        User user = db.getUser(username);
+
+        if(user == null)
+            return null;
+        else if(user.getPassword().equals(password))
+            return user;
+
+        return null;
+
     }
 }
