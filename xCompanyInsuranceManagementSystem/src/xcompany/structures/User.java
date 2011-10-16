@@ -2,11 +2,11 @@ package xcompany.structures;
 
 //  @ File Name : User.java
 //  @ Date : 11.10.2011
+import java.io.Serializable;
 
 
 
-
-public class User 
+public class User implements Serializable
 {
     private String name;
     private String surname;
@@ -21,6 +21,17 @@ public class User
         this.surname = surname;
         this.username = username;
         this.email = email;
+    }
+    public User(String name, String surname, String username, String email,
+            String password, String address, int id)
+    {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.id = id;
     }
     public String getName()
     {
@@ -92,7 +103,15 @@ public class User
     }
     @Override public boolean equals(Object o)
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(o instanceof User){
+            User user = (User) o;
+            return  (this.id == user.id) &&     //maybe just enough to compare id
+                    (this.name == user.name) &&
+                    (this.surname == user.surname) &&            
+                    (this.username == user.username);
+        }
+        return false;
+
     }
     @Override public String toString()
     {
