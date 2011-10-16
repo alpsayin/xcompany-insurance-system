@@ -2,12 +2,15 @@ package xcompany.control;
 //  @ File Name : AccountControl.java
 //  @ Date : 11.10.2011
 
+import xcompany.structures.User;
+
+
 
 
 
 public class AccountControl 
 {
-    public boolean add() 
+    public boolean add(User user)
     {
         throw new UnsupportedOperationException("not yet implemented!");
     }
