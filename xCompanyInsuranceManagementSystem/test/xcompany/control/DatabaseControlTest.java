@@ -56,8 +56,9 @@ public class DatabaseControlTest {
                 address = "Hanstavagen 49 Stockholm Sweden";
         int id = 1;
 
-        User user = db.getUser(1);
-        
+        User user = db.getUser(username);
+
+       
         assertEquals(name, user.getName());
         assertEquals(surname, user.getSurname());
         assertEquals(username, user.getUsername());
