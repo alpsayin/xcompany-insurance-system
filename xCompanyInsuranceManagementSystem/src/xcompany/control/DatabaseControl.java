@@ -39,8 +39,8 @@ public class DatabaseControl {
                     "Hanstavagen 49 Stockholm Sweden", 1);
             User customer2 = new Customer("alp", "sayin", "alpsayin", "alp@gmail.com", "12345",
                     "Akalla Stockholm Sweden", 2);
-            userList.put(Integer.toString(customer1.getId()), customer1);
-            userList.put(Integer.toString(customer2.getId()), customer2);
+            userList.put(customer1.getUsername(), customer1);
+            userList.put(customer2.getUsername(), customer2);
 
             objectOutputStream.writeObject(userList);
 
@@ -89,11 +89,10 @@ public class DatabaseControl {
     }
 
 
-    public User getUser(int id){
-        String idString = id + "";
-
+    public User getUser(String userName){
+        
         HashMap<String, User> userList = getAllUsers();
-        User user = userList.get(idString);
+        User user = userList.get(userName);
 
         return user;
     }
