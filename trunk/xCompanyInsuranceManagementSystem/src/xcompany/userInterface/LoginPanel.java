@@ -44,6 +44,8 @@ public class LoginPanel extends javax.swing.JPanel {
         textFieldPassword = new javax.swing.JTextField();
         buttonLogin = new javax.swing.JButton();
 
+        setMinimumSize(new java.awt.Dimension(800, 600));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Login", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 102, 153))); // NOI18N
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -114,16 +116,16 @@ public class LoginPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(300, 300, 300)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(176, 176, 176)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
