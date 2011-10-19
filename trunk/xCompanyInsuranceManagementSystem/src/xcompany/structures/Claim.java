@@ -2,6 +2,7 @@ package xcompany.structures;
 
 //  @ File Name : Claim.java
 
+import java.io.Serializable;
 import xcompany.structures.form.Form;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,7 +12,7 @@ import java.util.Calendar;
 
 
 
-public class Claim 
+public class Claim implements Serializable
 {
     private Customer owner;
     private String description;
