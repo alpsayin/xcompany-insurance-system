@@ -1,12 +1,15 @@
 package xcompany.structures;
 
 //  @ File Name : Garage.java
+
+import java.io.Serializable;
+
 //  @ Date : 11.10.2011
 
 
 
 
-public class Garage 
+public class Garage implements Serializable
 {
     private String name;
     private String address;
