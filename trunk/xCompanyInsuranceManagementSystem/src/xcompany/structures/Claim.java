@@ -6,6 +6,7 @@ import java.io.Serializable;
 import xcompany.structures.form.Form;
 import java.util.ArrayList;
 import java.util.Calendar;
+import xcompany.control.DatabaseControl;
 
 //  @ Date : 11.10.2011
 
@@ -31,9 +32,19 @@ public class Claim implements Serializable
         this.owner = owner;
         this.description = description;
         this.id = generateId();
+        this.status = ClaimStatus.WaitingForms;
     }
-    public static int generateId() 
+    public static int generateId()
     {
+        try
+        {
+            int id = DatabaseControl.generateClaimId();
+            return id;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return -1;
     }
     public void emailGarage() 

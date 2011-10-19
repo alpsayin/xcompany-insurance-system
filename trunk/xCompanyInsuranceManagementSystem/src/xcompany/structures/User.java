@@ -3,6 +3,7 @@ package xcompany.structures;
 //  @ File Name : User.java
 //  @ Date : 11.10.2011
 import java.io.Serializable;
+import xcompany.control.DatabaseControl;
 
 
 
@@ -136,6 +137,15 @@ public class User implements Serializable
     }
     public static int generateId()
     {
+        try
+        {
+            int id = DatabaseControl.generateUserId();
+            return id;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return -1;
     }
     public static String generatePassword()
