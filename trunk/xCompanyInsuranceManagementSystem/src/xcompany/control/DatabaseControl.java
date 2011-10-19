@@ -139,9 +139,9 @@ public abstract class DatabaseControl
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
-        for(Claim c : claimList.getClaimList())
+        for(Claim c : claimList.getClaimList().values())
             if(user.equals(c.getOwner()))
-                returnList.getClaimList().add(c);
+                returnList.getClaimList().put(c.getId(), c);
         
         return returnList;
     }
@@ -150,9 +150,9 @@ public abstract class DatabaseControl
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
-        for(Claim c : claimList.getClaimList())
+        for(Claim c : claimList.getClaimList().values())
             if(handler.equals(c.getClaimHandler()))
-                returnList.getClaimList().add(c);
+                returnList.getClaimList().put(c.getId(), c);
         
         return returnList;
     }
@@ -161,9 +161,9 @@ public abstract class DatabaseControl
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
-        for(Claim c : claimList.getClaimList())
+        for(Claim c : claimList.getClaimList().values())
             if(handler.equals(c.getFinancer()))
-                returnList.getClaimList().add(c);
+                returnList.getClaimList().put(c.getId(), c);
         
         return returnList;
     }
@@ -172,7 +172,7 @@ public abstract class DatabaseControl
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
-        for(Claim c : claimList.getClaimList())
+        for(Claim c : claimList.getClaimList().values())
             if(c.getStatus() == status)
                 returnList.add(c);
         
@@ -182,7 +182,7 @@ public abstract class DatabaseControl
     {
         int max = -1;
         ClaimList claimList = getAllClaims();
-        for(Claim c : claimList.getClaimList())
+        for(Claim c : claimList.getClaimList().values())
             if(c.getId() >= max)
                 max = c.getId();
         return max+1;
