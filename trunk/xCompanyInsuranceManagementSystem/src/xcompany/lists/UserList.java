@@ -18,7 +18,18 @@ public class UserList
     {
         userList = new HashMap<String,User>();
     }
-    public HashMap<String,User> getUserList()
+    public User get(String username)
+    {
+        return getUserList().get(username);
+    }
+    public User getUserById(int id)
+    {
+        for(User u : getUserList().values())
+            if(u.getId() == id)
+                return u;
+        return null;
+    }
+    private HashMap<String,User> getUserList()
     {
         return userList;
     }

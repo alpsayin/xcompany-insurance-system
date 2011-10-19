@@ -26,6 +26,9 @@ public class DatabaseControl
 {
 
     private static final String usersFile = "AllUsers.bin";
+    private static final String claimsFile = "AllClaims.bin";
+    private static final String garagesFile = "AllGarages.bin";
+    
 
     /*
      ^Because we dont have sign up (for now), we can use this function to create some users just once.
@@ -49,7 +52,8 @@ public class DatabaseControl
             objectOutputStream.close();
             fileOutputStream.close();
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
             e.printStackTrace();
             System.exit(1);
         }
@@ -57,16 +61,23 @@ public class DatabaseControl
         return true;
     }
 
-    private ClaimList getAllClaims() 
+    public static synchronized ClaimList getAllClaims() throws IOException, ClassNotFoundException
     {
-        ClaimList claimList = new ClaimList();
-
+        ClaimList claimList = null;
+        
+        FileInputStream fileInputStream = new FileInputStream(claimsFile);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        
+        claimList = (ClaimList) objectInputStream.readObject();
+        
+        objectInputStream.close();
+        
         return claimList;
     }
 
-    private UserList getAllUsers() throws IOException, ClassNotFoundException
+    public static synchronized UserList getAllUsers() throws IOException, ClassNotFoundException
     {
-        UserList userList = new UserList();
+        UserList userList = null;
 
         FileInputStream fileInputStream = new FileInputStream(usersFile);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -74,30 +85,38 @@ public class DatabaseControl
         userList = (UserList) objectInputStream.readObject();
 
         objectInputStream.close();
-        fileInputStream.close();
         
         return userList;
-
     }
 
-    private GarageList getAllGarages()
+    public static synchronized GarageList getAllGarages() throws IOException, ClassNotFoundException
     {
-        GarageList garageList = new GarageList();
+        GarageList garagesList = null;
 
-        return garageList;
+        FileInputStream fileInputStream = new FileInputStream(garagesFile);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+
+        garagesList = (GarageList) objectInputStream.readObject();
+
+        objectInputStream.close();
+        
+        return garagesList;
     }
 
-
-    public User getUser(String userName) throws IOException, ClassNotFoundException
+    public static synchronized User getUser(String userName) throws IOException, ClassNotFoundException
     {
-        return getAllUsers().getUserList().get(userName);
+        return getAllUsers().get(userName);
     }
-
-
-    public ClaimList getUserClaims(Object User) 
+    
+    public static synchronized ClaimList getUserClaims(User user) throws IOException, ClassNotFoundException 
     {
-        ClaimList claimList = new ClaimList();
-
+        ClaimList claimList = getAllClaims();
+        ClaimList returnList = new ClaimList();
+        
+        for(Claim c : claimList.getClaimList())
+            if(user.equals(c.getOwner()))
+                returnList.getClaimList().add(c);
+        
         return claimList;
     }
 
