@@ -3,6 +3,7 @@ package xcompany.structures;
 //  @ File Name : ClaimHandler.java
 
 import java.util.ArrayList;
+import xcompany.control.ClaimControl;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim.ClaimStatus;
 
@@ -36,7 +37,8 @@ public class ClaimHandler extends User
             {
                 claim.setStatus(ClaimStatus.Rejected);
             }
-            claim.notifyUser();
+            ClaimControl cc = new ClaimControl();
+            cc.notifyCustomer(claim.getId());
         }
         else
         {
@@ -64,5 +66,5 @@ public class ClaimHandler extends User
     public enum HandlerType
     {
         HighRanked, LowRanked
-    } 
+    }
 }
