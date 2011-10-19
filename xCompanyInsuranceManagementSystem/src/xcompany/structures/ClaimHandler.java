@@ -24,27 +24,7 @@ public class ClaimHandler extends User
         this.rank = rank;
     }
     
-    public void approve(Claim claim, boolean approvement, String message) throws Exception
-    {
-        if(this.equals(claim.getClaimHandler()))
-        {
-            if(approvement)
-            {
-                claim.setStatus(ClaimStatus.ApprovedPendingPayment);
-                claim.emailGarage();
-            }
-            else
-            {
-                claim.setStatus(ClaimStatus.Rejected);
-            }
-            ClaimControl cc = new ClaimControl();
-            cc.notifyCustomer(claim, message);
-        }
-        else
-        {
-            throw new Exception("Handler of this claim is not this handler");
-        }
-    }
+  
     
     public HandlerType getRank()
     {
