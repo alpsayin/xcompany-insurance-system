@@ -24,7 +24,7 @@ public class ClaimHandler extends User
         this.rank = rank;
     }
     
-    public void approve(Claim claim, boolean approvement) throws Exception
+    public void approve(Claim claim, boolean approvement, String message) throws Exception
     {
         if(this.equals(claim.getClaimHandler()))
         {
@@ -38,7 +38,7 @@ public class ClaimHandler extends User
                 claim.setStatus(ClaimStatus.Rejected);
             }
             ClaimControl cc = new ClaimControl();
-            cc.notifyCustomer(claim.getId());
+            cc.notifyCustomer(claim, message);
         }
         else
         {
