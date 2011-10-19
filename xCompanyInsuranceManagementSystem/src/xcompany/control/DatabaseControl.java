@@ -3,6 +3,7 @@ package xcompany.control;
 //  @ File Name : DatabaseControl.java
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,7 +23,7 @@ import xcompany.lists.UserList;
 
 
 
-public class DatabaseControl 
+public abstract class DatabaseControl 
 {
 
     private static final String usersFile = "AllUsers.bin";
@@ -34,7 +35,8 @@ public class DatabaseControl
      ^Because we dont have sign up (for now), we can use this function to create some users just once.
      *
      */
-    public boolean createSomeUsers() {
+    public static void main(String args[]) 
+    {
         try{
             FileOutputStream fileOutputStream = new FileOutputStream(usersFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -57,10 +59,34 @@ public class DatabaseControl
             e.printStackTrace();
             System.exit(1);
         }
-
-        return true;
     }
-
+    public static synchronized void writeAllClaims(ClaimList claimList) throws IOException
+    {
+        FileOutputStream fileOutputStream = new FileOutputStream(claimsFile);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        
+        objectOutputStream.writeObject(claimList);
+        
+        objectOutputStream.close();
+    }
+    public static synchronized void writeAllUsers(UserList userList) throws IOException
+    {
+        FileOutputStream fileOutputStream = new FileOutputStream(usersFile);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        
+        objectOutputStream.writeObject(userList);
+        
+        objectOutputStream.close();
+    }
+    public static synchronized void writeAllGarages(GarageList garageList) throws IOException
+    {
+        FileOutputStream fileOutputStream = new FileOutputStream(garagesFile);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        
+        objectOutputStream.writeObject(garageList);
+        
+        objectOutputStream.close();
+    }
     public static synchronized ClaimList getAllClaims() throws IOException, ClassNotFoundException
     {
         ClaimList claimList = null;
