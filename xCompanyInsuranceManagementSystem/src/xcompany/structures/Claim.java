@@ -56,13 +56,13 @@ public class Claim implements Serializable
         e.setText("Repairs for claim from "+owner.getName()+" "+owner.getSurname()+" regarding the damages dated "+getDateOfCrash()+" should be started.");
         e.send();
     }
-    public void notifyUser() 
+    public void notifyUser(String customizedLetter) 
     {
         Email e = new Email();
         e.setFrom(claimHandler.getEmail());
         e.setTo(owner.getEmail());
         e.setSubject("Claim Decision");
-        e.setText("Decision for your claim dated "+getDateOfCrash()+" described as \""+getDescription()+"\" is "+getStatus());
+        e.setText("Decision for your claim dated "+getDateOfCrash()+" described as \""+getDescription()+"\" is "+getStatus()+"\n"+((customizedLetter!=null)?customizedLetter:""));
         e.send();
     }
     public Customer getOwner()
