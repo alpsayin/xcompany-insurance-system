@@ -18,6 +18,10 @@ public class ClaimList
     {
         claimList = new ArrayList<Claim>();
     }
+    public Claim get(int index)
+    {
+        return getClaimList().get(index);
+    }
     public ArrayList<Claim> getClaimList()
     {
         return claimList;
