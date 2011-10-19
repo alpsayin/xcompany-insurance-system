@@ -4,13 +4,13 @@ package xcompany.control;
 
 import java.io.IOException;
 import xcompany.lists.ClaimList;
-import xcompany.lists.UserList;
 import xcompany.structures.Claim;
 import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.ClaimHandler;
 import xcompany.structures.Financer;
 import xcompany.structures.Customer;
 import xcompany.structures.Email;
+import xcompany.structures.Insurance;
 
 //  @ Date : 11.10.2011
 
@@ -73,16 +73,28 @@ public class ClaimControl
         return true;
     }
     public boolean checkInsurance(Claim c) throws IOException, ClassNotFoundException
-    {
-        ClaimList claimList = DatabaseControl.getAllClaims();
-        return claimList.get(c.getId()).getOwner().getInsurance().checkConstraints(c);
+    {        
+        Insurance ins = c.getOwner().getInsurance();
+        if(c.getDamage() > ins.getMaxAmount())
+            return false;
+        
+        if(c.getDateOfCrash().after(ins.getExpiryDate()))
+            return false;
+        
+        Customer customer = c.getOwner();
+        int numOfApprovedClaims = 0;
+        for(Claim oldClaim : customer.getHistory())
+            if(oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPendingPayment
+                    || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentInProcess
+                    || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentComplete)
+                numOfApprovedClaims++;
+        
+        if(numOfApprovedClaims >= ins.getMaxNumRepairs())
+            return false;
+            
+        return true;
     }
-    
-    private boolean checkValidation() 
-    {
-        throw new UnsupportedOperationException("not yet implemented!");
-    }
-
+   
     public void approve(ClaimHandler claimHandler, Claim claim, boolean approvement, String message) throws Exception
     {
         ClaimControl cc = new ClaimControl();
