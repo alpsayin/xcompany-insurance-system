@@ -26,4 +26,8 @@ public class ClaimList
     {
         return claimList;
     }
+    public void add(Claim c)
+    {
+        getClaimList().add(c);
+    }
 }
