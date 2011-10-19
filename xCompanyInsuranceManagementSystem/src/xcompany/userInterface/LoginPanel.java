@@ -134,13 +134,20 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_textFieldUserNameActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        JFrame temp = new JFrame();
-        temp = (JFrame)this.getTopLevelAncestor();
-        AccountControl accountControl = new AccountControl();
-        User user = accountControl.login(textFieldUserName.getText(), textFieldPassword.getText());
-        if(user instanceof Customer){
-            temp.setContentPane(new CustomerHomePanel());
-            temp.pack();
+        try
+        {
+            JFrame temp = new JFrame();
+            temp = (JFrame)this.getTopLevelAncestor();
+            AccountControl accountControl = new AccountControl();
+            User user = accountControl.login(textFieldUserName.getText(), textFieldPassword.getText());
+            if(user instanceof Customer){
+                temp.setContentPane(new CustomerHomePanel());
+                temp.pack();
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
 
     }//GEN-LAST:event_buttonLoginActionPerformed

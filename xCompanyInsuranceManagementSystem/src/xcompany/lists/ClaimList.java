@@ -6,6 +6,7 @@ package xcompany.lists;
 
 import xcompany.structures.Claim;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,21 +14,21 @@ import java.util.ArrayList;
  */
 public class ClaimList
 {
-    private ArrayList<Claim> claimList;
+    private HashMap<Integer, Claim> claimList;
     public ClaimList()
     {
-        claimList = new ArrayList<Claim>();
+        claimList = new HashMap<Integer, Claim>();
     }
-    public Claim get(int index)
+    public Claim get(int id)
     {
-        return getClaimList().get(index);
+        return getClaimList().get(id);
     }
-    public ArrayList<Claim> getClaimList()
+    public HashMap<Integer, Claim> getClaimList()
     {
         return claimList;
     }
     public void add(Claim c)
     {
-        getClaimList().add(c);
+        getClaimList().put(c.getId(), c);
     }
 }
