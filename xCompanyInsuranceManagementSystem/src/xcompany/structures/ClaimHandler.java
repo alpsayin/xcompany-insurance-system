@@ -4,6 +4,7 @@ package xcompany.structures;
 
 import java.util.ArrayList;
 import xcompany.lists.ClaimList;
+import xcompany.structures.Claim.ClaimStatus;
 
 //  @ Date : 11.10.2011
 
@@ -15,12 +16,6 @@ public class ClaimHandler extends User
     private HandlerType rank;
     private ArrayList<Claim> takenClaims;
 
-    public ClaimHandler(String name, String surname, String username, String email)
-    {
-        super(name, surname, username, email);
-        throw new UnsupportedOperationException("not yet implemented!");
-    }
-
     public ClaimHandler(String name, String surname, String username, String email,
             String password, String address, HandlerType rank)
     {
@@ -28,16 +23,27 @@ public class ClaimHandler extends User
         this.rank = rank;
     }
     
-    public void approve(Claim claim, boolean approvement)
+    public void approve(Claim claim, boolean approvement) throws Exception
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(this.equals(claim.getClaimHandler()))
+        {
+            if(approvement)
+            {
+                claim.setStatus(ClaimStatus.ApprovedPendingPayment);
+                claim.emailGarage();
+            }
+            else
+            {
+                claim.setStatus(ClaimStatus.Rejected);
+            }
+            claim.notifyUser();
+        }
+        else
+        {
+            throw new Exception("Handler of this claim is not this handler");
+        }
     }
-
-    public static ClaimList getAvailableClaims()
-    {
-        throw new UnsupportedOperationException("not yet implemented!");
-    }
-
+    
     public HandlerType getRank()
     {
         return rank;
@@ -47,7 +53,6 @@ public class ClaimHandler extends User
     {
         this.rank = rank;
     }
-
     public ArrayList<Claim> getTakenClaims()
     {
         return takenClaims;
