@@ -3,6 +3,8 @@ package xcompany.structures;
 //  @ File Name : RegistrationHandler.java
 
 import xcompany.lists.ClaimList;
+import xcompany.structures.Claim.ClaimStatus;
+import xcompany.structures.Claim.ClaimType;
 
 //  @ Date : 11.10.2011
 
@@ -16,12 +18,18 @@ public class RegistrationHandler extends User
     {
         super(name, surname, username, email);
     }
-    public void assignClaimClassification(Claim c) 
+    public void assignClaimClassification(Claim c, ClaimType type) throws Exception
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(c.getStatus()==ClaimStatus.Reported)
+            c.setType(type);
+        else
+            throw new Exception("Status of this claim is not eligible for this operation");
     }
-    public void approveForm(Claim c) 
+    public void approveForm(Claim c) throws Exception
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(c.getStatus()==ClaimStatus.WaitingForms)
+            c.setStatus(ClaimStatus.Reported);
+        else
+            throw new Exception("Status of this claim is not eligible for this operation");
     }
 }
