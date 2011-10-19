@@ -3,17 +3,18 @@ package xcompany.control;
 //  @ File Name : DatabaseControl.java
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import xcompany.structures.User;
 import xcompany.structures.Customer;
-import xcompany.structures.Garage;
 import xcompany.structures.Claim;
 import java.util.ArrayList;
 import java.util.HashMap;
+import xcompany.lists.ClaimList;
+import xcompany.lists.GarageList;
+import xcompany.lists.UserList;
 
 
 //  @ Date : 11.10.2011
@@ -21,9 +22,10 @@ import java.util.HashMap;
 
 
 
-public class DatabaseControl {
+public class DatabaseControl 
+{
 
-    String usersFile = "AllUsers.bin";
+    private static final String usersFile = "AllUsers.bin";
 
     /*
      ^Because we dont have sign up (for now), we can use this function to create some users just once.
@@ -55,51 +57,46 @@ public class DatabaseControl {
         return true;
     }
 
-    private ArrayList<Claim> getAllClaims() {
-            ArrayList<Claim> claimList = new ArrayList<Claim>();
+    private ClaimList getAllClaims() 
+    {
+        ClaimList claimList = new ClaimList();
 
-            return claimList;
+        return claimList;
     }
 
-    private HashMap<String, User> getAllUsers(){
-        HashMap<String, User> userList = null;
+    private UserList getAllUsers() throws IOException, ClassNotFoundException
+    {
+        UserList userList = new UserList();
 
-        try{
-            FileInputStream fileInputStream = new FileInputStream(usersFile);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        FileInputStream fileInputStream = new FileInputStream(usersFile);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-            userList = (HashMap<String, User>) objectInputStream.readObject();
+        userList = (UserList) objectInputStream.readObject();
 
-            objectInputStream.close();
-            fileInputStream.close();
-            
-        }
-        catch(Exception e){
-            System.err.println(e.toString());
-        }
-
+        objectInputStream.close();
+        fileInputStream.close();
+        
         return userList;
 
     }
 
-    private ArrayList<Garage> getAllGarages() {
-        ArrayList<Garage> garageList = new ArrayList<Garage>();
+    private GarageList getAllGarages()
+    {
+        GarageList garageList = new GarageList();
 
         return garageList;
     }
 
 
-    public User getUser(String userName){
-        
-        HashMap<String, User> userList = getAllUsers();
-        User user = userList.get(userName);
-
-        return user;
+    public User getUser(String userName) throws IOException, ClassNotFoundException
+    {
+        return getAllUsers().getUserList().get(userName);
     }
 
 
-    public ArrayList<Claim> getUserClaims(Object User) {
-        ArrayList<Claim> claimList = new ArrayList<Claim>();
+    public ClaimList getUserClaims(Object User) 
+    {
+        ClaimList claimList = new ClaimList();
 
         return claimList;
     }
