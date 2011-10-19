@@ -178,4 +178,22 @@ public abstract class DatabaseControl
         
         return returnList;
     }
+    public static synchronized int generateClaimId() throws ClassNotFoundException, IOException
+    {
+        int max = -1;
+        ClaimList claimList = getAllClaims();
+        for(Claim c : claimList.getClaimList())
+            if(c.getId() >= max)
+                max = c.getId();
+        return max+1;
+    }
+    public static synchronized int generateUserId() throws ClassNotFoundException, IOException
+    {
+        int max = -1;
+        UserList userList = getAllUsers();
+        for(User u : userList.getUserList().values())
+            if(u.getId() >= max)
+                max = u.getId();
+        return max+1;
+    }
 }
