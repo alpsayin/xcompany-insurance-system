@@ -12,7 +12,7 @@ import xcompany.lists.ClaimList;
 
 public class ClaimHandler extends User 
 {
-    private ClaimType rank;
+    private HandlerType rank;
     private ArrayList<Claim> takenClaims;
 
     public ClaimHandler(String name, String surname, String username, String email)
@@ -22,9 +22,9 @@ public class ClaimHandler extends User
     }
 
     public ClaimHandler(String name, String surname, String username, String email,
-            String password, String address, int id, ClaimType rank)
+            String password, String address, HandlerType rank)
     {
-        super(name, surname, username, email, password, address, id);
+        super(name, surname, username, email, password, address);
         this.rank = rank;
     }
     
@@ -38,12 +38,12 @@ public class ClaimHandler extends User
         throw new UnsupportedOperationException("not yet implemented!");
     }
 
-    public ClaimType getRank()
+    public HandlerType getRank()
     {
         return rank;
     }
 
-    public void setRank(ClaimType rank)
+    public void setRank(HandlerType rank)
     {
         this.rank = rank;
     }
@@ -56,7 +56,7 @@ public class ClaimHandler extends User
     {
         this.takenClaims = takenClaims;
     }
-    public enum ClaimType
+    public enum HandlerType
     {
         HighRanked, LowRanked
     }

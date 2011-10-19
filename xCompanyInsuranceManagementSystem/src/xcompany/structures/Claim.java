@@ -25,21 +25,33 @@ public class Claim
     private Garage garage;
     private Financer financer;
     private ArrayList<Email> emailsList;
-    public Claim()
+    public Claim(Customer owner, String description)
     {
-        
+        this.owner = owner;
+        this.description = description;
+        this.id = generateId();
     }
-    public int generateId() 
+    public static int generateId() 
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        return -1;
     }
     public void emailGarage() 
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        Email e = new Email();
+        e.setFrom(claimHandler.getEmail());
+        e.setTo(garage.getEmail());
+        e.setSubject("Repair Order");
+        e.setText("Repairs for claim from "+owner.getName()+" "+owner.getSurname()+" regarding the damages dated "+getDateOfCrash()+" should be started.");
+        e.send();
     }
     public void notifyUser() 
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        Email e = new Email();
+        e.setFrom(claimHandler.getEmail());
+        e.setTo(owner.getEmail());
+        e.setSubject("Claim Decision");
+        e.setText("Decision for your claim dated "+getDateOfCrash()+" described as \""+getDescription()+"\" is "+getStatus());
+        e.send();
     }
     public Customer getOwner()
     {

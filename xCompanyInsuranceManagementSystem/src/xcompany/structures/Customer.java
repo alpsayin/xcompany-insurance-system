@@ -20,9 +20,9 @@ public class Customer extends User
     }
 
     public Customer(String name, String surname, String username, String email,
-            String password, String address, int id)
+            String password, String address)
     {
-        super(name, surname, username, email, password, address, id);
+        super(name, surname, username, email, password, address);
     }
 
     public void report(Object Claim) 
