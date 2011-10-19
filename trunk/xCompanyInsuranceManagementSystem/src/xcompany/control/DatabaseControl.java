@@ -43,9 +43,9 @@ public abstract class DatabaseControl
 
             HashMap<String, User> userList = new HashMap<String, User>();
             User customer1 = new Customer("mert", "karadogan", "gmertk", "gmertk@gmail.com", "12345",
-                    "Hanstavagen 49 Stockholm Sweden", 1);
+                    "Hanstavagen 49 Stockholm Sweden");
             User customer2 = new Customer("alp", "sayin", "alpsayin", "alp@gmail.com", "12345",
-                    "Akalla Stockholm Sweden", 2);
+                    "Akalla Stockholm Sweden");
             userList.put(customer1.getUsername(), customer1);
             userList.put(customer2.getUsername(), customer2);
 
