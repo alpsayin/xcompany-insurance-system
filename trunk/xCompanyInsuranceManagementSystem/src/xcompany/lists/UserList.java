@@ -4,7 +4,7 @@
  */
 package xcompany.lists;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import xcompany.structures.User;
 
 /**
@@ -13,12 +13,12 @@ import xcompany.structures.User;
  */
 public class UserList
 {
-    private ArrayList<User> userList;
+    private HashMap<String,User> userList;
     public UserList()
     {
-        userList = new ArrayList<User>();
+        userList = new HashMap<String,User>();
     }
-    public ArrayList<User> getUserList()
+    public HashMap<String,User> getUserList()
     {
         return userList;
     }

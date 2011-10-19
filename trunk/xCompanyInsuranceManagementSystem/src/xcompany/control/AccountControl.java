@@ -39,7 +39,7 @@ public class AccountControl
 
         if(user == null)
             return null;
-        else if(user.getPassword().equals(password))
+        else if(user.checkPassword(password))
             return user;
 
         return null;
