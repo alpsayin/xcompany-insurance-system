@@ -29,7 +29,7 @@ public class UserList
                 return u;
         return null;
     }
-    private HashMap<String,User> getUserList()
+    public HashMap<String,User> getUserList()
     {
         return userList;
     }
