@@ -13,9 +13,32 @@ public class Insurance {
     private double maxAmount;
     private int maxNumRepairs;
     private Calendar expiryDate;
+    public Insurance(double maxAmount, int maxNumRepairs, Calendar expiryDate)
+    {
+        this.maxAmount = maxAmount;
+        this.maxNumRepairs = maxNumRepairs;
+        this.expiryDate = expiryDate;
+    }
     public boolean checkConstraints(Claim c) 
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(c.getDamage() > this.getMaxAmount())
+            return false;
+        
+        if(c.getDateOfCrash().after(this.getExpiryDate()))
+            return false;
+        
+        Customer customer = c.getOwner();
+        int numOfApprovedClaims = 0;
+        for(Claim oldClaim : customer.getHistory())
+            if(oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPendingPayment
+                    || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentInProcess
+                    || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentComplete)
+                numOfApprovedClaims++;
+        
+        if(numOfApprovedClaims >= getMaxNumRepairs())
+            return false;
+            
+        return true;
     }
     public double getMaxAmount()
     {
