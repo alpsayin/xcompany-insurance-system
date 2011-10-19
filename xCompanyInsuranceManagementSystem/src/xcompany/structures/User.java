@@ -91,15 +91,22 @@ public class User implements Serializable
     }
     public boolean resetPassword(String username, String email)
     {
-        throw new UnsupportedOperationException("not yet implemented!");
-    }
-    public void sendEmail(Email m)
-    {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(this.getUsername().equals(username))
+            if(this.getEmail().equals(email))
+            {
+                this.setPassword(generatePassword());
+                Email e = new Email();
+                e.setFrom("password@xCompany.com");
+                e.setTo(this.getEmail());
+                e.setSubject("Password Reset");
+                e.setText("Your new password is \""+getPassword()+"\"");
+                return true;
+            }
+        return false;
     }
     public boolean checkPassword(String password)
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        return this.getPassword().equals(password);
     }
     @Override public boolean equals(Object o)
     {
