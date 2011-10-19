@@ -51,4 +51,12 @@ public class Email
     {
         this.text = text;
     }
+    public void send()
+    {
+        System.out.println(this);
+    }
+    @Override public String toString()
+    {
+        return "From:"+getFrom()+"\nTo:"+getTo()+"\nSubject"+getSubject()+"\n"+getText();
+    }
 }

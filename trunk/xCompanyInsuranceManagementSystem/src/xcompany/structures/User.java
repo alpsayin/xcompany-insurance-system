@@ -23,15 +23,15 @@ public class User implements Serializable
         this.email = email;
     }
     public User(String name, String surname, String username, String email,
-            String password, String address, int id)
+            String password, String address)
     {
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.password = generatePassword();
         this.address = address;
-        this.id = id;
+        this.id = generateId();
     }
     public String getName()
     {
@@ -103,12 +103,11 @@ public class User implements Serializable
     }
     @Override public boolean equals(Object o)
     {
+        if(o == null)
+            return false;
         if(o instanceof User){
             User user = (User) o;
-            return  (this.id == user.id) &&     //maybe just enough to compare id
-                    (this.name == user.name) &&
-                    (this.surname == user.surname) &&            
-                    (this.username == user.username);
+            return  (this.username.equals(user.username));
         }
         return false;
 
@@ -130,10 +129,10 @@ public class User implements Serializable
     }
     public static int generateId()
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        return -1;
     }
     public static String generatePassword()
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        return "123456";
     }
 }
