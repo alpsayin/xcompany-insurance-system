@@ -44,27 +44,12 @@ public class Claim implements Serializable
         catch(Exception e)
         {
             e.printStackTrace();
+            
         }
         return -1;
     }
-    public void emailGarage() 
-    {
-        Email e = new Email();
-        e.setFrom(claimHandler.getEmail());
-        e.setTo(garage.getEmail());
-        e.setSubject("Repair Order");
-        e.setText("Repairs for claim from "+owner.getName()+" "+owner.getSurname()+" regarding the damages dated "+getDateOfCrash()+" should be started.");
-        e.send();
-    }
-    public void notifyUser(String customizedLetter) 
-    {
-        Email e = new Email();
-        e.setFrom(claimHandler.getEmail());
-        e.setTo(owner.getEmail());
-        e.setSubject("Claim Decision");
-        e.setText("Decision for your claim dated "+getDateOfCrash()+" described as \""+getDescription()+"\" is "+getStatus()+"\n"+((customizedLetter!=null)?customizedLetter:""));
-        e.send();
-    }
+
+
     public Customer getOwner()
     {
         return owner;
