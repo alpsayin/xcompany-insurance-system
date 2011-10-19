@@ -3,7 +3,6 @@ package xcompany.control;
 //  @ File Name : DatabaseControl.java
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,11 +10,12 @@ import java.io.ObjectOutputStream;
 import xcompany.structures.User;
 import xcompany.structures.Customer;
 import xcompany.structures.Claim;
-import java.util.ArrayList;
 import java.util.HashMap;
 import xcompany.lists.ClaimList;
 import xcompany.lists.GarageList;
 import xcompany.lists.UserList;
+import xcompany.structures.ClaimHandler;
+import xcompany.structures.Financer;
 
 
 //  @ Date : 11.10.2011
@@ -145,7 +145,28 @@ public abstract class DatabaseControl
         
         return returnList;
     }
-    
+    public static synchronized ClaimList getClaimsOfHandler(ClaimHandler handler) throws IOException, ClassNotFoundException
+    {
+        ClaimList claimList = getAllClaims();
+        ClaimList returnList = new ClaimList();
+        
+        for(Claim c : claimList.getClaimList())
+            if(handler.equals(c.getClaimHandler()))
+                returnList.getClaimList().add(c);
+        
+        return returnList;
+    }
+    public static synchronized ClaimList getClaimsOfFinancer(Financer handler) throws IOException, ClassNotFoundException
+    {
+        ClaimList claimList = getAllClaims();
+        ClaimList returnList = new ClaimList();
+        
+        for(Claim c : claimList.getClaimList())
+            if(handler.equals(c.getFinancer()))
+                returnList.getClaimList().add(c);
+        
+        return returnList;
+    }
     public static synchronized ClaimList getClaimsByStatus(Claim.ClaimStatus status) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = getAllClaims();
