@@ -17,14 +17,23 @@ public class Financer extends User
         super(name,surname,username,email);
         takenClaims = new ClaimList();
     }
-    public void markAsPaymentInProcess(Object Claim) 
+    public void takeClaim(Claim claim)
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        claim.setFinancer(this);
     }
-
-    public void markAsPaymentCompleted(Object Claim) 
+    public void markAsPaymentInProcess(Claim claim) throws Exception
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        if(claim.getFinancer().equals(this))
+            claim.setStatus(Claim.ClaimStatus.ApprovedPaymentInProcess);
+        else
+            throw new Exception("Claim not owned by this financer");
+    }
+    public void markAsPaymentCompleted(Claim claim) throws Exception
+    {
+        if(claim.getFinancer().equals(this))
+            claim.setStatus(Claim.ClaimStatus.ApprovedPaymentComplete);
+        else
+            throw new Exception("Claim not owned by this financer");
     }
     public ClaimList getTakenClaims()
     {

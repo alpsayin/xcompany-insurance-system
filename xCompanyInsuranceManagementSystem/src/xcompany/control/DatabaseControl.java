@@ -143,7 +143,18 @@ public abstract class DatabaseControl
             if(user.equals(c.getOwner()))
                 returnList.getClaimList().add(c);
         
-        return claimList;
+        return returnList;
     }
-
+    
+    public static synchronized ClaimList getClaimsByStatus(Claim.ClaimStatus status) throws IOException, ClassNotFoundException
+    {
+        ClaimList claimList = getAllClaims();
+        ClaimList returnList = new ClaimList();
+        
+        for(Claim c : claimList.getClaimList())
+            if(c.getStatus() == status)
+                returnList.add(c);
+        
+        return returnList;
+    }
 }
