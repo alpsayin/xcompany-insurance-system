@@ -1,6 +1,12 @@
 package xcompany.control;
 
 //  @ File Name : ClaimControl.java
+
+import java.io.IOException;
+import xcompany.lists.ClaimList;
+import xcompany.structures.Claim;
+import xcompany.structures.Claim.ClaimStatus;
+import xcompany.structures.ClaimHandler;
 //  @ Date : 11.10.2011
 
 
@@ -8,25 +14,41 @@ package xcompany.control;
 
 public class ClaimControl 
 {
-    public boolean add() 
+    public boolean add(Claim c) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        claimList.add(c);
+        return true;
     }
-    public boolean changeStatus() 
+    public boolean changeStatus(int id, ClaimStatus status) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        Claim claim = claimList.get(id);
+        if(claim != null){
+            claim.setStatus(status);
+            return true;
+        }
+        return false;
     }
-    private boolean notifyCustomer() 
+    public boolean notifyCustomer(int id) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        Claim claim = claimList.get(id);
+        if(claim != null){
+            claim.notifyUser();
+            return true;
+        }
+        return false;
     }
     private boolean notifyGarage() 
     {
         throw new UnsupportedOperationException("not yet implemented!");
     }
-    public boolean assignClaimHandler() 
+    public boolean assignClaimHandler(Claim c, ClaimHandler ch) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        claimList.get(c.getId()).setClaimHandler(ch);
+        
     }
     public boolean assignFinancer() 
     {
