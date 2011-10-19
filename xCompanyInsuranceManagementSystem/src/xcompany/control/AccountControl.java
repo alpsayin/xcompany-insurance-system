@@ -2,6 +2,8 @@ package xcompany.control;
 //  @ File Name : AccountControl.java
 //  @ Date : 11.10.2011
 
+import java.io.IOException;
+import xcompany.lists.UserList;
 import xcompany.structures.User;
 
 
@@ -14,34 +16,58 @@ public class AccountControl
     {
         throw new UnsupportedOperationException("not yet implemented!");
     }
-    public boolean modify() 
+    public boolean modify(String username, User user) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        UserList userList = DatabaseControl.getAllUsers();
+        User u = userList.get(username);
+        if(u != null){
+            u.setAddress(user.getAddress());
+            u.setEmail(user.getEmail());
+            u.setName(user.getName());
+            u.setPassword(user.getPassword());
+            u.setSurname(user.getPassword());
+            DatabaseControl.writeAllUsers(userList);
+            return true;
+        }
+        return false;
+
+
     }
 
-    public boolean delete() 
+    public boolean delete(String username) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        UserList userList = DatabaseControl.getAllUsers();
+        if(userList.getUserList().containsKey(username)){
+            userList.getUserList().remove(username);
+            DatabaseControl.writeAllUsers(userList);
+            return true;
+        }
+        return false;
     }
 
     public boolean resetPassword() 
     {
         throw new UnsupportedOperationException("not yet implemented!");
     }
-    public boolean changePassword() 
+    public boolean changePassword(String username, String oldPassword, String newPassword) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        UserList userList = DatabaseControl.getAllUsers();
+        User user = userList.get(username);
+
+        if( (user != null) && (user.checkPassword(oldPassword))){
+            user.setPassword(newPassword);
+            DatabaseControl.writeAllUsers(userList);
+            return true;
+        }
+        return false;
+
     }
-    public User login(String username, String password)
+    public User login(String username, String password) throws IOException, ClassNotFoundException
     {
-        DatabaseControl db = new DatabaseControl();
-        User user = db.getUser(username);
-
-        if(user == null)
-            return null;
-        else if(user.checkPassword(password))
+        User user = DatabaseControl.getUser(username);
+        if((user != null) && (user.checkPassword(password)))
             return user;
-
+        
         return null;
 
     }
