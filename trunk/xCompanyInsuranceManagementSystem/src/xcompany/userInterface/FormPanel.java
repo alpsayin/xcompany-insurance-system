@@ -6,12 +6,17 @@ package xcompany.userInterface;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import xcompany.structures.Claim;
+import xcompany.structures.Customer;
+import xcompany.structures.User;
 import xcompany.structures.form.Form;
 import xcompany.structures.form.FormFactory;
 
@@ -19,20 +24,38 @@ import xcompany.structures.form.FormFactory;
  *
  * @author Alp Sayin
  */
-public class FormPanel extends JPanel
+public class FormPanel extends JPanel implements ActionListener
 {
     ArrayList<JLabel> fields;
     ArrayList<JTextArea> values; 
     JButton sendButton;
-    public FormPanel(Form form)
+    Claim claim;
+    User user;
+    boolean editable;
+    public FormPanel(User u, Claim c)
     {
-        sendButton = new JButton("");
+        this.claim = c;
+        this.user = u;
+        if(user instanceof Customer)
+        {
+            sendButton = new JButton("Send");
+            editable = true;
+        }
+        else
+        {
+            sendButton = new JButton("Approve");
+            editable = false;
+        }
+        
+        Form form = c.getForm();
+        sendButton.addActionListener(this);
         fields = new ArrayList<JLabel>();
         values = new ArrayList<JTextArea>();
         for(String field : form.getFields().keySet())
         {
             JLabel fieldLabel = new JLabel(field);
             JTextArea valueField = new JTextArea(form.getFields().get(field));
+            valueField.setEditable(editable);
             fields.add(fieldLabel);
             values.add(valueField);
         }
@@ -47,13 +70,20 @@ public class FormPanel extends JPanel
         this.add("Center",fieldsPanel);
         this.add("South", sendButton);
     }
-    public static void main(String args[])
+    @Override public void actionPerformed(ActionEvent e)
     {
-        JFrame f = new JFrame();
-        Form form = FormFactory.createComplexFormInstance();
-        f.add(new FormPanel(form));
-        f.setVisible(true);
-        f.pack();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if(user instanceof Customer)
+        {
+            for(int i=0; i<fields.size(); i++)
+            {
+                JLabel field = fields.get(i);
+                JTextArea area = values.get(i);
+                claim.getForm().getFields().put(field.getText(), area.getText());
+            }
+        }
+        else
+        {
+            
+        }
     }
 }
