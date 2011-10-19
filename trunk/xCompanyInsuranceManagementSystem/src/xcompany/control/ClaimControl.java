@@ -82,4 +82,27 @@ public class ClaimControl
     {
         throw new UnsupportedOperationException("not yet implemented!");
     }
+
+    public void approve(ClaimHandler claimHandler, Claim claim, boolean approvement, String message) throws Exception
+    {
+        ClaimControl cc = new ClaimControl();
+        if(claimHandler.equals(claim.getClaimHandler()))
+        {
+            if(approvement)
+            {
+                claim.setStatus(ClaimStatus.ApprovedPendingPayment);
+                cc.notifyGarage(claim);
+            }
+            else
+            {
+                claim.setStatus(ClaimStatus.Rejected);
+            }
+            
+            cc.notifyCustomer(claim, message);
+        }
+        else
+        {
+            throw new Exception("Handler of this claim is not this handler");
+        }
+    }
 }
