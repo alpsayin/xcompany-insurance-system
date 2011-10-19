@@ -64,5 +64,5 @@ public class ClaimHandler extends User
     public enum HandlerType
     {
         HighRanked, LowRanked
-    }
+    } 
 }
