@@ -45,6 +45,7 @@ public class ClaimControl
         e.setText("Decision for your claim dated "+ c.getDateOfCrash()+" described as \""+ 
                 c.getDescription()+"\" is "+c.getStatus() + ". And the claim handler's message is: " + message );
         e.send();
+        c.getEmailsList().add(e);
 
         return false;
     }
@@ -56,6 +57,7 @@ public class ClaimControl
         e.setSubject("Repair Order");
         e.setText("Repairs for claim from "+c.getOwner().getName()+" "+c.getOwner().getSurname()+" regarding the damages dated "+c.getDateOfCrash()+" should be started.");
         e.send();
+        c.getEmailsList().add(e);
         return true;
     }
     public boolean assignClaimHandler(Claim c, ClaimHandler ch) throws IOException, ClassNotFoundException
