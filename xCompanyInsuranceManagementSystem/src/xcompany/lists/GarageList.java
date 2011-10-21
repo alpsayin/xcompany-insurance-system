@@ -4,6 +4,7 @@
  */
 package xcompany.lists;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import xcompany.structures.Garage;
 
@@ -11,7 +12,7 @@ import xcompany.structures.Garage;
  *
  * @author Alp Sayin
  */
-public class GarageList
+public class GarageList implements Serializable
 {
     private ArrayList<Garage> garageList;
     public GarageList()
