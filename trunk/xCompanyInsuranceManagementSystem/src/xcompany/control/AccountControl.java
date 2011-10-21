@@ -4,7 +4,11 @@ package xcompany.control;
 
 import java.io.IOException;
 import xcompany.lists.UserList;
+import xcompany.structures.Customer;
 import xcompany.structures.User;
+import xcompany.structures.Financer;
+import xcompany.structures.ClaimHandler;
+import xcompany.structures.RegistrationHandler;
 
 
 
@@ -12,9 +16,10 @@ import xcompany.structures.User;
 
 public class AccountControl 
 {
-    public boolean add(User user)
+    public void add(User user) throws IOException, ClassNotFoundException
     {
-        throw new UnsupportedOperationException("not yet implemented!");
+        DatabaseControl.addUser(user);
+
     }
     public boolean modify(String username, User user) throws IOException, ClassNotFoundException
     {
