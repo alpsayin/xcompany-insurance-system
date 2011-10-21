@@ -4,6 +4,7 @@
  */
 package xcompany.lists;
 
+import java.io.Serializable;
 import xcompany.structures.Claim;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.HashMap;
  *
  * @author Alp Sayin
  */
-public class ClaimList
+public class ClaimList implements Serializable
 {
     private HashMap<Integer, Claim> claimList;
     public ClaimList()

@@ -4,6 +4,7 @@
  */
 package xcompany.lists;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import xcompany.structures.User;
 
@@ -11,7 +12,7 @@ import xcompany.structures.User;
  *
  * @author Alp Sayin
  */
-public class UserList
+public class UserList implements Serializable
 {
     private HashMap<String,User> userList;
     public UserList()
