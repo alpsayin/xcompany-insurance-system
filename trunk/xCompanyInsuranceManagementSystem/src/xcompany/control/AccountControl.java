@@ -19,19 +19,21 @@ public class AccountControl
     public boolean modify(String username, User user) throws IOException, ClassNotFoundException
     {
         UserList userList = DatabaseControl.getAllUsers();
-        User u = userList.get(username);
-        if(u != null){
-            u.setAddress(user.getAddress());
-            u.setEmail(user.getEmail());
-            u.setName(user.getName());
-            u.setPassword(user.getPassword());
-            u.setSurname(user.getPassword());
-            DatabaseControl.writeAllUsers(userList);
-            return true;
+        if(userList != null){
+            User u = userList.get(username);
+            if(u != null){
+                u.setAddress(user.getAddress());
+                u.setEmail(user.getEmail());
+                u.setName(user.getName());
+                u.setPassword(user.getPassword());
+                u.setSurname(user.getPassword());
+
+                userList.getUserList().put(u.getUsername(), u);
+                DatabaseControl.writeAllUsers(userList);
+                return true;
+            }
         }
         return false;
-
-
     }
 
     public boolean delete(String username) throws IOException, ClassNotFoundException
