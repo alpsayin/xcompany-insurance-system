@@ -35,13 +35,13 @@ public abstract class DatabaseControl
             FileOutputStream fileOutputStream = new FileOutputStream(usersFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-            HashMap<String, User> userList = new HashMap<String, User>();
+            UserList userList = new UserList();
             User customer1 = new Customer("mert", "karadogan", "gmertk", "gmertk@gmail.com", "12345",
-                    "Hanstavagen 49 Stockholm Sweden");
+                    "Hanstavagen 49 Stockholm Sweden", 1);
             User customer2 = new Customer("alp", "sayin", "alpsayin", "alp@gmail.com", "12345",
-                    "Akalla Stockholm Sweden");
-            userList.put(customer1.getUsername(), customer1);
-            userList.put(customer2.getUsername(), customer2);
+                    "Akalla Stockholm Sweden", 2);
+            userList.getUserList().put(customer1.getUsername(), customer1);
+            userList.getUserList().put(customer2.getUsername(), customer2);
 
             objectOutputStream.writeObject(userList);
 
@@ -55,7 +55,7 @@ public abstract class DatabaseControl
         }
     }
 
-    public static synchronized void addUser(User user) throws IOException, ClassNotFoundException{
+    public static synchronized boolean addUser(User user) throws IOException, ClassNotFoundException{
         UserList userList = DatabaseControl.getAllUsers();
         if(userList == null){
             userList = new UserList();
@@ -64,9 +64,11 @@ public abstract class DatabaseControl
         if( !(userList.getUserList().containsKey(user.getUsername())) ){
             userList.getUserList().put(user.getUsername(), user);
             writeAllUsers(userList);
+            return true;
         }
         else{
-            System.err.println("User already exists");
+            System.err.println("Username already exists");
+            return false;
         }
 
     }
@@ -201,6 +203,9 @@ public abstract class DatabaseControl
     {
         int max = -1;
         UserList userList = getAllUsers();
+        if(userList == null){
+            return 1;
+        }
         for(User u : userList.getUserList().values())
             if(u.getId() >= max)
                 max = u.getId();

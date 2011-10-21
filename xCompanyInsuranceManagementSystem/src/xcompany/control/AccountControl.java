@@ -16,9 +16,9 @@ import xcompany.structures.RegistrationHandler;
 
 public class AccountControl 
 {
-    public void add(User user) throws IOException, ClassNotFoundException
+    public boolean add(User user) throws IOException, ClassNotFoundException
     {
-        DatabaseControl.addUser(user);
+        return DatabaseControl.addUser(user);
 
     }
     public boolean modify(String username, User user) throws IOException, ClassNotFoundException
