@@ -14,15 +14,17 @@ public class Customer extends User
     private Insurance insurance;
     private ArrayList<Claim> history;
 
-    public Customer(String name, String surname, String username, String email)
-    {
-        super(name, surname, username, email);
-    }
-
     public Customer(String name, String surname, String username, String email,
             String password, String address)
     {
         super(name, surname, username, email, password, address);
+    }
+
+
+    public Customer(String name, String surname, String username, String email,
+            String password, String address, int id)
+    {
+        super(name, surname, username, email, password, address, id);
     }
 
     public void report(Object Claim) 
