@@ -16,6 +16,9 @@ import javax.swing.JFrame;
 import xcompany.control.AccountControl;
 import xcompany.structures.Customer;
 import xcompany.structures.User;
+import xcompany.structures.Financer;
+import xcompany.structures.ClaimHandler;
+import xcompany.structures.RegistrationHandler;
 
 /**
  *
@@ -140,10 +143,21 @@ public class LoginPanel extends javax.swing.JPanel {
             temp = (JFrame)this.getTopLevelAncestor();
             AccountControl accountControl = new AccountControl();
             User user = accountControl.login(textFieldUserName.getText(), textFieldPassword.getText());
+
             if(user instanceof Customer){
                 temp.setContentPane(new CustomerHomePanel());
                 temp.pack();
             }
+            else if(user instanceof RegistrationHandler){
+
+            }
+            else if(user instanceof ClaimHandler){
+
+            }
+            else if(user instanceof Financer){
+
+            }
+            
         }
         catch(Exception e)
         {
