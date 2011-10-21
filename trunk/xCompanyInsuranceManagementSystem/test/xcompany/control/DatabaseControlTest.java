@@ -34,8 +34,7 @@ public class DatabaseControlTest {
 
     @Before
     public void setUp() {
-        db = new DatabaseControl();
-        db.createSomeUsers();
+        
     }
 
     @After
@@ -51,22 +50,7 @@ public class DatabaseControlTest {
     public void testGetUser() {
         System.out.println("getUser");
         
-        String name = "mert", surname = "karadogan", username = "gmertk",
-                email = "gmertk@gmail.com", password = "12345",
-                address = "Hanstavagen 49 Stockholm Sweden";
-        int id = 1;
-
-        User user = db.getUser(username);
-
-       
-        assertEquals(name, user.getName());
-        assertEquals(surname, user.getSurname());
-        assertEquals(username, user.getUsername());
-        assertEquals(email, user.getEmail());
-        assertEquals(password, user.getPassword());
-        assertEquals(address, user.getAddress());
-        assertEquals(id, user.getId());
-
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -75,12 +59,7 @@ public class DatabaseControlTest {
     @Test
     public void testGetUserClaims() {
         System.out.println("getUserClaims");
-        Object User = null;
-        DatabaseControl instance = new DatabaseControl();
-        ArrayList expResult = null;
-        ArrayList result = instance.getUserClaims(User);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        
         fail("The test case is a prototype.");
     }
 

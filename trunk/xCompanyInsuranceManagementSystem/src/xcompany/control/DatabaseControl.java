@@ -7,15 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import xcompany.structures.User;
-import xcompany.structures.Customer;
-import xcompany.structures.Claim;
 import java.util.HashMap;
-import xcompany.lists.ClaimList;
-import xcompany.lists.GarageList;
-import xcompany.lists.UserList;
-import xcompany.structures.ClaimHandler;
-import xcompany.structures.Financer;
+import xcompany.structures.*;
+import xcompany.lists.*;
 
 
 //  @ Date : 11.10.2011

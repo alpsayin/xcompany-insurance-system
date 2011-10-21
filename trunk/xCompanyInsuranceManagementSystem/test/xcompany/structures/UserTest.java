@@ -33,7 +33,7 @@ public class UserTest {
     @Before
     public void setUp() {
         user = new User("mert", "karadogan", "gmertk", "gmertk@gmail.com", "12345",
-                "Hanstavagen 49 Stockholm Sweden", 1);
+                "Hanstavagen 49 Stockholm Sweden");
 
     }
 
@@ -52,7 +52,6 @@ public class UserTest {
         String name = "mert", surname = "karadogan", username = "gmertk",
                 email = "gmertk@gmail.com", password = "12345",
                 address = "Hanstavagen 49 Stockholm Sweden";
-        int id = 1;
         
         assertEquals(name, user.getName());
         assertEquals(surname, user.getSurname());
@@ -60,7 +59,6 @@ public class UserTest {
         assertEquals(email, user.getEmail());
         assertEquals(password, user.getPassword());
         assertEquals(address, user.getAddress());
-        assertEquals(id, user.getId());
 
     }
 
@@ -89,7 +87,7 @@ public class UserTest {
         System.out.println("sendEmail");
         Email m = null;
         User instance = null;
-        instance.sendEmail(m);
+        
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
