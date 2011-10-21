@@ -32,7 +32,7 @@ public abstract class DatabaseControl
     
 
     /*
-     ^Because we dont have sign up (for now), we can use this function to create some users just once.
+     *Because we dont have sign up (for now), we can use this function to create some users just once.
      *
      */
     public static void main(String args[]) 
