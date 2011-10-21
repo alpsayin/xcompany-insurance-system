@@ -60,6 +60,22 @@ public abstract class DatabaseControl
             System.exit(1);
         }
     }
+
+    public static synchronized void addUser(User user) throws IOException, ClassNotFoundException{
+        UserList userList = DatabaseControl.getAllUsers();
+        if(userList == null){
+            userList = new UserList();
+        }
+
+        if( !(userList.getUserList().containsKey(user.getUsername())) ){
+            userList.getUserList().put(user.getUsername(), user);
+            writeAllUsers(userList);
+        }
+        else{
+            System.err.println("User already exists");
+        }
+
+    }
     public static synchronized void writeAllClaims(ClaimList claimList) throws IOException
     {
         FileOutputStream fileOutputStream = new FileOutputStream(claimsFile);
