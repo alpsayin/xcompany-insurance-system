@@ -22,17 +22,24 @@ public class ClaimControl
     public boolean add(Claim c) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = DatabaseControl.getAllClaims();
-
+        if(claimList == null){
+            claimList = new ClaimList();
+        }
+            
         claimList.add(c);
+        DatabaseControl.writeAllClaims(claimList);
+
         return true;
     }
     public boolean changeStatus(int id, ClaimStatus status) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = DatabaseControl.getAllClaims();
-        Claim claim = claimList.get(id);
-        if(claim != null){
-            claim.setStatus(status);
-            return true;
+        if(claimList != null){
+            if(claimList.get(id) != null){
+                claimList.get(id).setStatus(status);
+                DatabaseControl.writeAllClaims(claimList);
+                return true;
+            }
         }
         return false;
     }
@@ -45,11 +52,18 @@ public class ClaimControl
         e.setText("Decision for your claim dated "+ c.getDateOfCrash()+" described as \""+ 
                 c.getDescription()+"\" is "+c.getStatus() + ". And the claim handler's message is: " + message );
         e.send();
-        c.getEmailsList().add(e);
-
+        //c.getEmailsList().add(e);
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        if(claimList != null){
+            if(claimList.get(c.getId()) != null){
+                claimList.get(c.getId()).getEmailsList().add(e);
+                DatabaseControl.writeAllClaims(claimList);
+                return true;
+            }
+        }
         return false;
     }
-    private boolean notifyGarage(Claim c)
+    private boolean notifyGarage(Claim c) throws IOException, ClassNotFoundException
     {
         Email e = new Email();
         e.setFrom(c.getClaimHandler().getEmail());
@@ -57,20 +71,43 @@ public class ClaimControl
         e.setSubject("Repair Order");
         e.setText("Repairs for claim from "+c.getOwner().getName()+" "+c.getOwner().getSurname()+" regarding the damages dated "+c.getDateOfCrash()+" should be started.");
         e.send();
-        c.getEmailsList().add(e);
-        return true;
+        
+        //c.getEmailsList().add(e);
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        if(claimList != null){
+            if(claimList.get(c.getId()) != null){
+                claimList.get(c.getId()).getEmailsList().add(e);
+                DatabaseControl.writeAllClaims(claimList);
+                return true;
+            }
+        }
+        return false;
     }
     public boolean assignClaimHandler(Claim c, ClaimHandler ch) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = DatabaseControl.getAllClaims();
-        claimList.get(c.getId()).setClaimHandler(ch);
-        return true;
+        if(claimList != null){
+            if(claimList.get(c.getId()) != null){
+                claimList.get(c.getId()).setClaimHandler(ch);
+                DatabaseControl.writeAllClaims(claimList);
+                return true;
+             }
+        }
+        return false;
     }
     public boolean assignFinancer(Claim c, Financer f) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = DatabaseControl.getAllClaims();
-        claimList.get(c.getId()).setFinancer(f);
-        return true;
+        if(claimList != null){
+            if(claimList.get(c.getId()) != null){
+                claimList.get(c.getId()).setFinancer(f);
+                DatabaseControl.writeAllClaims(claimList);
+                return true;
+             }
+        }
+        return false;
+        
+        
     }
     public boolean checkInsurance(Claim c) throws IOException, ClassNotFoundException
     {        
@@ -100,16 +137,20 @@ public class ClaimControl
         ClaimControl cc = new ClaimControl();
         if(claimHandler.equals(claim.getClaimHandler()))
         {
-            if(approvement)
-            {
-                claim.setStatus(ClaimStatus.ApprovedPendingPayment);
-                cc.notifyGarage(claim);
+            ClaimList claimList = DatabaseControl.getAllClaims();
+            if(claimList != null){
+                if(claimList.get(claim.getId()) != null){
+                    if(approvement){
+                        claimList.get(claim.getId()).setStatus(ClaimStatus.ApprovedPendingPayment);
+                        DatabaseControl.writeAllClaims(claimList);
+                        cc.notifyGarage(claim);
+                    }
+                    else{
+                        claimList.get(claim.getId()).setStatus(ClaimStatus.Rejected);
+                        DatabaseControl.writeAllClaims(claimList);
+                    }
+                }
             }
-            else
-            {
-                claim.setStatus(ClaimStatus.Rejected);
-            }
-            
             cc.notifyCustomer(claim, message);
         }
         else
