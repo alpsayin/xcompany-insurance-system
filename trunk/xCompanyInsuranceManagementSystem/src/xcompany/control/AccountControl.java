@@ -39,10 +39,12 @@ public class AccountControl
     public boolean delete(String username) throws IOException, ClassNotFoundException
     {
         UserList userList = DatabaseControl.getAllUsers();
-        if(userList.getUserList().containsKey(username)){
-            userList.getUserList().remove(username);
-            DatabaseControl.writeAllUsers(userList);
-            return true;
+        if(userList != null){
+            if(userList.getUserList().containsKey(username)){
+                userList.getUserList().remove(username);
+                DatabaseControl.writeAllUsers(userList);
+                return true;
+            }
         }
         return false;
     }
@@ -54,12 +56,12 @@ public class AccountControl
     public boolean changePassword(String username, String oldPassword, String newPassword) throws IOException, ClassNotFoundException
     {
         UserList userList = DatabaseControl.getAllUsers();
-        User user = userList.get(username);
-
-        if( (user != null) && (user.checkPassword(oldPassword))){
-            user.setPassword(newPassword);
-            DatabaseControl.writeAllUsers(userList);
-            return true;
+        if(userList != null){
+            if( (userList.get(username) != null) && (userList.get(username).checkPassword(oldPassword))){
+                userList.get(username).setPassword(newPassword);
+                DatabaseControl.writeAllUsers(userList);
+                return true;
+            }
         }
         return false;
 
