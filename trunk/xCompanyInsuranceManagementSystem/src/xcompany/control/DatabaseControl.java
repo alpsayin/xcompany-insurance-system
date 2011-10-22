@@ -146,35 +146,35 @@ public abstract class DatabaseControl
         return getAllUsers().get(userName);
     }
     
-    public static synchronized ClaimList getUserClaims(User user) throws IOException, ClassNotFoundException 
+    public static synchronized ClaimList getUserClaims(String username) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
         for(Claim c : claimList.getClaimList().values())
-            if(user.equals(c.getOwner()))
+            if(username.equals(c.getOwner().getUsername()))
                 returnList.getClaimList().put(c.getId(), c);
         
         return returnList;
     }
-    public static synchronized ClaimList getClaimsOfHandler(ClaimHandler handler) throws IOException, ClassNotFoundException
+    public static synchronized ClaimList getClaimsOfHandler(String  username) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
         for(Claim c : claimList.getClaimList().values())
-            if(handler.equals(c.getClaimHandler()))
+            if(username.equals(c.getClaimHandler().getUsername()))
                 returnList.getClaimList().put(c.getId(), c);
         
         return returnList;
     }
-    public static synchronized ClaimList getClaimsOfFinancer(Financer handler) throws IOException, ClassNotFoundException
+    public static synchronized ClaimList getClaimsOfFinancer(String username) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = getAllClaims();
         ClaimList returnList = new ClaimList();
         
         for(Claim c : claimList.getClaimList().values())
-            if(handler.equals(c.getFinancer()))
+            if(username.equals(c.getFinancer().getUsername()))
                 returnList.getClaimList().put(c.getId(), c);
         
         return returnList;

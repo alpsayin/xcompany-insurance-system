@@ -10,6 +10,7 @@ import xcompany.structures.ClaimHandler;
 import xcompany.structures.Financer;
 import xcompany.structures.Customer;
 import xcompany.structures.Email;
+import xcompany.structures.Garage;
 import xcompany.structures.Insurance;
 
 //  @ Date : 11.10.2011
@@ -108,6 +109,20 @@ public class ClaimControl
         return false;
         
         
+    }
+     public boolean assignGarage(Claim c, Garage g) throws IOException, ClassNotFoundException
+    {
+        ClaimList claimList = DatabaseControl.getAllClaims();
+        if(claimList != null){
+            if(claimList.get(c.getId()) != null){
+                claimList.get(c.getId()).setGarage(g);
+                DatabaseControl.writeAllClaims(claimList);
+                return true;
+             }
+        }
+        return false;
+
+
     }
     public boolean checkInsurance(Claim c) throws IOException, ClassNotFoundException
     {        
