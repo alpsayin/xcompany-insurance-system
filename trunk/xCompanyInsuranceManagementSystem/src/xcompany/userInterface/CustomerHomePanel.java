@@ -12,6 +12,7 @@
 package xcompany.userInterface;
 
 import com.toedter.calendar.JCalendar;
+import java.util.Locale;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
