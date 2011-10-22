@@ -34,6 +34,8 @@ public class Forms extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel1SimpleForm = new javax.swing.JLabel();
         jLabel1Name = new javax.swing.JLabel();
@@ -59,12 +61,47 @@ public class Forms extends javax.swing.JPanel {
         jButton1SimpleFormSubmit = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6NameC = new javax.swing.JLabel();
+        jTextField2NameC = new javax.swing.JTextField();
+        jLabel6SurnameC = new javax.swing.JLabel();
+        jTextField2SurnameC = new javax.swing.JTextField();
+        jLabel6EmailC = new javax.swing.JLabel();
+        jTextField2EmailC = new javax.swing.JTextField();
+        jLabel6DateC = new javax.swing.JLabel();
+        jTextField2DateC = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField2AccidentAddressC = new javax.swing.JTextField();
+        jLabel7WitnessNameC = new javax.swing.JLabel();
+        jTextField2WitnessNameC = new javax.swing.JTextField();
+        jLabel7WitnessSurnameC = new javax.swing.JLabel();
+        jTextField2WitnessSurnameC = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2LicensePlateC = new javax.swing.JTextField();
+        jLabel8VehicleModel = new javax.swing.JLabel();
+        jTextField2VehicleModelC = new javax.swing.JTextField();
+        jLabel8DamageDecription = new javax.swing.JLabel();
+        jTextField2DamageDescriptionC = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField2Name2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField2Surname2 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField2LicensePlate2 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField2VehiclePlate2 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField2DamageDescription2 = new javax.swing.JTextField();
+        jButton1SubmitC = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
 
         jLabel1SimpleForm.setText("Simple Form");
 
@@ -198,20 +235,186 @@ public class Forms extends javax.swing.JPanel {
 
         jLabel5.setText("Complex Form");
 
+        jLabel6NameC.setText("Name");
+
+        jLabel6SurnameC.setText("Surname");
+
+        jLabel6EmailC.setText("Email");
+
+        jTextField2EmailC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2EmailCActionPerformed(evt);
+            }
+        });
+
+        jLabel6DateC.setText("Date");
+
+        jLabel6.setText("Accident Address");
+
+        jTextField2AccidentAddressC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2AccidentAddressCActionPerformed(evt);
+            }
+        });
+
+        jLabel7WitnessNameC.setText("Witness Name");
+
+        jLabel7WitnessSurnameC.setText("Witness Surname");
+
+        jLabel7.setText("License Plate");
+
+        jLabel8VehicleModel.setText("Vehicle Model");
+
+        jLabel8DamageDecription.setText("Damage Description");
+
+        jLabel8.setText("Name of other driver");
+
+        jTextField2Name2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2Name2ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Surname of other driver");
+
+        jLabel10.setText("License Plate2");
+
+        jLabel11.setText("Vehicle Plate2");
+
+        jLabel12.setText("Damage Description");
+
+        jButton1SubmitC.setText("Submit");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6NameC)
+                                    .addComponent(jLabel6SurnameC)
+                                    .addComponent(jLabel6EmailC)
+                                    .addComponent(jLabel6DateC)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7WitnessNameC)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8VehicleModel)
+                                    .addComponent(jLabel8DamageDecription)
+                                    .addComponent(jLabel8))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField2Name2)
+                                    .addComponent(jTextField2DamageDescriptionC)
+                                    .addComponent(jTextField2VehicleModelC)
+                                    .addComponent(jTextField2LicensePlateC)
+                                    .addComponent(jTextField2WitnessSurnameC)
+                                    .addComponent(jTextField2WitnessNameC)
+                                    .addComponent(jTextField2AccidentAddressC)
+                                    .addComponent(jTextField2EmailC)
+                                    .addComponent(jTextField2SurnameC)
+                                    .addComponent(jTextField2NameC, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                    .addComponent(jTextField2DateC, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField2Surname2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField2DamageDescription2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField2VehiclePlate2)
+                                        .addComponent(jTextField2LicensePlate2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)))))
+                        .addGap(708, 708, 708))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7WitnessSurnameC)
+                        .addContainerGap(859, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(847, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jButton1SubmitC)
+                .addContainerGap(817, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel5)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6NameC)
+                    .addComponent(jTextField2NameC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2SurnameC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6SurnameC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2EmailC, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6EmailC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2DateC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6DateC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2AccidentAddressC, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2WitnessNameC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7WitnessNameC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2WitnessSurnameC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7WitnessSurnameC))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2LicensePlateC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2VehicleModelC, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8VehicleModel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2DamageDescriptionC, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8DamageDecription))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2Name2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2Surname2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jTextField2LicensePlate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2VehiclePlate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)))
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jTextField2DamageDescription2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1SubmitC)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -220,8 +423,8 @@ public class Forms extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -230,9 +433,9 @@ public class Forms extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(11, 11, 11)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -240,10 +443,26 @@ public class Forms extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2DamageDescriptionActionPerformed
 
+    private void jTextField2EmailCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2EmailCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2EmailCActionPerformed
+
+    private void jTextField2AccidentAddressCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2AccidentAddressCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2AccidentAddressCActionPerformed
+
+    private void jTextField2Name2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2Name2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2Name2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1SimpleFormSubmit;
+    private javax.swing.JButton jButton1SubmitC;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel1Name;
     private javax.swing.JLabel jLabel1SimpleForm;
     private javax.swing.JLabel jLabel1Surname;
@@ -255,21 +474,50 @@ public class Forms extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4VehicleModel;
     private javax.swing.JLabel jLabel4WitnessSurname;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel6DateC;
+    private javax.swing.JLabel jLabel6EmailC;
+    private javax.swing.JLabel jLabel6NameC;
+    private javax.swing.JLabel jLabel6SurnameC;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel7WitnessNameC;
+    private javax.swing.JLabel jLabel7WitnessSurnameC;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel8DamageDecription;
+    private javax.swing.JLabel jLabel8VehicleModel;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1Name;
     private javax.swing.JTextField jTextField2AccidentAddress;
+    private javax.swing.JTextField jTextField2AccidentAddressC;
     private javax.swing.JTextField jTextField2DamageDescription;
+    private javax.swing.JTextField jTextField2DamageDescription2;
+    private javax.swing.JTextField jTextField2DamageDescriptionC;
     private javax.swing.JTextField jTextField2Date;
+    private javax.swing.JTextField jTextField2DateC;
     private javax.swing.JTextField jTextField2Email;
+    private javax.swing.JTextField jTextField2EmailC;
+    private javax.swing.JTextField jTextField2LicensePlate2;
+    private javax.swing.JTextField jTextField2LicensePlateC;
     private javax.swing.JTextField jTextField2Licenseplate;
+    private javax.swing.JTextField jTextField2Name2;
+    private javax.swing.JTextField jTextField2NameC;
     private javax.swing.JTextField jTextField2Surname;
+    private javax.swing.JTextField jTextField2Surname2;
+    private javax.swing.JTextField jTextField2SurnameC;
     private javax.swing.JTextField jTextField2VehicleModel;
+    private javax.swing.JTextField jTextField2VehicleModelC;
+    private javax.swing.JTextField jTextField2VehiclePlate2;
     private javax.swing.JTextField jTextField2WitnessName;
+    private javax.swing.JTextField jTextField2WitnessNameC;
     private javax.swing.JTextField jTextField2WitnessSurname;
+    private javax.swing.JTextField jTextField2WitnessSurnameC;
     // End of variables declaration//GEN-END:variables
 
 }
