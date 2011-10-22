@@ -88,7 +88,7 @@ public class Forms extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jTextField2LicensePlate2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2VehiclePlate2 = new javax.swing.JTextField();
+        jTextField2VehicleModel2 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTextField2DamageDescription2 = new javax.swing.JTextField();
         jButton1SubmitC = new javax.swing.JButton();
@@ -285,7 +285,7 @@ public class Forms extends javax.swing.JPanel {
 
         jLabel10.setText("License Plate2");
 
-        jLabel11.setText("Vehicle Plate2");
+        jLabel11.setText("Vehicle Model2");
 
         jLabel12.setText("Damage Description");
 
@@ -337,7 +337,7 @@ public class Forms extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextField2DamageDescription2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                                    .addComponent(jTextField2VehiclePlate2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                    .addComponent(jTextField2VehicleModel2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                                     .addComponent(jTextField2LicensePlate2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                                     .addComponent(jTextField2Surname2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))))
                         .addGap(235, 235, 235))
@@ -416,7 +416,7 @@ public class Forms extends javax.swing.JPanel {
                                 .addGap(42, 42, 42)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(jTextField2VehiclePlate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextField2VehicleModel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel10))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -529,8 +529,8 @@ public class Forms extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2Surname2;
     private javax.swing.JTextField jTextField2SurnameC;
     private javax.swing.JTextField jTextField2VehicleModel;
+    private javax.swing.JTextField jTextField2VehicleModel2;
     private javax.swing.JTextField jTextField2VehicleModelC;
-    private javax.swing.JTextField jTextField2VehiclePlate2;
     private javax.swing.JTextField jTextField2WitnessName;
     private javax.swing.JTextField jTextField2WitnessNameC;
     private javax.swing.JTextField jTextField2WitnessSurname;
