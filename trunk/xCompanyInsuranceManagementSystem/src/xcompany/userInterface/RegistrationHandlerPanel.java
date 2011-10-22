@@ -23,6 +23,7 @@ import xcompany.structures.*;
 import xcompany.lists.*;
 import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.Claim.ClaimType;
+import xcompany.structures.form.*;
 
 /**
  *
@@ -189,7 +190,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             .addGap(0, 331, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel3);
+        jTabbedPane1.addTab("Claims Waiting Forms", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,14 +212,20 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             ClaimType claimType;
+            Form form;
             if (radioButtonComplex.isSelected()) {
                 claimType = ClaimType.ComplexClaim;
+                form = FormFactory.createComplexFormInstance();
             } else  {
                 claimType = ClaimType.SimpleClaim;
+                form = FormFactory.createSimpleFormInstance();
             }
 
             ClaimList claimList = DatabaseControl.getAllClaims();
             int id = getClaimAtSelectedRow(reportedClaimList, tableReportedClaims).getId();
+
+
+            claimList.get(id).setForm(form);
             claimList.get(id).setType(claimType);
             claimList.get(id).setStatus(ClaimStatus.WaitingForms);
             DatabaseControl.writeAllClaims(claimList);
