@@ -90,6 +90,7 @@ public class ClaimControl
         if(claimList != null){
             if(claimList.get(c.getId()) != null){
                 claimList.get(c.getId()).setClaimHandler(ch);
+                claimList.get(c.getId()).setStatus(ClaimStatus.Assigned);
                 DatabaseControl.writeAllClaims(claimList);
                 return true;
              }
@@ -102,6 +103,7 @@ public class ClaimControl
         if(claimList != null){
             if(claimList.get(c.getId()) != null){
                 claimList.get(c.getId()).setFinancer(f);
+                claimList.get(c.getId()).setStatus(ClaimStatus.ApprovedPendingPayment);
                 DatabaseControl.writeAllClaims(claimList);
                 return true;
              }
