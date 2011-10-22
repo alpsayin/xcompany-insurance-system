@@ -46,15 +46,15 @@ public class AccountControlTest {
     @Test
     public void testAdd() throws Exception {
         System.out.println("add");
-        User user = new Customer("name1", "surname1", "username2", "modified@gmail.com", "12345",
-                "address1");
+        User user = new ClaimHandler("Mark", "Canon", "ch", "email@gmail.com", "12345",
+                "address1", ClaimHandler.HandlerType.LowRanked);
         AccountControl instance = new AccountControl();
         boolean result = instance.add(user);
         assertEquals(true, result);
         assertEquals(user, DatabaseControl.getUser(user.getUsername()) );
         
         
-        assertEquals(true, instance.delete(user.getUsername()));
+        //assertEquals(true, instance.delete(user.getUsername()));
         
     }
 
