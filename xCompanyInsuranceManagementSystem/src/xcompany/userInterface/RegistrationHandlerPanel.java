@@ -12,6 +12,9 @@
 package xcompany.userInterface;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -19,6 +22,7 @@ import xcompany.control.*;
 import xcompany.structures.*;
 import xcompany.lists.*;
 import xcompany.structures.Claim.ClaimStatus;
+import xcompany.structures.Claim.ClaimType;
 
 /**
  *
@@ -26,16 +30,13 @@ import xcompany.structures.Claim.ClaimStatus;
  */
 public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
-        ClaimList reportedClaimList;
+    ClaimList reportedClaimList;
+    ClaimControl cc = new ClaimControl();
+    
     /** Creates new form RegistrationHandlerPanel */
     public RegistrationHandlerPanel() throws IOException, ClassNotFoundException {
-        reportedClaimList = DatabaseControl.getAllClaims();
-        for(Claim c:reportedClaimList.getClaimList().values()){
-            if ( !c.getStatus().equals(ClaimStatus.Reported)){
-                reportedClaimList.getClaimList().remove(c.getId());
-            }
-        }
-
+        reportedClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.Reported);
+        
         initComponents();
     }
 
@@ -61,9 +62,10 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         labelDate = new javax.swing.JLabel();
         labelDescription = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        radioButtonSimple = new javax.swing.JRadioButton();
+        radioButtonComplex = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(600, 0));
 
@@ -85,15 +87,16 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         labelDescription.setText("jLabel4");
         labelDescription.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jLabel4.setText("Category:");
+        jLabel4.setText("Choose Type:");
 
-        buttonGroupClaimCategory.add(jRadioButton1);
-        jRadioButton1.setText("Simple");
+        buttonGroupClaimCategory.add(radioButtonSimple);
+        radioButtonSimple.setSelected(true);
+        radioButtonSimple.setText("Simple");
 
-        buttonGroupClaimCategory.add(jRadioButton2);
-        jRadioButton2.setText("Complex");
+        buttonGroupClaimCategory.add(radioButtonComplex);
+        radioButtonComplex.setText("Complex");
 
-        jButton1.setText("Submit Category");
+        jButton1.setText("Send Form");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -111,7 +114,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
-                        .addGap(3, 3, 3)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelDate)
                             .addComponent(labelCustomerNameSurname)
@@ -119,32 +122,35 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton1)
+                        .addComponent(radioButtonSimple)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2))
+                        .addComponent(radioButtonComplex))
                     .addComponent(jButton1))
-                .addGap(156, 156, 156))
+                .addGap(141, 141, 141))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(labelCustomerNameSurname))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(labelDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(labelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(56, 56, 56))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelCustomerNameSurname)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(radioButtonSimple)
+                    .addComponent(radioButtonComplex))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -172,6 +178,19 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Reported Claims", jPanel1);
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 575, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 331, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,7 +209,33 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
+        try {
+            ClaimType claimType;
+            if (radioButtonComplex.isSelected()) {
+                claimType = ClaimType.ComplexClaim;
+            } else  {
+                claimType = ClaimType.SimpleClaim;
+            }
+
+            ClaimList claimList = DatabaseControl.getAllClaims();
+            int id = getClaimAtSelectedRow(reportedClaimList, tableReportedClaims).getId();
+            claimList.get(id).setType(claimType);
+            claimList.get(id).setStatus(ClaimStatus.WaitingForms);
+            DatabaseControl.writeAllClaims(claimList);
+
+            reportedClaimList.getClaimList().remove(id);
+            tableReportedClaims.setModel(new MyTableModel(reportedClaimList));
+
+        } catch (IOException ex) {
+            Logger.getLogger(RegistrationHandlerPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegistrationHandlerPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -203,14 +248,15 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScroll;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelCustomerNameSurname;
     private javax.swing.JLabel labelDate;
     private javax.swing.JLabel labelDescription;
+    private javax.swing.JRadioButton radioButtonComplex;
+    private javax.swing.JRadioButton radioButtonSimple;
     private javax.swing.JTable tableReportedClaims;
     // End of variables declaration//GEN-END:variables
 
@@ -222,16 +268,18 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             if (event.getValueIsAdjusting()) {
                 return;
             }
-
-
-            labelCustomerNameSurname
+            Claim c = getClaimAtSelectedRow(reportedClaimList, tableReportedClaims);
+            labelCustomerNameSurname.setText(c.getOwner().getName() + " " + c.getOwner().getSurname());
+            labelDate.setText(c.getDateOfCrash().toString());
+            labelDescription.setText(c.getDescription());
+            
             System.out.println("Row selected");
         }
     }
 
-    private Claim getClaimAtSelectedRow(ClaimList c){
-        int row = tableReportedClaims.getSelectedRow();
-        int id = Integer.parseInt(tableReportedClaims.getValueAt(row, 0).toString());
+    private Claim getClaimAtSelectedRow(ClaimList c, JTable jt){
+        int row = jt.getSelectedRow();
+        int id = Integer.parseInt(jt.getValueAt(row, 0).toString());
         return c.get(id);
     }
 
