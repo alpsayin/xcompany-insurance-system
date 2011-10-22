@@ -54,7 +54,7 @@ public class TopPanel extends javax.swing.JPanel {
         labelNameSurname.setForeground(new java.awt.Color(51, 51, 51));
         labelNameSurname.setText("jLabel1");
 
-        labelUserType.setFont(new java.awt.Font("Tahoma", 2, 12));
+        labelUserType.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         labelUserType.setForeground(new java.awt.Color(51, 51, 51));
         labelUserType.setText("jLabel1");
 
@@ -78,29 +78,27 @@ public class TopPanel extends javax.swing.JPanel {
                     .addComponent(labelUsername))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelUserType)
-                .addGap(409, 409, 409)
+                .addGap(341, 341, 341)
                 .addComponent(buttonEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLogout)
-                .addGap(133, 133, 133))
+                .addGap(205, 205, 205))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonLogout)
-                            .addComponent(buttonEdit))
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(labelNameSurname)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelUsername)
-                            .addComponent(labelUserType))
-                        .addContainerGap())))
+                            .addComponent(labelUserType)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonLogout)
+                        .addComponent(buttonEdit)))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
