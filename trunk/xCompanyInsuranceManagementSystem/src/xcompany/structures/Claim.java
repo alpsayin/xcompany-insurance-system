@@ -27,10 +27,11 @@ public class Claim implements Serializable
     private Garage garage;
     private Financer financer;
     private ArrayList<Email> emailsList;
-    public Claim(Customer owner, String description)
+    public Claim(Customer owner, String description, Calendar dateOfCrash)
     {
         this.owner = owner;
         this.description = description;
+        this.dateOfCrash = dateOfCrash;
         this.id = generateId();
         this.status = ClaimStatus.WaitingForms;
     }

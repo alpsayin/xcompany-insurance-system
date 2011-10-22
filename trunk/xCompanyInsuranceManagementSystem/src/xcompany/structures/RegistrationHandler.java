@@ -14,10 +14,13 @@ import xcompany.structures.Claim.ClaimType;
 public class RegistrationHandler extends User 
 {
     public ClaimList claimList;
-    public RegistrationHandler(String name, String surname, String username, String email)
+    
+    public RegistrationHandler(String name, String surname, String username, String email,
+            String password, String address)
     {
-        super(name, surname, username, email);
+        super(name, surname, username, email, password, address);
     }
+
     public void assignClaimClassification(Claim c, ClaimType type) throws Exception
     {
         if(c.getStatus()==ClaimStatus.Reported)
