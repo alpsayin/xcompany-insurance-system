@@ -141,6 +141,7 @@ public class LoginPanel extends javax.swing.JPanel {
         {
             JFrame temp = new JFrame();
             temp = (JFrame)this.getTopLevelAncestor();
+
             AccountControl accountControl = new AccountControl();
             User user = accountControl.login(textFieldUserName.getText(), textFieldPassword.getText());
 
@@ -148,6 +149,8 @@ public class LoginPanel extends javax.swing.JPanel {
                 temp.setContentPane(new CustomerHomePanel());
                 temp.pack();
             }
+
+
             else if(user instanceof RegistrationHandler){
 
             }
