@@ -33,7 +33,7 @@ public class Claim implements Serializable
         this.description = description;
         this.dateOfCrash = dateOfCrash;
         this.id = generateId();
-        this.status = ClaimStatus.WaitingForms;
+        this.status = ClaimStatus.Reported;
         
     }
     public static int generateId()

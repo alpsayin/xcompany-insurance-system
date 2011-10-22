@@ -2,7 +2,10 @@ package xcompany.structures;
 
 //  @ File Name : Customer.java
 
+import java.io.IOException;
 import java.util.ArrayList;
+import xcompany.control.DatabaseControl;
+import xcompany.lists.ClaimList;
 
 //  @ Date : 11.10.2011
 
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 public class Customer extends User 
 {
     private Insurance insurance;
-    private ArrayList<Claim> history;
+    //private ArrayList<Claim> history;
 
     public Customer(String name, String surname, String username, String email,
             String password, String address)
@@ -39,6 +42,7 @@ public class Customer extends User
     {
         this.insurance = insurance;
     }
+    /*
     public ArrayList<Claim> getHistory()
     {
         return history;
@@ -46,5 +50,20 @@ public class Customer extends User
     public void setHistory(ArrayList<Claim> history)
     {
         this.history = history;
+    }
+     * 
+     */
+    public ArrayList<Claim> getHistory() throws IOException, ClassNotFoundException
+    {
+        ArrayList<Claim> history = new ArrayList<Claim>();
+        ClaimList cl = DatabaseControl.getAllClaims();
+
+        for(Claim c:cl.getClaimList().values()){
+            if(c.getOwner().getUsername().equals(this.getUsername())){
+                history.add(c);
+            }
+        }
+
+        return history;
     }
 }
