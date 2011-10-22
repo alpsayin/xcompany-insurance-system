@@ -46,19 +46,33 @@ public class AccountControlTest {
     @Test
     public void testAdd() throws Exception {
         System.out.println("add");
-        User user = new Customer("elmira", "Khodabandeloo ", "elmira-k", "elmira@gmail.com", "12345",
-                "KTH Stockholm Sweden");
-
-        User existingUser = new Customer("mert", "karadogan ", "gmertk", "gmertk@gmail.com", "12345",
-                "KTH Stockholm Sweden");
-
+        User user = new Customer("name1", "surname1", "username2", "modified@gmail.com", "12345",
+                "address1");
         AccountControl instance = new AccountControl();
-        //instance.add(user);
-        //assertEquals(user, DatabaseControl.getUser(user.getUsername()) );
+        boolean result = instance.add(user);
+        assertEquals(true, result);
+        assertEquals(user, DatabaseControl.getUser(user.getUsername()) );
         
-        boolean result = instance.add(existingUser);
+        
+        assertEquals(true, instance.delete(user.getUsername()));
+        
+    }
+
+    @Test
+    public void testAddExistingUser() throws Exception {
+        System.out.println("addExisting");
+        User user = new Customer("name1", "surname1", "username1", "modified@gmail.com", "12345",
+                "address1");
+        AccountControl instance = new AccountControl();
+        instance.add(user);
+        assertEquals(user, DatabaseControl.getUser(user.getUsername()) );
+        
+        boolean result = instance.add(user);
         assertEquals(false, result);
         
+        assertEquals(true, instance.delete(user.getUsername()));
+
+
     }
 
     /**
@@ -67,14 +81,24 @@ public class AccountControlTest {
     @Test
     public void testModify() throws Exception {
         System.out.println("modify");
-        String username = "";
-        User user = null;
+        
+        User user = new Customer("name1", "surname1", "username1", "modified@gmail.com", "12345",
+                "address1");
+        String username = user.getUsername();
+
         AccountControl instance = new AccountControl();
-        boolean expResult = false;
-        boolean result = instance.modify(username, user);
+        instance.add(user);
+        assertEquals(user, DatabaseControl.getUser(username));
+        
+        boolean expResult = true;
+        User userModified = new Customer("name1modified", "surname1modified", "username1", "modified@gmail.com", "12345",
+                "address1");
+        boolean result = instance.modify(username, userModified);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(userModified, DatabaseControl.getUser(user.getUsername()) );
+        
+        
+        assertEquals(true, instance.delete(username));
     }
 
     /**
@@ -83,28 +107,21 @@ public class AccountControlTest {
     @Test
     public void testDelete() throws Exception {
         System.out.println("delete");
-        String username = "";
+        User user = new Customer("name1", "surname1", "username1", "modified@gmail.com", "12345",
+                "address1");
+        String username = user.getUsername();
         AccountControl instance = new AccountControl();
-        boolean expResult = false;
+        instance.add(user);
+        assertEquals(user, DatabaseControl.getUser(username));
+
+        boolean expResult = true;
         boolean result = instance.delete(username);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        assertEquals(null, DatabaseControl.getUser(username) );
+
     }
 
-    /**
-     * Test of resetPassword method, of class AccountControl.
-     */
-    @Test
-    public void testResetPassword() {
-        System.out.println("resetPassword");
-        AccountControl instance = new AccountControl();
-        boolean expResult = false;
-        boolean result = instance.resetPassword();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of changePassword method, of class AccountControl.
@@ -112,15 +129,24 @@ public class AccountControlTest {
     @Test
     public void testChangePassword() throws Exception {
         System.out.println("changePassword");
-        String username = "";
-        String oldPassword = "";
-        String newPassword = "";
+        
+        User user = new Customer("name1", "surname1", "username1", "modified@gmail.com", "12345",
+                "address1");
+        String username = user.getUsername();
+        String oldPassword = user.getPassword();
+        String newPassword = "new12345";
+
         AccountControl instance = new AccountControl();
-        boolean expResult = false;
+        instance.add(user);
+        assertEquals(user, DatabaseControl.getUser(username));
+
+        boolean expResult = true;
         boolean result = instance.changePassword(username, oldPassword, newPassword);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(newPassword, DatabaseControl.getUser(username).getPassword());
+
+        
+        assertEquals(true, instance.delete(username));
     }
 
     /**
@@ -129,14 +155,20 @@ public class AccountControlTest {
     @Test
     public void testLogin() throws Exception {
         System.out.println("login");
-        String username = "";
-        String password = "";
+
+        User user = new Customer("name1", "surname1", "username1", "modified@gmail.com", "12345",
+                "address1");
+        String username = user.getUsername();
+
         AccountControl instance = new AccountControl();
-        User expResult = null;
-        User result = instance.login(username, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.add(user);
+        assertEquals(user, DatabaseControl.getUser(username));
+
+        boolean expResult = true;
+        User loginedUser = instance.login(username, user.getPassword());
+        assertEquals(loginedUser, user);
+
+        assertEquals(true, instance.delete(username));
     }
 
 }
