@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import xcompany.structures.User;
 
 /*
  * To change this template, choose Tools | Templates
@@ -27,7 +28,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         this.setContentPane(new LoginPanel());
-
+       
     }
 
     /** This method is called from within the constructor to
