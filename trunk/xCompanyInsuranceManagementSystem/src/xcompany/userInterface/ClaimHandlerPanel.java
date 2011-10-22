@@ -37,19 +37,14 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
     User user = null;
     ClaimControl cc = new ClaimControl();
-    ClaimList cl;
-    ClaimList claimListAvailableToHandle = new ClaimList();
+    
+    ClaimList claimListAvailableToHandle;
     FormPanel formPanel;
     
     /** Creates new form ClaimHandlerPanel */
     public ClaimHandlerPanel(User user) throws IOException, ClassNotFoundException {
-        cl = DatabaseControl.getAllClaims();
+        claimListAvailableToHandle = DatabaseControl.getClaimsByStatus(ClaimStatus.Registered);
 
-        for(Claim c:cl.getClaimList().values()){
-            if ( c.getStatus().equals(ClaimStatus.Registered)){
-                claimListAvailableToHandle.getClaimList().put(c.getId(), c);
-            }
-        }
 
         initComponents();
 
