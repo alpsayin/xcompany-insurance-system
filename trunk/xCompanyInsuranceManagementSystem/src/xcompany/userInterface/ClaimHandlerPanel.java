@@ -223,9 +223,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
             return result;
         }
         
-        public void removeRow(int row) {
-            claimList.getClaimList().remove(Integer.parseInt(tableAvailableClaims.getValueAt(row, 0).toString()));
-        }
+       
 
     }
 }
