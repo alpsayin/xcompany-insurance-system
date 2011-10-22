@@ -146,7 +146,7 @@ public class LoginPanel extends javax.swing.JPanel {
             User user = accountControl.login(textFieldUserName.getText(), textFieldPassword.getText());
 
             if(user instanceof Customer){
-                temp.setContentPane(new CustomerHomePanel());
+                temp.setContentPane(new CustomerHomePanel(user));
                 temp.pack();
             }
 
