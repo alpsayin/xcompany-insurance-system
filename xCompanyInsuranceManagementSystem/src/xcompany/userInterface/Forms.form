@@ -349,7 +349,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jTextField2DamageDescription2" alignment="0" pref="101" max="32767" attributes="0"/>
-                                      <Component id="jTextField2VehiclePlate2" pref="101" max="32767" attributes="1"/>
+                                      <Component id="jTextField2VehicleModel2" pref="101" max="32767" attributes="1"/>
                                       <Component id="jTextField2LicensePlate2" pref="101" max="32767" attributes="1"/>
                                       <Component id="jTextField2Surname2" alignment="1" pref="101" max="32767" attributes="1"/>
                                   </Group>
@@ -451,7 +451,7 @@
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField2VehiclePlate2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextField2VehicleModel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -582,10 +582,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Vehicle Plate2"/>
+            <Property name="text" type="java.lang.String" value="Vehicle Model2"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2VehiclePlate2">
+        <Component class="javax.swing.JTextField" name="jTextField2VehicleModel2">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
