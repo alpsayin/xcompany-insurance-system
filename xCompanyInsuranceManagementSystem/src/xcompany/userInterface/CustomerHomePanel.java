@@ -383,7 +383,8 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             claimListCurrent.add(c);
             getCurrentClaimsTableModel();
 
-
+            textAreaDesc.setText("");
+            JOptionPane.showMessageDialog(this, "Submitted", "Submitted new claim", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(CustomerHomePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
