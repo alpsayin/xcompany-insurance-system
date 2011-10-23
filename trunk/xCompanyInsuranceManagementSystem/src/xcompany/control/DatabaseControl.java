@@ -3,10 +3,12 @@ package xcompany.control;
 //  @ File Name : DatabaseControl.java
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import xcompany.structures.*;
 import xcompany.lists.*;
@@ -32,21 +34,67 @@ public abstract class DatabaseControl
     public static void main(String args[]) 
     {
         try{
+            
             FileOutputStream fileOutputStream = new FileOutputStream(usersFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
             UserList userList = new UserList();
-            User customer1 = new Customer("mert", "karadogan", "gmertk", "gmertk@gmail.com", "12345",
-                    "Hanstavagen 49 Stockholm Sweden", 1);
-            User customer2 = new Customer("alp", "sayin", "alpsayin", "alp@gmail.com", "12345",
-                    "Akalla Stockholm Sweden", 2);
+            Calendar calendar = Calendar.getInstance();
+
+            Customer customer1 = new Customer("Mert", "Karadogan", "customer", "gmertk@gmail.com", "1234",
+                    "Grufsgatan 12 Stockholm Sweden", 1);
+            calendar.set(2015, 12, 01);
+            customer1.setInsurance(new Insurance(10000, 5, calendar ));
             userList.getUserList().put(customer1.getUsername(), customer1);
+
+            Customer customer2 = new Customer("Jacob", "Stain", "customer2", "jacob@gmail.com", "1234",
+                    "Uppsala Sweden",2);
+            calendar.set(2010, 12, 01);
+            customer2.setInsurance(new Insurance(10000, 5, calendar ));
             userList.getUserList().put(customer2.getUsername(), customer2);
 
-            objectOutputStream.writeObject(userList);
+            Customer customer3 = new Customer("Lina", "Ann", "customer3", "lina@gmail.com", "1234",
+                    "KTH Stockholm Sweden",3);
+            calendar.set(2014, 12, 01);
+            customer3.setInsurance(new Insurance(10000, 5, calendar ));
+            userList.getUserList().put(customer3.getUsername(), customer3);
 
+            RegistrationHandler rh1 = new RegistrationHandler("Alp", "Sayin", "rh", "alp@gmail.com", "1234",
+                                                                "Akalla Stockholm Sweden",4);
+            userList.getUserList().put(rh1.getUsername(), rh1);
+
+            RegistrationHandler rh2 = new RegistrationHandler("Orcun", "Doganci", "rh2", "orcun@gmail.com", "1234",
+                                                                    "Ankara Turkey",5);
+            userList.getUserList().put(rh2.getUsername(), rh2);
+
+            ClaimHandler ch = new ClaimHandler("Rachel", "Green", "ch", "orcun@gmail.com", "1234",
+                                                "Arizona USA", ClaimHandler.HandlerType.HighRanked,6);
+            userList.getUserList().put(ch.getUsername(), ch);
+
+            ClaimHandler ch2 = new ClaimHandler("Chandler", "Bing", "ch2", "chandler@gmail.com", "1234",
+                                                "Stockholm Sweden", ClaimHandler.HandlerType.LowRanked,7);
+            userList.getUserList().put(ch2.getUsername(), ch2);
+
+            ClaimHandler ch3 = new ClaimHandler("Phoebe", "Buffay", "ch3", "phoebe@gmail.com", "1234",
+                                                "Arizona USA", ClaimHandler.HandlerType.HighRanked,8);
+            userList.getUserList().put(ch3.getUsername(), ch3);
+
+            ClaimHandler ch4 = new ClaimHandler("Yigit", "Karadogan", "ch4", "chandler@gmail.com", "1234",
+                                                "Stockholm Sweden", ClaimHandler.HandlerType.LowRanked,9);
+            userList.getUserList().put(ch4.getUsername(), ch4);
+
+            Financer fin = new Financer("Pinar", "Adimci", "fin", "adimci@gmail.com", "1234",10);
+            userList.getUserList().put(fin.getUsername(), fin);
+
+            Financer fin2 = new Financer("Emre", "Demiralp", "fin2", "demir@gmail.com", "1234",11);
+            userList.getUserList().put(fin2.getUsername(), fin2);
+
+
+            objectOutputStream.writeObject(userList);
+            UserList ul = new UserList();
+            ul = DatabaseControl.getAllUsers();
             objectOutputStream.close();
-            fileOutputStream.close();
+            
         }
         catch(Exception e)
         {
@@ -203,9 +251,7 @@ public abstract class DatabaseControl
     {
         int max = -1;
         UserList userList = getAllUsers();
-        if(userList == null){
-            return 1;
-        }
+     
         for(User u : userList.getUserList().values())
             if(u.getId() >= max)
                 max = u.getId();

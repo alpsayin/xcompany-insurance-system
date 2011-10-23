@@ -11,12 +11,17 @@ import xcompany.lists.ClaimList;
 
 public class Financer extends User 
 {
-    private ClaimList takenClaims;
-    public Financer(String name, String surname, String username, String email)
+    //private ClaimList takenClaims;
+    public Financer(String name, String surname, String username, String email, String password)
     {
-        super(name,surname,username,email);
-        takenClaims = new ClaimList();
+        super(name,surname,username,email,password,"AddressFooData");
+        //takenClaims = new ClaimList();
     }
+
+    public Financer(String name, String surname, String username, String email, String password, int i) {
+        super(name,surname,username,email,password,"AddressFooData",i);
+    }
+    
     public void takeClaim(Claim claim)
     {
         claim.setFinancer(this);
@@ -35,6 +40,7 @@ public class Financer extends User
         else
             throw new Exception("Claim not owned by this financer");
     }
+    /*
     public ClaimList getTakenClaims()
     {
         return takenClaims;
@@ -43,4 +49,6 @@ public class Financer extends User
     {
         this.takenClaims = takenClaims;
     }
+     *
+     */
 }

@@ -21,6 +21,12 @@ public class RegistrationHandler extends User
         super(name, surname, username, email, password, address);
     }
 
+    public RegistrationHandler(String name, String surname, String username, String email,
+            String password, String address,int i)
+    {
+        super(name, surname, username, email, password, address,i);
+    }
+
     public void assignClaimClassification(Claim c, ClaimType type) throws Exception
     {
         if(c.getStatus()==ClaimStatus.Reported)

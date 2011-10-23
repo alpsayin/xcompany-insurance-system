@@ -1,6 +1,7 @@
 package xcompany.structures;
 
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 //  @ File Name : Insurance.java
@@ -9,7 +10,7 @@ import java.util.Calendar;
 
 
 
-public class Insurance {
+public class Insurance  implements Serializable{
     private double maxAmount;
     private int maxNumRepairs;
     private Calendar expiryDate;
