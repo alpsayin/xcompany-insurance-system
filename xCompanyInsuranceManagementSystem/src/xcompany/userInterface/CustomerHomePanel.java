@@ -20,6 +20,7 @@ package xcompany.userInterface;
 import java.awt.BorderLayout;
 import java.util.Locale;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -475,7 +476,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             dtm.addRow(row);
             row = new Vector<String>();
             row.add("Date");
-            row.add(c.getDateOfCrash().toString());
+            row.add(c.getDateOfCrash().get(Calendar.DATE)+"/"+c.getDateOfCrash().get(Calendar.MONTH)+"/"+c.getDateOfCrash().get(Calendar.YEAR));
             dtm.addRow(row);
             row = new Vector<String>();
             row.add("Damage");
