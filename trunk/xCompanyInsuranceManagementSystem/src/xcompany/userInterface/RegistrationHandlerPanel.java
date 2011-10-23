@@ -110,10 +110,6 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Description:");
 
-        labelCustomerNameSurname.setText("jLabel4");
-
-        labelDate.setText("jLabel4");
-
         jLabel4.setText("Choose Type:");
 
         buttonGroupClaimCategory.add(radioButtonSimple);
@@ -131,7 +127,6 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         });
 
         labelDescription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelDescription.setText("jLabel4");
         labelDescription.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         labelDescription.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         labelDescription.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
