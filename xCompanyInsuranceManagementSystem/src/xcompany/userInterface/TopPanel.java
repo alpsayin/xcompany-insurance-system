@@ -11,6 +11,8 @@
 
 package xcompany.userInterface;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Mert
@@ -54,7 +56,7 @@ public class TopPanel extends javax.swing.JPanel {
         labelNameSurname.setForeground(new java.awt.Color(51, 51, 51));
         labelNameSurname.setText("jLabel1");
 
-        labelUserType.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        labelUserType.setFont(new java.awt.Font("Tahoma", 2, 12));
         labelUserType.setForeground(new java.awt.Color(51, 51, 51));
         labelUserType.setText("jLabel1");
 
@@ -103,7 +105,11 @@ public class TopPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
-        // TODO add your handling code here:
+            JFrame temp = new JFrame();
+            temp = (JFrame)this.getTopLevelAncestor();
+            temp.setContentPane(new LoginPanel());
+            temp.pack();
+
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
 

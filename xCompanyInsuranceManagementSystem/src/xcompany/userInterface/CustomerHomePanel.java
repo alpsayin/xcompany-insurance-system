@@ -12,6 +12,8 @@
 package xcompany.userInterface;
 
 import com.toedter.calendar.JCalendar;
+import java.awt.BorderLayout;
+import java.awt.LayoutManager;
 import java.util.Locale;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -24,7 +26,7 @@ import xcompany.control.ClaimControl;
 import xcompany.control.DatabaseControl;
 import xcompany.structures.*;
 import xcompany.lists.*;
-import xcompany.userInterface.TopPanel;
+import xcompany.structures.Claim.ClaimStatus;
 /**
  *
  * @author Mert
@@ -34,12 +36,19 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     User user;
     ClaimControl cc = new ClaimControl();
     ClaimList claimListCurrent;
+    
     /** Creates new form CustomerHomePanel */
     public CustomerHomePanel(User user) throws IOException, ClassNotFoundException {
         this.user = user;
-        claimListCurrent = DatabaseControl.getClaimsByStatus(Claim.ClaimStatus.WaitingForms);
+        
+        claimListCurrent = DatabaseControl.getAllClaims();
+        for(Claim c : claimListCurrent.getClaimList().values()){
+            if( (c.getStatus() != ClaimStatus.WaitingForms) || !c.getOwner().getUsername().equals(user.getUsername()))
+                claimListCurrent.getClaimList().remove(c.getId());
+        }
+        
         initComponents();
-    
+        
     }
 
     /** This method is called from within the constructor to
@@ -55,7 +64,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2Description = new javax.swing.JLabel();
         jScrollPane1Description = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textAreaDesc = new javax.swing.JTextArea();
         jLabel2DateofCrash = new javax.swing.JLabel();
         jButton1SubmitClaim = new javax.swing.JButton();
         calendarCrash = new com.toedter.calendar.JCalendar(Locale.US);
@@ -73,9 +82,9 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         jLabel2Description.setText("Description:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1Description.setViewportView(jTextArea1);
+        textAreaDesc.setColumns(20);
+        textAreaDesc.setRows(5);
+        jScrollPane1Description.setViewportView(textAreaDesc);
 
         jLabel2DateofCrash.setText("Date of Crash:");
 
@@ -135,7 +144,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         );
         panelCurrentClaimDetailsLayout.setVerticalGroup(
             panelCurrentClaimDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 296, Short.MAX_VALUE)
+            .addGap(0, 246, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -156,7 +165,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCurrentClaimDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(73, 73, 73))
         );
 
         jTabbedPane1.addTab("Send Form", jPanel2);
@@ -169,7 +178,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Claim History", jPanel3);
@@ -182,7 +191,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGap(0, 369, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Messages", jPanel4);
@@ -197,13 +206,15 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1SubmitClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1SubmitClaimActionPerformed
         try {
-            Claim c = new Claim((Customer) user, jLabel2Description.getText(), calendarCrash.getCalendar());
+            Claim c = new Claim((Customer) user, textAreaDesc.getText(), calendarCrash.getCalendar());
             cc.add(c);
             
 
@@ -228,28 +239,35 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane1Description;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel panelCurrentClaimDetails;
     private javax.swing.JTable tableCurrentClaims;
+    private javax.swing.JTextArea textAreaDesc;
     // End of variables declaration//GEN-END:variables
 
 
     private class RowListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent event) {
+            
             if (event.getValueIsAdjusting()) {
                 return;
             }
-            Claim c = getClaimAtSelectedRow(claimListCurrent, tableCurrentClaims);
-            FormPanel fp = new FormPanel(user, c);
-            panelCurrentClaimDetails.add(fp);
-            revalidate();
+            else{
 
-            System.out.println("Row selected");
+                Claim c = getClaimAtSelectedRow(claimListCurrent, tableCurrentClaims);
+                FormPanel fp = new FormPanel(user, c);
+                fp.setVisible(true);
+                fp.revalidate();
+                panelCurrentClaimDetails.setLayout(new BorderLayout());
+                panelCurrentClaimDetails.add(fp);
+                panelCurrentClaimDetails.revalidate();
+                validate();
+
+                System.out.println("Row selected");
+            }
         }
     }
 

@@ -152,14 +152,16 @@ public class LoginPanel extends javax.swing.JPanel {
 
 
             else if(user instanceof RegistrationHandler){
-
+                temp.setContentPane(new RegistrationHandlerPanel(user));
+                temp.pack();
             }
             else if(user instanceof ClaimHandler){
                 temp.setContentPane(new ClaimHandlerPanel(user));
                 temp.pack();
             }
             else if(user instanceof Financer){
-
+                temp.setContentPane(new FinancerPanel(user));
+                temp.pack();
             }
             
         }
