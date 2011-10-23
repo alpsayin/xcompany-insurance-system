@@ -150,6 +150,7 @@ public abstract class DatabaseControl
     public static synchronized ClaimList getAllClaims() throws IOException, ClassNotFoundException
     {
         ClaimList claimList = null;
+
         
         FileInputStream fileInputStream = new FileInputStream(claimsFile);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
