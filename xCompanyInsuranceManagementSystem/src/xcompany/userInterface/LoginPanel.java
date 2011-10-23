@@ -13,6 +13,7 @@ package xcompany.userInterface;
 
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import xcompany.control.AccountControl;
 import xcompany.structures.Customer;
 import xcompany.structures.User;
@@ -145,6 +146,11 @@ public class LoginPanel extends javax.swing.JPanel {
             AccountControl accountControl = new AccountControl();
             User user = accountControl.login(textFieldUserName.getText(), textFieldPassword.getText());
 
+            if(user==null)
+            {
+                JOptionPane.showMessageDialog(this, "User credentials are wrong", "Incorrect Login", JOptionPane.ERROR_MESSAGE);
+            }
+            
             if(user instanceof Customer){
                 temp.setContentPane(new CustomerHomePanel(user));
                 temp.pack();
