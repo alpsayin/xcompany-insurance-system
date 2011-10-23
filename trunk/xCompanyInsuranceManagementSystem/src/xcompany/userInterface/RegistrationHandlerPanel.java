@@ -12,6 +12,8 @@
 package xcompany.userInterface;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -33,11 +35,11 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
     ClaimList reportedClaimList;
     ClaimControl cc = new ClaimControl();
-    
+    User user;
     /** Creates new form RegistrationHandlerPanel */
-    public RegistrationHandlerPanel() throws IOException, ClassNotFoundException {
+    public RegistrationHandlerPanel(User user) throws IOException, ClassNotFoundException {
         reportedClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.Reported);
-        
+        this.user = user;
         initComponents();
     }
 
@@ -61,11 +63,12 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         labelCustomerNameSurname = new javax.swing.JLabel();
         labelDate = new javax.swing.JLabel();
-        labelDescription = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         radioButtonSimple = new javax.swing.JRadioButton();
         radioButtonComplex = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        labelDescription = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(600, 0));
@@ -84,10 +87,6 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
         labelDate.setText("jLabel4");
 
-        labelDescription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labelDescription.setText("jLabel4");
-        labelDescription.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
         jLabel4.setText("Choose Type:");
 
         buttonGroupClaimCategory.add(radioButtonSimple);
@@ -104,6 +103,13 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             }
         });
 
+        labelDescription.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelDescription.setText("jLabel4");
+        labelDescription.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelDescription.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        labelDescription.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jScrollPane1.setViewportView(labelDescription);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -117,9 +123,9 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelDate)
-                            .addComponent(labelCustomerNameSurname)
-                            .addComponent(labelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(labelCustomerNameSurname)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -127,34 +133,34 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radioButtonComplex))
                     .addComponent(jButton1))
-                .addGap(141, 141, 141))
+                .addGap(245, 245, 245))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(56, 56, 56))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(labelCustomerNameSurname)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(6, 6, 6)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(radioButtonSimple)
                     .addComponent(radioButtonComplex))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -164,7 +170,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -272,12 +278,16 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private class RowListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent event) {
+        
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+          
             if (event.getValueIsAdjusting()) {
                 return;
             }
+          
             Claim c = getClaimAtSelectedRow(reportedClaimList, tableReportedClaims);
             labelCustomerNameSurname.setText(c.getOwner().getName() + " " + c.getOwner().getSurname());
-            labelDate.setText(c.getDateOfCrash().toString());
+            labelDate.setText(sdf.format(c.getDateOfCrash().getTime()));
             labelDescription.setText(c.getDescription());
             
             System.out.println("Row selected");

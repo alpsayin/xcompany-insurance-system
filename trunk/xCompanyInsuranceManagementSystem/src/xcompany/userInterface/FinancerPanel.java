@@ -11,15 +11,19 @@
 
 package xcompany.userInterface;
 
+import xcompany.structures.User;
+
 /**
  *
  * @author Emertat
  */
 public class FinancerPanel extends javax.swing.JPanel {
 
+    User user;
     /** Creates new form FinancerPanel */
-    public FinancerPanel() {
+    public FinancerPanel(User user) {
         initComponents();
+        this.user = user;
     }
 
     /** This method is called from within the constructor to
