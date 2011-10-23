@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import xcompany.control.DatabaseControl;
@@ -98,6 +99,7 @@ public class FormPanel extends JPanel implements ActionListener
                 cl.getClaimList().get(claim.getId()).setForm(claim.getForm());
                 cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.SentBack);
                 DatabaseControl.writeAllClaims(cl);
+                JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
             }
             else if (user instanceof RegistrationHandler) {
 
@@ -110,6 +112,7 @@ public class FormPanel extends JPanel implements ActionListener
                     DatabaseControl.writeAllClaims(cl);
 
                 }
+                JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
 
@@ -122,6 +125,7 @@ public class FormPanel extends JPanel implements ActionListener
                     DatabaseControl.writeAllClaims(cl);
 
                 }
+                JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (IOException ex) {
             Logger.getLogger(FormPanel.class.getName()).log(Level.SEVERE, null, ex);

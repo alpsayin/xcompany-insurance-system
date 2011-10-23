@@ -43,6 +43,8 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     User user;
     ClaimControl cc = new ClaimControl();
     
+    EmailList emailList;
+    
     ClaimList claimListCurrent;
     
     Claim selectedClaim;
@@ -52,6 +54,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         
         claimListCurrent = DatabaseControl.getUserClaims(user.getUsername());
         
+        emailList = new EmailList();
         
         TopPanel topPanel = new TopPanel(user.getName()+" "+user.getSurname(), user.getUsername(), "Customer");
         
@@ -97,6 +100,16 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         claimInfoTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        emalTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        fromLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        toLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        subjectLabel = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        textTextArea = new javax.swing.JTextArea();
         panelTop = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(600, 450));
@@ -237,15 +250,61 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Claim History", jPanel3);
 
+        emalTable.setModel(getEmailsTableModel());
+        emalTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());
+        jScrollPane4.setViewportView(emalTable);
+
+        jLabel1.setText("From:");
+
+        jLabel2.setText("To:");
+
+        jLabel3.setText("Subject:");
+
+        textTextArea.setColumns(20);
+        textTextArea.setRows(5);
+        jScrollPane5.setViewportView(textTextArea);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 618, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fromLabel)
+                            .addComponent(toLabel)
+                            .addComponent(subjectLabel))))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(fromLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(toLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(subjectLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Messages", jPanel4);
@@ -306,10 +365,15 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar calendarCrash;
     private javax.swing.JTable claimInfoTable;
+    private javax.swing.JTable emalTable;
+    private javax.swing.JLabel fromLabel;
     private javax.swing.JTable historyTable;
     private javax.swing.JButton jButton1SubmitClaim;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2DateofCrash;
     private javax.swing.JLabel jLabel2Description;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -318,11 +382,16 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1Description;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelCurrentClaimDetails;
     private javax.swing.JPanel panelTop;
+    private javax.swing.JLabel subjectLabel;
     private javax.swing.JTable tableCurrentClaims;
     private javax.swing.JTextArea textAreaDesc;
+    private javax.swing.JTextArea textTextArea;
+    private javax.swing.JLabel toLabel;
     // End of variables declaration//GEN-END:variables
     private TableModel getCurrentClaimsTableModel()
     {
@@ -351,8 +420,44 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             row.add(c.getStatus().toString());
             dtm.addRow(row);
         }
-        tableCurrentClaims.setModel(dtm);
+        historyTable.setModel(dtm);
         return dtm;
+    }
+    private TableModel getEmailsTableModel()
+    {
+        String columnNames[] = {"From", "To", "Subject"};
+        DefaultTableModel dtm = new DefaultTableModel(columnNames,0);
+        for(Claim c : claimListCurrent.getClaimList().values())
+        {
+            for(Email e : c.getEmailsList().getEmailList())
+            {
+                emailList.add(e);
+                Vector<String> row = new Vector<String>();
+                row.add(e.getFrom());
+                row.add(e.getTo());
+                row.add(e.getSubject());
+                dtm.addRow(row);
+            }
+        }
+        emalTable.setModel(dtm);
+        return dtm;
+    }
+    private class EmailsRowListener implements ListSelectionListener
+    {
+        @Override
+        public void valueChanged(ListSelectionEvent e)
+        {
+            if(e.getValueIsAdjusting())
+                return;
+            
+            int row = e.getFirstIndex();
+            Email email = emailList.getEmailList().get(row);
+            fromLabel.setText(email.getFrom());
+            toLabel.setText(email.getTo());
+            subjectLabel.setText(email.getSubject());
+            textTextArea.setText(email.getText());
+            textTextArea.setEditable(false);
+        }
     }
     private class HistoryRowListener implements ListSelectionListener
     {
