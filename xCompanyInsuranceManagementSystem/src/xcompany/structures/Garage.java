@@ -44,4 +44,8 @@ public class Garage implements Serializable
     {
         this.email = email;
     }
+    @Override
+    public String toString(){
+        return "Name: " + name  + " Email: " + email;
+    }
 }

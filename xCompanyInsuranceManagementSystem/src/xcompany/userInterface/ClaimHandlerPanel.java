@@ -28,7 +28,6 @@ import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
 import xcompany.structures.User;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import xcompany.control.ClaimControl;
 import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.ClaimHandler;
@@ -44,62 +43,20 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
     
     ClaimList claimListAvailableToHandle;
     ClaimList claimListTaken;
+    
     /** Creates new form ClaimHandlerPanel */
     public ClaimHandlerPanel(User user) throws IOException, ClassNotFoundException {
 
         this.user = user;
 
         claimListAvailableToHandle = DatabaseControl.getClaimsByStatus(ClaimStatus.Registered);
-        claimListTaken = DatabaseControl.getClaimsOfHandler(user.getName());
+        claimListTaken = DatabaseControl.getClaimsOfHandler(user.getUsername());
 
         initComponents();
 
-        panelTakenClaims.setLayout(new GridLayout(2,0));
+      
 
-        if(claimListTaken != null){
-            JTable table = new JTable(new MyTableModel(claimListTaken)){
 
-                //Implement table cell tool tips.
-                @Override
-                public String getToolTipText(MouseEvent e) {
-                    String tip = null;
-                    java.awt.Point p = e.getPoint();
-                    int rowIndex = rowAtPoint(p);
-                    int colIndex = columnAtPoint(p);
-                    int realColumnIndex = convertColumnIndexToModel(colIndex);
-
-                    TableModel model = getModel();
-                    if (realColumnIndex == 1) { //customer name
-                        int id =Integer.parseInt( (String)model.getValueAt(rowIndex,0));
-                        Customer user = claimListTaken.get(id).getOwner();
-                        tip = "Insurance Limit: " + user.getInsurance().getMaxAmount() +
-                                "$\n Insurance Repair Limit: " + user.getInsurance().getMaxNumRepairs();
-                    } else if (realColumnIndex == 2) { //Description
-
-                        String description = (String)model.getValueAt(rowIndex,3);
-
-                        tip = description;
-
-                    } else {
-                        //You can omit this part if you know you don't
-                        //have any renderers that supply their own tool
-                        //tips.
-                        tip = super.getToolTipText(e);
-                    }
-                    return tip;
-                }
-            };
-            table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-            table.setFillsViewportHeight(true);
-
-            //Create the scroll pane and add the table to it.
-            JScrollPane scrollPane = new JScrollPane(table);
-
-            //Add the scroll pane to this panel.
-            panelTakenClaims.add(scrollPane);
-            panelTakenClaims.revalidate();
-            validate();
-        }
     
     }
 
@@ -120,6 +77,9 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         panelCurrentClaimDetails = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         panelTakenClaims = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableTaken = new javax.swing.JTable();
+        panelDetails = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(600, 450));
         setPreferredSize(new java.awt.Dimension(600, 450));
@@ -144,7 +104,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         );
         panelCurrentClaimDetailsLayout.setVerticalGroup(
             panelCurrentClaimDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 213, Short.MAX_VALUE)
+            .addGap(0, 205, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -155,14 +115,14 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelCurrentClaimDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
-                    .addComponent(buttonTakeClaim, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(buttonTakeClaim, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonTakeClaim)
@@ -173,15 +133,39 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Available Claims", jPanel1);
 
+        tableTaken.setModel(new MyTableModel(claimListTaken));
+        tableTaken.getSelectionModel().addListSelectionListener(new RowListener2());
+        jScrollPane2.setViewportView(tableTaken);
+
+        javax.swing.GroupLayout panelDetailsLayout = new javax.swing.GroupLayout(panelDetails);
+        panelDetails.setLayout(panelDetailsLayout);
+        panelDetailsLayout.setHorizontalGroup(
+            panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 575, Short.MAX_VALUE)
+        );
+        panelDetailsLayout.setVerticalGroup(
+            panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 302, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout panelTakenClaimsLayout = new javax.swing.GroupLayout(panelTakenClaims);
         panelTakenClaims.setLayout(panelTakenClaimsLayout);
         panelTakenClaimsLayout.setHorizontalGroup(
             panelTakenClaimsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 595, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTakenClaimsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTakenClaimsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelDetails, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelTakenClaimsLayout.setVerticalGroup(
             panelTakenClaimsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(panelTakenClaimsLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -205,7 +189,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -240,10 +224,13 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelCurrentClaimDetails;
+    private javax.swing.JPanel panelDetails;
     private javax.swing.JPanel panelTakenClaims;
     private javax.swing.JTable tableAvailableClaims;
+    private javax.swing.JTable tableTaken;
     // End of variables declaration//GEN-END:variables
 
 
@@ -255,7 +242,28 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         int id = Integer.parseInt(jt.getValueAt(row, 0).toString());
         return c.get(id);
     }
-    
+    private class RowListener2 implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent event) {
+
+       if (event.getValueIsAdjusting()) {
+                return;
+            }
+            else{
+
+                Claim c = getClaimAtSelectedRow(claimListTaken,tableTaken );
+                //selectedClaim = c;
+                FormPanel fp = new FormPanel(user, c,true);
+                panelDetails.setLayout(new BorderLayout());
+                panelDetails.removeAll();
+                panelDetails.add(fp);
+                panelDetails.revalidate();
+                validate();
+
+                System.out.println("Row selected");
+            }
+        }
+    }
     private class RowListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent event) {

@@ -102,6 +102,8 @@ public abstract class DatabaseControl
             Claim c = new Claim(customer1, "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" +
                     "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" +
                     "DescriptionDescriptionDescription", Calendar.getInstance(), 1);
+            c.setClaimHandler(ch);
+            
             cl.add(c);
             oos.writeObject(cl);
             oos.close();
@@ -224,9 +226,11 @@ public abstract class DatabaseControl
         ClaimList returnList = new ClaimList();
         
         for(Claim c : claimList.getClaimList().values())
-            if(username.equals(c.getClaimHandler().getUsername()))
-                returnList.getClaimList().put(c.getId(), c);
-        
+        {
+            if(c.getClaimHandler() != null)
+                if(username.equals(c.getClaimHandler().getUsername()))
+                    returnList.getClaimList().put(c.getId(), c);
+        }
         return returnList;
     }
     public static synchronized ClaimList getClaimsOfFinancer(String username) throws IOException, ClassNotFoundException

@@ -20,7 +20,7 @@ public class EmailList
     }
     public ArrayList<Email> getEmailList()
     {
-        return getEmailList();
+        return emailList;
     }
     public void setEmailList(ArrayList<Email> emailList)
     {
