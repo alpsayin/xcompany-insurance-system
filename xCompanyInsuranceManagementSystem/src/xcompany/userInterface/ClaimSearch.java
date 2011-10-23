@@ -32,19 +32,14 @@ public class ClaimSearch extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1ClaimSearch = new javax.swing.JComboBox();
         jButton1SearchClaim = new javax.swing.JButton();
+        jComboBox1ClaimSearch = new javax.swing.JComboBox();
 
         jLabel1.setText("Search Claim by:");
 
-        jComboBox1ClaimSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1ClaimSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ClaimSearchActionPerformed(evt);
-            }
-        });
-
         jButton1SearchClaim.setText("Search");
+
+        jComboBox1ClaimSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,12 +50,12 @@ public class ClaimSearch extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addComponent(jLabel1)
-                        .addGap(91, 91, 91)
-                        .addComponent(jComboBox1ClaimSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(124, 124, 124)
+                        .addComponent(jComboBox1ClaimSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addComponent(jButton1SearchClaim)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,16 +63,12 @@ public class ClaimSearch extends javax.swing.JPanel {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1ClaimSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1ClaimSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1SearchClaim)
                 .addContainerGap(270, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jComboBox1ClaimSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ClaimSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ClaimSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
