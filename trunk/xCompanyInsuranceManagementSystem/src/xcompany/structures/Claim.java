@@ -7,6 +7,7 @@ import xcompany.structures.form.Form;
 import java.util.ArrayList;
 import java.util.Calendar;
 import xcompany.control.DatabaseControl;
+import xcompany.lists.EmailList;
 
 //  @ Date : 11.10.2011
 
@@ -26,7 +27,7 @@ public class Claim implements Serializable
     private Calendar dateOfCrash;
     private Garage garage;
     private Financer financer;
-    private ArrayList<Email> emailsList;
+    private EmailList emailsList;
     public Claim(Customer owner, String description, Calendar dateOfCrash)
     {
         this.owner = owner;
@@ -134,11 +135,11 @@ public class Claim implements Serializable
     {
         this.financer = financer;
     }
-    public ArrayList<Email> getEmailsList()
+    public EmailList getEmailsList()
     {
         return emailsList;
     }
-    public void setEmailsList(ArrayList<Email> emailsList)
+    public void setEmailsList(EmailList emailsList)
     {
         this.emailsList = emailsList;
     }
