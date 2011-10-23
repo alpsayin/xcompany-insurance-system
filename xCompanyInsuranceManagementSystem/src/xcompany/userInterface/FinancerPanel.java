@@ -71,15 +71,15 @@ public class FinancerPanel extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        buttonPay = new javax.swing.JButton();
+        buttonTake = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableApproved = new javax.swing.JTable();
         panelTop = new javax.swing.JPanel();
 
-        buttonPay.setText("Pay");
-        buttonPay.addActionListener(new java.awt.event.ActionListener() {
+        buttonTake.setText("Take");
+        buttonTake.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPayActionPerformed(evt);
+                buttonTakeActionPerformed(evt);
             }
         });
 
@@ -94,7 +94,7 @@ public class FinancerPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-                    .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(buttonTake, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -103,7 +103,7 @@ public class FinancerPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonPay)
+                .addComponent(buttonTake)
                 .addContainerGap(121, Short.MAX_VALUE))
         );
 
@@ -145,7 +145,7 @@ public class FinancerPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
+    private void buttonTakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeActionPerformed
         try {
             Claim c = getClaimAtSelectedRow(claimListCurrent, tableApproved);
             cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentInProcess);
@@ -155,11 +155,11 @@ public class FinancerPanel extends javax.swing.JPanel {
             Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_buttonPayActionPerformed
+    }//GEN-LAST:event_buttonTakeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonPay;
+    private javax.swing.JButton buttonTake;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;

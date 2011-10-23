@@ -59,7 +59,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane1" pref="606" max="32767" attributes="0"/>
-                          <Component id="buttonPay" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonTake" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -71,19 +71,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="287" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="buttonPay" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonTake" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="121" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="buttonPay">
+            <Component class="javax.swing.JButton" name="buttonTake">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pay"/>
+                <Property name="text" type="java.lang.String" value="Take"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPayActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTakeActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
