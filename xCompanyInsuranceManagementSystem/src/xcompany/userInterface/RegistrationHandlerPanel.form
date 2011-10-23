@@ -112,6 +112,9 @@
                       <Connection code="getReportedClaimsTable()" type="code"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    @Override public boolean isCellEditable(int row, int col)&#xa;    {&#xa;        return false;&#xa;    }}"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -297,6 +300,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    @Override public boolean isCellEditable(int row, int col)&#xa;    {&#xa;        return false;&#xa;    }}"/>
                     <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableWaiting.getSelectionModel().addListSelectionListener(new WaitingRowListener());&#xa;tableWaiting.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
                   </AuxValues>
                 </Component>
