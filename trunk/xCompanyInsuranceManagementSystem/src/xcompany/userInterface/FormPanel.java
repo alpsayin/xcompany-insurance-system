@@ -139,7 +139,6 @@ public class FormPanel extends JPanel implements ActionListener
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.Rejected);
                     DatabaseControl.writeAllClaims(cl);
                 }
-                JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
                 sendButton.setEnabled(false);
                 sendBackButton.setEnabled(false);
                 chp.getAvailableClaimsTableModel();
