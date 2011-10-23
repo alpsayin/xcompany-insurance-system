@@ -12,17 +12,13 @@
 package xcompany.userInterface;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.TableModel;
 import xcompany.control.DatabaseControl;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
@@ -31,7 +27,6 @@ import javax.swing.table.AbstractTableModel;
 import xcompany.control.ClaimControl;
 import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.ClaimHandler;
-import xcompany.structures.Customer;
 /**
  *
  * @author Mert
@@ -72,13 +67,24 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableAvailableClaims = new javax.swing.JTable();
+        tableAvailableClaims = new javax.swing.JTable(){
+            @Override public boolean isCellEditable(int row, int col)
+            {
+                return false;
+            }
+        }
+        ;
         buttonTakeClaim = new javax.swing.JButton();
         panelCurrentClaimDetails = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         panelTakenClaims = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableTaken = new javax.swing.JTable();
+        tableTaken = new javax.swing.JTable(){
+            @Override public boolean isCellEditable(int row, int col)
+            {
+                return false;
+            }
+        };
         panelDetails = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(600, 450));
@@ -86,6 +92,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
         tableAvailableClaims.setModel(new MyTableModel(claimListAvailableToHandle));
         tableAvailableClaims.getSelectionModel().addListSelectionListener(new RowListener());
+        tableAvailableClaims.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableAvailableClaims.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableAvailableClaims);
 
@@ -104,7 +111,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         );
         panelCurrentClaimDetailsLayout.setVerticalGroup(
             panelCurrentClaimDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 205, Short.MAX_VALUE)
+            .addGap(0, 189, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -135,6 +142,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
         tableTaken.setModel(new MyTableModel(claimListTaken));
         tableTaken.getSelectionModel().addListSelectionListener(new RowListener2());
+        tableTaken.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableTaken);
 
         javax.swing.GroupLayout panelDetailsLayout = new javax.swing.GroupLayout(panelDetails);
@@ -145,7 +153,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         );
         panelDetailsLayout.setVerticalGroup(
             panelDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
+            .addGap(0, 294, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout panelTakenClaimsLayout = new javax.swing.GroupLayout(panelTakenClaims);
@@ -189,7 +197,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,9 +244,6 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
     private Claim getClaimAtSelectedRow(ClaimList c, JTable jt){
         int row = jt.getSelectedRow();
-        if (row<0){
-            System.err.println("Selection is -1");
-        }
         int id = Integer.parseInt(jt.getValueAt(row, 0).toString());
         return c.get(id);
     }
@@ -250,7 +255,10 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
                 return;
             }
             else{
-
+                int row = event.getFirstIndex();
+                if (row<0 || row>=claimListTaken.getClaimList().size()){
+                    return;
+                }
                 Claim c = getClaimAtSelectedRow(claimListTaken,tableTaken );
                 //selectedClaim = c;
                 FormPanel fp = new FormPanel(user, c,true, null);
@@ -270,7 +278,10 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
             if (event.getValueIsAdjusting()) {
                 return;
             }
-
+            int row = event.getFirstIndex();
+            if (row<0 || row>=claimListAvailableToHandle.getClaimList().size()){
+                return;
+            }
             Claim c = getClaimAtSelectedRow(claimListAvailableToHandle, tableAvailableClaims);
             
             FormPanel fp = new FormPanel(user, c,false, null);
