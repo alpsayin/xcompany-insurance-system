@@ -27,4 +27,8 @@ public class EmailList implements Serializable
     {
         this.emailList = emailList;
     }
+     public void add(Email e)
+    {
+        getEmailList().add(e);
+    }
 }
