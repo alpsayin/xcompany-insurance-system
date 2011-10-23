@@ -1,12 +1,15 @@
 package xcompany.structures;
 
 //  @ File Name : Email.java
+
+import java.io.Serializable;
+
 //  @ Date : 11.10.2011
 
 
 
 
-public class Email 
+public class Email  implements Serializable
 {
     private String from;
     private String to;

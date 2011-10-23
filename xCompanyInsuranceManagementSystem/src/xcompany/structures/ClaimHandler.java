@@ -15,7 +15,7 @@ import xcompany.structures.Claim.ClaimStatus;
 public class ClaimHandler extends User 
 {
     private HandlerType rank;
-    private ArrayList<Claim> takenClaims;
+    //private ArrayList<Claim> takenClaims;
 
     public ClaimHandler(String name, String surname, String username, String email,
             String password, String address, HandlerType rank)
@@ -23,7 +23,14 @@ public class ClaimHandler extends User
         super(name, surname, username, email, password, address);
         this.rank = rank;
     }
-    
+
+    public ClaimHandler(String name, String surname, String username, String email,
+            String password, String address, HandlerType rank,int i)
+    {
+        super(name, surname, username, email, password, address,i);
+        this.rank = rank;
+
+    }
   
     
     public HandlerType getRank()
@@ -35,6 +42,7 @@ public class ClaimHandler extends User
     {
         this.rank = rank;
     }
+    /*
     public ArrayList<Claim> getTakenClaims()
     {
         return takenClaims;
@@ -43,6 +51,8 @@ public class ClaimHandler extends User
     {
         this.takenClaims = takenClaims;
     }
+     *
+     */
     public enum HandlerType
     {
         HighRanked, LowRanked
