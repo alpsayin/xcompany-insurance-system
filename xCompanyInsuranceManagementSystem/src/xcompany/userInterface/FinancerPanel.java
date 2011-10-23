@@ -39,6 +39,7 @@ public class FinancerPanel extends javax.swing.JPanel {
     User user;
     ClaimControl cc = new ClaimControl();
     ClaimList cl, claimListCurrent = new ClaimList();
+    ClaimList claimListTaken = new ClaimList();
     
     /** Creates new form FinancerPanel */
     public FinancerPanel(User user) throws IOException, ClassNotFoundException {
@@ -47,6 +48,8 @@ public class FinancerPanel extends javax.swing.JPanel {
         for(Claim c:cl.getClaimList().values()){
             if( c.getStatus().equals(ClaimStatus.ApprovedPendingPayment))
                 claimListCurrent.getClaimList().put(c.getId(), c);
+            else if( c.getStatus().equals(ClaimStatus.ApprovedPaymentInProcess))
+                claimListTaken.getClaimList().put(c.getId(), c);
         }
         
         TopPanel topPanel = new TopPanel(user.getName()+" "+user.getSurname(), user.getUsername(), "Financer");
@@ -72,8 +75,12 @@ public class FinancerPanel extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         buttonTake = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
         tableApproved = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tableTaken = new javax.swing.JTable();
+        buttonPay = new javax.swing.JButton();
         panelTop = new javax.swing.JPanel();
 
         buttonTake.setText("Take");
@@ -84,7 +91,7 @@ public class FinancerPanel extends javax.swing.JPanel {
         });
 
         tableApproved.setModel(getCurrentClaimsTableModel());
-        jScrollPane1.setViewportView(tableApproved);
+        jScrollPane3.setViewportView(tableApproved);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -93,21 +100,54 @@ public class FinancerPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
-                    .addComponent(buttonTake, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(buttonTake, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 625, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(buttonTake)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Approved Claims", jPanel2);
+
+        tableTaken.setModel(getTakenClaimsTableModel());
+        jScrollPane4.setViewportView(tableTaken);
+
+        buttonPay.setText("Pay");
+        buttonPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPayActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+                    .addComponent(buttonPay, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonPay)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Taken Claims", jPanel1);
 
         panelTop.setMinimumSize(new java.awt.Dimension(631, 56));
         panelTop.setPreferredSize(new java.awt.Dimension(631, 56));
@@ -129,19 +169,19 @@ public class FinancerPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                    .addComponent(panelTop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,6 +189,9 @@ public class FinancerPanel extends javax.swing.JPanel {
         try {
             Claim c = getClaimAtSelectedRow(claimListCurrent, tableApproved);
             cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentInProcess);
+            
+            getCurrentClaimsTableModel();
+            getTakenClaimsTableModel();
         } catch (IOException ex) {
             Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -157,14 +200,34 @@ public class FinancerPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_buttonTakeActionPerformed
 
+    private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
+        try {
+            Claim c = getClaimAtSelectedRow(claimListCurrent, tableApproved);
+            cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentComplete);
+            
+            getCurrentClaimsTableModel();
+            getTakenClaimsTableModel();
+        } catch (IOException ex) {
+            Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonPayActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonPay;
     private javax.swing.JButton buttonTake;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel panelTop;
     private javax.swing.JTable tableApproved;
+    private javax.swing.JTable tableTaken;
     // End of variables declaration//GEN-END:variables
  private TableModel getCurrentClaimsTableModel()
     {
@@ -186,7 +249,26 @@ public class FinancerPanel extends javax.swing.JPanel {
         tableApproved.setModel(dtm);
         return dtm;
     }
-  
+  private TableModel getTakenClaimsTableModel()
+    {
+        String columnNames[] = {"Id", "Customer", "Payment", "Date","Description", "Garage", "Status" };
+        DefaultTableModel dtm = new DefaultTableModel(columnNames,0);
+        for(Claim c : claimListTaken.getClaimList().values())
+        {
+            Vector<String> row = new Vector<String>();
+            row.add(""+c.getId());
+            row.add(c.getOwner().getName() + "" + c.getOwner().getSurname());
+            row.add( c.getDamage()+ "");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
+            row.add( sdf.format(c.getDateOfCrash().getTime()));
+            row.add(c.getDescription());
+            row.add(c.getGarage().getName() + " " + c.getGarage().getEmail());
+            row.add(c.getStatus().toString());
+            dtm.addRow(row);
+        }
+        tableTaken.setModel(dtm);
+        return dtm;
+    }
    
     private Claim getClaimAtSelectedRow(ClaimList c, JTable jt){
         int row = jt.getSelectedRow();
