@@ -50,6 +50,8 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     ClaimList claimListCurrent;
     
     Claim selectedClaim;
+    
+    CustomerHomePanel me;
     /** Creates new form CustomerHomePanel */
     public CustomerHomePanel(User user) throws IOException, ClassNotFoundException {
         this.user = user;
@@ -67,6 +69,8 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         panelTop.add(topPanel);
         panelTop.revalidate();
         validate();
+        
+        me = this;
     }
 
     /** This method is called from within the constructor to
@@ -189,7 +193,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         tableCurrentClaims.setModel(getCurrentClaimsTableModel());
         tableCurrentClaims.getSelectionModel().addListSelectionListener(new FormRowListener());
-        historyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableCurrentClaims.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableCurrentClaims);
 
         javax.swing.GroupLayout panelCurrentClaimDetailsLayout = new javax.swing.GroupLayout(panelCurrentClaimDetails);
@@ -226,7 +230,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Send Form", jPanel2);
 
-        historyTable.setModel(getClaimHistoryTableModel());
+        historyTable.setModel(getCurrentClaimsTableModel());
         historyTable.getSelectionModel().addListSelectionListener(new HistoryRowListener());
         historyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(historyTable);
@@ -373,7 +377,6 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             }
             
             claimListCurrent.add(c);
-            getClaimHistoryTableModel();
             getCurrentClaimsTableModel();
 
 
@@ -419,8 +422,9 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     private javax.swing.JTextArea textTextArea;
     private javax.swing.JLabel toLabel;
     // End of variables declaration//GEN-END:variables
-    private TableModel getCurrentClaimsTableModel()
+    public TableModel getCurrentClaimsTableModel()
     {
+        updateClaimList();
         String columnNames[] = {"Id", "Description", "Status"};
         DefaultTableModel dtm = new DefaultTableModel(columnNames,0);
         for(Claim c : claimListCurrent.getClaimList().values())
@@ -432,20 +436,6 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             dtm.addRow(row);
         }
         tableCurrentClaims.setModel(dtm);
-        return dtm;
-    }
-    private TableModel getClaimHistoryTableModel()
-    {
-        String columnNames[] = {"Id", "Description", "Status"};
-        DefaultTableModel dtm = new DefaultTableModel(columnNames,0);
-        for(Claim c : claimListCurrent.getClaimList().values())
-        {
-            Vector<String> row = new Vector<String>();
-            row.add(""+c.getId());
-            row.add(c.getDescription());
-            row.add(c.getStatus().toString());
-            dtm.addRow(row);
-        }
         historyTable.setModel(dtm);
         return dtm;
     }
@@ -467,6 +457,17 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         }
         emailTable.setModel(dtm);
         return dtm;
+    }
+    private void updateClaimList()
+    {
+        try
+        {
+            claimListCurrent = DatabaseControl.getUserClaims(user.getUsername());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     private class EmailsRowListener implements ListSelectionListener
     {
@@ -548,9 +549,11 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             }
             else{
                 
+                if(event.getLastIndex()>=claimListCurrent.getClaimList().size() || event.getFirstIndex()<0)
+                    return;
                 Claim c = getClaimAtSelectedRow(claimListCurrent, tableCurrentClaims);
                 if(c.getStatus().equals(ClaimStatus.WaitingForms)){
-                    FormPanel fp = new FormPanel(user, c,true);
+                    FormPanel fp = new FormPanel(user, c,true, me);
                     panelCurrentClaimDetails.setLayout(new BorderLayout());
                     panelCurrentClaimDetails.removeAll();
                     panelCurrentClaimDetails.add(fp);
