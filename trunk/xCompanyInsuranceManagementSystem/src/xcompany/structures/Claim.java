@@ -36,6 +36,15 @@ public class Claim implements Serializable
         this.status = ClaimStatus.Reported;
         
     }
+    public Claim(Customer owner, String description, Calendar dateOfCrash, int id)
+    {
+        this.owner = owner;
+        this.description = description;
+        this.dateOfCrash = dateOfCrash;
+        this.id = id;
+        this.status = ClaimStatus.Reported;
+
+    }
     public static int generateId()
     {
         try

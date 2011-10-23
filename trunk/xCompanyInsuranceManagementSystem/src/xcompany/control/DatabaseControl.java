@@ -41,19 +41,19 @@ public abstract class DatabaseControl
             UserList userList = new UserList();
             Calendar calendar = Calendar.getInstance();
 
-            Customer customer1 = new Customer("Mert", "Karadogan", "customer", "gmertk@gmail.com", "1234",
+            Customer customer1 = new Customer("Mert", "Karadogan", "cust", "gmertk@gmail.com", "1234",
                     "Grufsgatan 12 Stockholm Sweden", 1);
             calendar.set(2015, 12, 01);
             customer1.setInsurance(new Insurance(10000, 5, calendar ));
             userList.getUserList().put(customer1.getUsername(), customer1);
 
-            Customer customer2 = new Customer("Jacob", "Stain", "customer2", "jacob@gmail.com", "1234",
+            Customer customer2 = new Customer("Jacob", "Stain", "cust2", "jacob@gmail.com", "1234",
                     "Uppsala Sweden",2);
             calendar.set(2010, 12, 01);
             customer2.setInsurance(new Insurance(10000, 5, calendar ));
             userList.getUserList().put(customer2.getUsername(), customer2);
 
-            Customer customer3 = new Customer("Lina", "Ann", "customer3", "lina@gmail.com", "1234",
+            Customer customer3 = new Customer("Lina", "Ann", "cust3", "lina@gmail.com", "1234",
                     "KTH Stockholm Sweden",3);
             calendar.set(2014, 12, 01);
             customer3.setInsurance(new Insurance(10000, 5, calendar ));
@@ -94,7 +94,19 @@ public abstract class DatabaseControl
             UserList ul = new UserList();
             ul = DatabaseControl.getAllUsers();
             objectOutputStream.close();
-            
+
+            FileOutputStream fos = new FileOutputStream(claimsFile);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            ClaimList cl = new ClaimList();
+
+            Claim c = new Claim(customer1, "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" +
+                    "DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" +
+                    "DescriptionDescriptionDescription", Calendar.getInstance(), 1);
+            cl.add(c);
+            oos.writeObject(cl);
+            oos.close();
+
+
         }
         catch(Exception e)
         {
