@@ -12,6 +12,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import xcompany.lists.ClaimList;
+import xcompany.lists.EmailList;
+import xcompany.lists.UserList;
 import static org.junit.Assert.*;
 import xcompany.structures.Claim;
 import xcompany.structures.Claim.ClaimStatus;
@@ -20,6 +23,7 @@ import xcompany.structures.Customer;
 import xcompany.structures.Email;
 import xcompany.structures.Financer;
 import xcompany.structures.Garage;
+import xcompany.structures.Insurance;
 import xcompany.structures.User;
 
 /**
@@ -28,11 +32,52 @@ import xcompany.structures.User;
  */
 public class ClaimControlTest {
 
+    static Customer c1, c2;
+    static ClaimHandler ch;
+    static Financer f;
+    static Claim claim;
+
     public ClaimControlTest() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+            UserList userList = new UserList();
+            Calendar calendar = Calendar.getInstance();
+
+            c1 = new Customer("Pinar", "Adimci", "fin", "adimci@gmail.com", "1234","address",10);
+            userList.getUserList().put(c1.getUsername(), c1);
+            calendar.set(2015, 12, 01);
+            c1.setInsurance(new Insurance(10000, 5, calendar));
+
+            c2 = new Customer("Emre", "Demiralp", "fin2", "demir@gmail.com", "1234","address",11);
+            userList.getUserList().put(c2.getUsername(), c2);
+
+            ch = new ClaimHandler("Phoebe", "Buffay", "ch3", "phoebe@gmail.com", "1234",
+                                                "Arizona USA", ClaimHandler.HandlerType.HighRanked,8);
+            
+            f = new Financer("Pinar", "Adimci", "fin", "adimci@gmail.com", "1234",20);
+            userList.getUserList().put(f.getUsername(), f);
+
+            userList.getUserList().put(ch.getUsername(), ch);
+
+            DatabaseControl.writeAllUsers(userList);
+
+
+            ClaimList cl = new ClaimList();
+             claim = new Claim((Customer)c1, "newAddedClaim",Calendar.getInstance(),999);
+             claim.setClaimHandler(ch);
+             claim.setGarage(new Garage("name","email"));
+
+             EmailList el = new EmailList();
+             ArrayList<Email> al =new ArrayList<Email>();
+             al.add(new Email());
+             el.setEmailList(al);
+
+             claim.setEmailsList(el);
+             cl.add(claim);
+             DatabaseControl.writeAllClaims(cl);
+
     }
 
     @AfterClass
@@ -47,133 +92,75 @@ public class ClaimControlTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of add method, of class ClaimControl.
-     */
+
     @Test
-    public void testAdd() throws Exception {
+    public void testAddNewClaim() throws Exception {
         System.out.println("add");
-        User customer = DatabaseControl.getUser("gmertk");
-        Claim c = new Claim((Customer)customer, "newAddedClaim",Calendar.getInstance());
+        
+        Claim c = new Claim((Customer)c1, "newAddedClaim",Calendar.getInstance(),999);
         
         ClaimControl instance = new ClaimControl();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.add(c);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
-    /**
-     * Test of changeStatus method, of class ClaimControl.
-     */
     @Test
     public void testChangeStatus() throws Exception {
         System.out.println("changeStatus");
-        int id = 10;
+
+        int id = 999;
         ClaimStatus status = ClaimStatus.Registered;
         ClaimControl instance = new ClaimControl();
+
         boolean expResult = true;
         boolean result = instance.changeStatus(id, status);
         assertEquals(expResult, result);
         assertEquals(DatabaseControl.getAllClaims().get(id).getStatus(), status);
     }
 
-    /**
-     * Test of notifyCustomer method, of class ClaimControl.
-     */
-    @Test
-    public void testNotifyCustomer() throws Exception {
-        System.out.println("notifyCustomer");
-        int id = 10;
-        Claim c = DatabaseControl.getAllClaims().get(id);
-        String message = "email";
-        ClaimControl instance = new ClaimControl();
-        boolean expResult = false;
-        boolean result = instance.notifyCustomer(c, message);
-        ArrayList<Email> elist = DatabaseControl.getAllClaims().get(id).getEmailsList();
 
-        assertEquals(expResult, result);
-        assertEquals(elist.get(elist.size()-1).getText(), message  );
-    }
-
-    /**
-     * Test of assignClaimHandler method, of class ClaimControl.
-     */
     @Test
-    public void testAssignClaimHandler() throws Exception {
+    public void testAssignments() throws Exception {
         System.out.println("assignClaimHandler");
-        Claim c = null;
-        ClaimHandler ch = null;
+        Claim c = new Claim((Customer)c1, "newAddedClaim",Calendar.getInstance(),999);
+        
         ClaimControl instance = new ClaimControl();
-        boolean expResult = false;
+
+        boolean expResult = true;
         boolean result = instance.assignClaimHandler(c, ch);
+        boolean result2 = instance.assignFinancer(c, f);
+        boolean result3 = instance.assignGarage(c, new Garage("name", "email"));
+
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult, result2);
+        assertEquals(expResult, result3);
+        
     }
 
-    /**
-     * Test of assignFinancer method, of class ClaimControl.
-     */
-    @Test
-    public void testAssignFinancer() throws Exception {
-        System.out.println("assignFinancer");
-        Claim c = null;
-        Financer f = null;
-        ClaimControl instance = new ClaimControl();
-        boolean expResult = false;
-        boolean result = instance.assignFinancer(c, f);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of assignGarage method, of class ClaimControl.
-     */
-    @Test
-    public void testAssignGarage() throws Exception {
-        System.out.println("assignGarage");
-        Claim c = null;
-        Garage g = null;
-        ClaimControl instance = new ClaimControl();
-        boolean expResult = false;
-        boolean result = instance.assignGarage(c, g);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of checkInsurance method, of class ClaimControl.
-     */
     @Test
     public void testCheckInsurance() throws Exception {
         System.out.println("checkInsurance");
-        Claim c = null;
+        Claim c = new Claim((Customer)c1, "newAddedClaim",Calendar.getInstance(),999);
         ClaimControl instance = new ClaimControl();
-        boolean expResult = false;
+
+        boolean expResult = true;
         boolean result = instance.checkInsurance(c);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
-    /**
-     * Test of approve method, of class ClaimControl.
-     */
     @Test
     public void testApprove() throws Exception {
         System.out.println("approve");
-        ClaimHandler claimHandler = null;
-        Claim claim = null;
-        boolean approvement = false;
-        String message = "";
+        boolean approvement = true;
+        String message = "Message";
         ClaimControl instance = new ClaimControl();
-        instance.approve(claimHandler, claim, approvement, message);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.approve(ch, claim, approvement, message);
+        assertEquals(DatabaseControl.getAllClaims().get(claim.getId()).getStatus(), ClaimStatus.ApprovedPendingPayment);
+        
     }
 
 }

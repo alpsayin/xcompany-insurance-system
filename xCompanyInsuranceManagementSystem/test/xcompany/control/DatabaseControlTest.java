@@ -23,12 +23,21 @@ import xcompany.structures.Claim.ClaimStatus;
  * @author Mert
  */
 public class DatabaseControlTest {
-
+    static Financer fin, fin2;
     public DatabaseControlTest() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+            UserList userList = new UserList();
+            fin = new Financer("Pinar", "Adimci", "fin", "adimci@gmail.com", "1234",10);
+            userList.getUserList().put(fin.getUsername(), fin);
+
+            fin2 = new Financer("Emre", "Demiralp", "fin2", "demir@gmail.com", "1234",11);
+            userList.getUserList().put(fin2.getUsername(), fin2);
+            
+            DatabaseControl.writeAllUsers(userList);
+
     }
 
     @AfterClass
@@ -44,24 +53,20 @@ public class DatabaseControlTest {
     }
 
    
-    /**
-     * Test of addUser method, of class DatabaseControl.
-     */
+  
     @Test
     public void testAddUser() throws Exception {
         System.out.println("addUser");
         User user = new RegistrationHandler("regHandName", "regHandSurname", "regHand1", "modified@gmail.com", "12345",
-                "address1");
-        boolean expResult = false;
+                "address1", 999);
+        boolean expResult = true;
         boolean result = DatabaseControl.addUser(user);
         assertEquals(expResult, result);
         assertEquals(user, DatabaseControl.getUser(user.getUsername()));
         
     }
 
-    /**
-     * Test of writeAllClaims method, of class DatabaseControl.
-     */
+ 
     @Test
     public void testAllClaims() throws Exception {
         System.out.println("testAllClaims");
@@ -100,9 +105,7 @@ public class DatabaseControlTest {
 
 
 
-    /**
-     * Test of writeAllGarages method, of class DatabaseControl.
-     */
+
     @Test
     public void testAllGarages() throws Exception {
         System.out.println("writeAllGarages");
@@ -121,87 +124,19 @@ public class DatabaseControlTest {
         
     }
 
-
-
-    /**
-     * Test of getUser method, of class DatabaseControl.
-     */
     @Test
     public void testGetUser() throws Exception {
         System.out.println("getUser");
-        User customer1 = new Customer("mert", "karadogan", "gmertk", "gmertk@gmail.com", "12345",
-                    "Hanstavagen 49 Stockholm Sweden", 1);
-        String userName = customer1.getUsername();
-        User expResult = customer1;
-        User result = DatabaseControl.getUser(userName);
+        
+        
+        User expResult = fin2;
+        User result = DatabaseControl.getUser(fin2.getUsername());
         assertEquals(expResult, result);
         
     }
 
-    /**
-     * Test of getClaimsOfHandler method, of class DatabaseControl.
-   
-    @Test
-    public void testGetClaimsOfHandler() throws Exception {
-
-        System.out.println("getClaimsOfHandler");
-       
-        fail("The test case is a prototype.");
-    }
-  */
-    /**
-     * Test of getClaimsOfFinancer method, of class DatabaseControl.
-    
-    @Test
-    public void testGetClaimsOfFinancer() throws Exception {
-        System.out.println("getClaimsOfFinancer");
-        Financer handler = null;
-        ClaimList expResult = null;
-        ClaimList result = DatabaseControl.getClaimsOfFinancer(handler);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
- */
 
 
-    /**
-     * Test of getClaimsByStatus method, of class DatabaseControl.
-     */
-    @Test
-    public void testGetClaimsByStatus() throws Exception {
-        System.out.println("getClaimsByStatus");
-        ClaimStatus status = ClaimStatus.WaitingForms;
-        ClaimList expResult = DatabaseControl.getAllClaims();
-        ClaimList result = DatabaseControl.getClaimsByStatus(status);
-        
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of generateClaimId method, of class DatabaseControl.
-     */
-    @Test
-    public void testGenerateClaimId() throws Exception {
-        System.out.println("generateClaimId");
-        int expResult = 0;
-        int result = DatabaseControl.generateClaimId();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of generateUserId method, of class DatabaseControl.
-     */
-    @Test
-    public void testGenerateUserId() throws Exception {
-        System.out.println("generateUserId");
-        int expResult = 0;
-        int result = DatabaseControl.generateUserId();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
 }
