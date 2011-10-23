@@ -40,6 +40,11 @@ public class ClaimSearch extends javax.swing.JPanel {
         jButton1SearchClaim.setText("Search");
 
         jComboBox1ClaimSearch.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1ClaimSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ClaimSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,6 +74,10 @@ public class ClaimSearch extends javax.swing.JPanel {
                 .addContainerGap(270, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ClaimSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ClaimSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ClaimSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
