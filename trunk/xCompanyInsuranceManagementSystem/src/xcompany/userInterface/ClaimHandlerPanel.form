@@ -85,7 +85,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tableAvailableClaims">
                   <Properties>
-                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="tableAvailableClaims.getSelectionModel().addListSelectionListener(new RowListener());">
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" postCode="tableAvailableClaims.getSelectionModel().addListSelectionListener(new RowListener());&#xa;tableAvailableClaims.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);">
                       <Connection code="new MyTableModel(claimListAvailableToHandle)" type="code"/>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -96,7 +96,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    @Override public boolean isCellEditable(int row, int col)&#xa;    {&#xa;        return false;&#xa;    }&#xa;}&#xa;"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -189,7 +189,8 @@
                         </Property>
                       </Properties>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableTaken.getSelectionModel().addListSelectionListener(new RowListener2());"/>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    @Override public boolean isCellEditable(int row, int col)&#xa;    {&#xa;        return false;&#xa;    }&#xa;}"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableTaken.getSelectionModel().addListSelectionListener(new RowListener2());&#xa;tableTaken.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
                       </AuxValues>
                     </Component>
                   </SubComponents>
