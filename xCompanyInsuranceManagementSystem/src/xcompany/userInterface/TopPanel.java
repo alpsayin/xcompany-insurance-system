@@ -20,10 +20,10 @@ import javax.swing.JFrame;
 public class TopPanel extends javax.swing.JPanel {
 
     /** Creates new form TopPanel */
-    public TopPanel(String username, String name, String type) {
+    public TopPanel(String name, String username,  String type) {
         initComponents();
-        labelNameSurname.setText(name);
-        labelUsername.setText(username);
+        labelNameSurname.setText(name + ",");
+        labelUsername.setText(username + ",");
         labelUserType.setText(type);
     }
 
@@ -40,13 +40,12 @@ public class TopPanel extends javax.swing.JPanel {
         labelNameSurname = new javax.swing.JLabel();
         labelUserType = new javax.swing.JLabel();
         buttonLogout = new javax.swing.JButton();
-        buttonEdit = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(198, 212, 225));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(68, 116, 157), 1, true));
         setForeground(new java.awt.Color(235, 231, 224));
-        setMinimumSize(new java.awt.Dimension(600, 0));
-        setPreferredSize(new java.awt.Dimension(600, 78));
+        setMinimumSize(new java.awt.Dimension(500, 0));
+        setPreferredSize(new java.awt.Dimension(500, 56));
 
         labelUsername.setFont(new java.awt.Font("Tahoma", 0, 12));
         labelUsername.setForeground(new java.awt.Color(51, 51, 51));
@@ -56,7 +55,7 @@ public class TopPanel extends javax.swing.JPanel {
         labelNameSurname.setForeground(new java.awt.Color(51, 51, 51));
         labelNameSurname.setText("jLabel1");
 
-        labelUserType.setFont(new java.awt.Font("Tahoma", 2, 12));
+        labelUserType.setFont(new java.awt.Font("Tahoma", 0, 12));
         labelUserType.setForeground(new java.awt.Color(51, 51, 51));
         labelUserType.setText("jLabel1");
 
@@ -67,40 +66,31 @@ public class TopPanel extends javax.swing.JPanel {
             }
         });
 
-        buttonEdit.setText("Edit Profile");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelNameSurname)
-                    .addComponent(labelUsername))
+                .addComponent(labelNameSurname)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelUserType)
-                .addGap(341, 341, 341)
-                .addComponent(buttonEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(273, 273, 273)
                 .addComponent(buttonLogout)
-                .addGap(205, 205, 205))
+                .addGap(325, 325, 325))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelNameSurname)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelUsername)
-                            .addComponent(labelUserType)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buttonLogout)
-                        .addComponent(buttonEdit)))
-                .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNameSurname)
+                    .addComponent(labelUsername)
+                    .addComponent(labelUserType)
+                    .addComponent(buttonLogout))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,7 +104,6 @@ public class TopPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonEdit;
     private javax.swing.JButton buttonLogout;
     private javax.swing.JLabel labelNameSurname;
     private javax.swing.JLabel labelUserType;

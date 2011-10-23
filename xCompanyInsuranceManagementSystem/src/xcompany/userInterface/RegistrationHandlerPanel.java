@@ -11,6 +11,7 @@
 
 package xcompany.userInterface;
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -34,13 +35,24 @@ import xcompany.structures.form.*;
 public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
     ClaimList reportedClaimList;
+    ClaimList waitingClaimList;
     ClaimControl cc = new ClaimControl();
     User user;
     /** Creates new form RegistrationHandlerPanel */
     public RegistrationHandlerPanel(User user) throws IOException, ClassNotFoundException {
         reportedClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.Reported);
+        waitingClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.SentBack);
+        
         this.user = user;
+        TopPanel topPanel = new TopPanel(user.getName()+" "+user.getSurname(), user.getUsername(), "Customer");
+
         initComponents();
+
+        panelTop.setLayout(new BorderLayout());
+        panelTop.removeAll();
+        panelTop.add(topPanel);
+        panelTop.revalidate();
+        validate();
     }
 
     /** This method is called from within the constructor to
@@ -53,6 +65,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroupClaimCategory = new javax.swing.ButtonGroup();
+        panelTop = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScroll = new javax.swing.JScrollPane();
@@ -70,8 +83,22 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         labelDescription = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableWaiting = new javax.swing.JTable();
+        panelWaitingDetails = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(600, 0));
+
+        javax.swing.GroupLayout panelTopLayout = new javax.swing.GroupLayout(panelTop);
+        panelTop.setLayout(panelTopLayout);
+        panelTopLayout.setHorizontalGroup(
+            panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 631, Short.MAX_VALUE)
+        );
+        panelTopLayout.setVerticalGroup(
+            panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 49, Short.MAX_VALUE)
+        );
 
         tableReportedClaims.setModel(new MyTableModel(reportedClaimList));
         tableReportedClaims.getSelectionModel().addListSelectionListener(new RowListener());
@@ -133,7 +160,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radioButtonComplex))
                     .addComponent(jButton1))
-                .addGap(245, 245, 245))
+                .addGap(296, 296, 296))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +187,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                     .addComponent(radioButtonComplex))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -170,30 +197,56 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+                    .addComponent(jScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reported Claims", jPanel1);
+
+        tableWaiting.setModel(new MyTableModel(waitingClaimList));
+        tableWaiting.getSelectionModel().addListSelectionListener(new RowListener2());
+        jScrollPane3.setViewportView(tableWaiting);
+
+        javax.swing.GroupLayout panelWaitingDetailsLayout = new javax.swing.GroupLayout(panelWaitingDetails);
+        panelWaitingDetails.setLayout(panelWaitingDetailsLayout);
+        panelWaitingDetailsLayout.setHorizontalGroup(
+            panelWaitingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 606, Short.MAX_VALUE)
+        );
+        panelWaitingDetailsLayout.setVerticalGroup(
+            panelWaitingDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 363, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelWaitingDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelWaitingDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Claims Waiting Forms", jPanel3);
@@ -202,16 +255,21 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelTop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE))
+                .addComponent(panelTop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,13 +322,17 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScroll;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelCustomerNameSurname;
     private javax.swing.JLabel labelDate;
     private javax.swing.JLabel labelDescription;
+    private javax.swing.JPanel panelTop;
+    private javax.swing.JPanel panelWaitingDetails;
     private javax.swing.JRadioButton radioButtonComplex;
     private javax.swing.JRadioButton radioButtonSimple;
     private javax.swing.JTable tableReportedClaims;
+    private javax.swing.JTable tableWaiting;
     // End of variables declaration//GEN-END:variables
 
 
@@ -291,6 +353,29 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             labelDescription.setText(c.getDescription());
             
             System.out.println("Row selected");
+        }
+   }
+
+    private class RowListener2 implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent event) {
+        
+       if (event.getValueIsAdjusting()) {
+                return;
+            }
+            else{
+
+                Claim c = getClaimAtSelectedRow(waitingClaimList,tableWaiting );
+                //selectedClaim = c;
+                FormPanel fp = new FormPanel(user, c,true);
+                panelWaitingDetails.setLayout(new BorderLayout());
+                panelWaitingDetails.removeAll();
+                panelWaitingDetails.add(fp);
+                panelWaitingDetails.revalidate();
+                validate();
+
+                System.out.println("Row selected");
+            }
         }
     }
 
