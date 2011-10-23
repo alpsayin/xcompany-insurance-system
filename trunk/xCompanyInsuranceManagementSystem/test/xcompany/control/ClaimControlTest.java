@@ -24,7 +24,6 @@ import xcompany.structures.Email;
 import xcompany.structures.Financer;
 import xcompany.structures.Garage;
 import xcompany.structures.Insurance;
-import xcompany.structures.User;
 
 /**
  *
