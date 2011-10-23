@@ -3,6 +3,8 @@ package xcompany.control;
 //  @ File Name : ClaimControl.java
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
 import xcompany.structures.Claim.ClaimStatus;
@@ -130,26 +132,59 @@ public class ClaimControl
     public boolean checkInsurance(Claim c) throws IOException, ClassNotFoundException
     {        
         Insurance ins = c.getOwner().getInsurance();
-        if(c.getDamage() > ins.getMaxAmount())
-            return false;
         
         if(c.getDateOfCrash().after(ins.getExpiryDate()))
             return false;
-        
-        Customer customer = c.getOwner();
-        int numOfApprovedClaims = 0;
-        for(Claim oldClaim : customer.getHistory())
-            if(oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPendingPayment
-                    || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentInProcess
-                    || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentComplete)
-                numOfApprovedClaims++;
-        
-        if(numOfApprovedClaims >= ins.getMaxNumRepairs())
-            return false;
-            
+                    
         return true;
     }
-   
+    public String getAdvice(Claim c)
+    {
+        try
+        {
+            String str = "";
+            boolean maxDamage = false;
+            boolean maxClaims = false;
+            Insurance ins = c.getOwner().getInsurance();
+            if(c.getDamage() > ins.getMaxAmount())
+            {
+                maxDamage = true;
+            }
+            
+            Customer customer = c.getOwner();
+            int numOfApprovedClaims = 0;
+            for(Claim oldClaim : customer.getHistory())
+                if(oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPendingPayment
+                        || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentInProcess
+                        || oldClaim.getStatus() == Claim.ClaimStatus.ApprovedPaymentComplete)
+                    numOfApprovedClaims++;
+            
+            if(numOfApprovedClaims >= ins.getMaxNumRepairs())
+                maxClaims = true;
+            
+            if(maxDamage)
+                str = "Maximum damage exceeded, ";
+            if(maxClaims)
+                str += "Maximim claims exceeded, ";
+            
+            if(maxDamage || maxClaims)
+                str += " Advice: NO";
+            
+            if(!(maxDamage || maxClaims))
+                str = "Advice: Yes";
+            
+            return str;
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(ClaimControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(ClaimControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Advice not available";
+    }
     public void approve(ClaimHandler claimHandler, Claim claim, boolean approvement, String message) throws Exception
     {
         ClaimControl cc = new ClaimControl();
