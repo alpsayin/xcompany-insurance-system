@@ -35,7 +35,10 @@ public class Claim implements Serializable
         this.dateOfCrash = dateOfCrash;
         this.id = generateId();
         this.status = ClaimStatus.Reported;
-        
+        this.emailsList = new EmailList();
+        this.financer = null;
+        this.claimHandler = null;
+        this.garage = null;
         
     }
     public Claim(Customer owner, String description, Calendar dateOfCrash, int id)
@@ -45,6 +48,10 @@ public class Claim implements Serializable
         this.dateOfCrash = dateOfCrash;
         this.id = id;
         this.status = ClaimStatus.Reported;
+        this.emailsList = new EmailList();
+        this.financer = null;
+        this.claimHandler = null;
+        this.garage = null;
 
     }
     public static int generateId()

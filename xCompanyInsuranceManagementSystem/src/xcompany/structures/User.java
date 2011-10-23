@@ -162,6 +162,6 @@ public class User implements Serializable
     }
     public static String generatePassword()
     {
-        return "123456";
+        return "1234";
     }
 }
