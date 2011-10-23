@@ -21,7 +21,6 @@ public class FormFactory implements Serializable
                 getFields().put("Name", "Please enter your name here");
                 getFields().put("Surname", "Please enter your surname here");
                 getFields().put("Email", "Please enter your email address here");
-                getFields().put("Date", "Please enter date here");
                 getFields().put("Accident Address", "Please enter the accident place here");
                 getFields().put("Witness Name", "Please enter witness name here if there is");
                 getFields().put("Witness Surname", "Please enter witness surname here if there is");
@@ -42,7 +41,6 @@ public class FormFactory implements Serializable
                 getFields().put("Name", "Please enter your name here");
                 getFields().put("Surname", "Please enter your surname here");
                 getFields().put("Email", "Please enter your email address here");
-                getFields().put("Date", "Please enter date here");
                 getFields().put("Accident Address", "Please enter the accident place here");
                 getFields().put("Witness Name", "Please enter witness name here if there is");
                 getFields().put("Witness Surname", "Please enter witness surname here if there is");
