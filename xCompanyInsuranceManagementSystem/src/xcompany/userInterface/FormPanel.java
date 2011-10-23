@@ -100,21 +100,27 @@ public class FormPanel extends JPanel implements ActionListener
                 cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.SentBack);
                 DatabaseControl.writeAllClaims(cl);
                 JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
+                sendButton.setEnabled(false);
             }
-            else if (user instanceof RegistrationHandler) {
+            else if (user instanceof RegistrationHandler) 
+            {
 
                 if (e.getActionCommand().equals("Approve")) {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.Registered);
                     DatabaseControl.writeAllClaims(cl);
                 }
-                else {
+                else 
+                {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.WaitingForms);
                     DatabaseControl.writeAllClaims(cl);
 
                 }
                 JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
+                sendButton.setEnabled(false);
+                sendBackButton.setEnabled(false);
             }
-            else{
+            else
+            {
 
                 if (e.getActionCommand().equals("Approve")) {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.ApprovedPendingPayment);
@@ -123,13 +129,17 @@ public class FormPanel extends JPanel implements ActionListener
                 else {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.Rejected);
                     DatabaseControl.writeAllClaims(cl);
-
                 }
                 JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
+                sendButton.setEnabled(false);
+                sendBackButton.setEnabled(false);
             }
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) 
+        {
             Logger.getLogger(FormPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } 
+        catch (ClassNotFoundException ex) {
             Logger.getLogger(FormPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

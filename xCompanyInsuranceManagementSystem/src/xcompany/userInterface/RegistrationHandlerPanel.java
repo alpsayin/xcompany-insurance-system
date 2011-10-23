@@ -14,13 +14,15 @@ package xcompany.userInterface;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Locale;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import xcompany.control.*;
 import xcompany.structures.*;
 import xcompany.lists.*;
@@ -100,8 +102,9 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             .addGap(0, 49, Short.MAX_VALUE)
         );
 
-        tableReportedClaims.setModel(new MyTableModel(reportedClaimList));
-        tableReportedClaims.getSelectionModel().addListSelectionListener(new RowListener());
+        tableReportedClaims.setModel(getReportedClaimsTable());
+        tableReportedClaims.getSelectionModel().addListSelectionListener(new ReportedListener());
+        tableWaiting.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScroll.setViewportView(tableReportedClaims);
 
         jLabel1.setText("Customer:");
@@ -208,8 +211,9 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Reported Claims", jPanel1);
 
-        tableWaiting.setModel(new MyTableModel(waitingClaimList));
-        tableWaiting.getSelectionModel().addListSelectionListener(new RowListener2());
+        tableWaiting.setModel(getClaimsWaitingFormsTableModel());
+        tableWaiting.getSelectionModel().addListSelectionListener(new WaitingRowListener());
+        tableWaiting.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(tableWaiting);
 
         javax.swing.GroupLayout panelWaitingDetailsLayout = new javax.swing.GroupLayout(panelWaitingDetails);
@@ -290,7 +294,8 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             DatabaseControl.writeAllClaims(claimList);
 
             reportedClaimList.getClaimList().remove(id);
-            tableReportedClaims.setModel(new MyTableModel(reportedClaimList));
+            getReportedClaimsTable();
+            getClaimsWaitingFormsTableModel();
 
         } catch (IOException ex) {
             Logger.getLogger(RegistrationHandlerPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -329,10 +334,40 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private javax.swing.JTable tableReportedClaims;
     private javax.swing.JTable tableWaiting;
     // End of variables declaration//GEN-END:variables
+    private TableModel getReportedClaimsTable()
+    {
+        String columnNames[] = {"Id", "Customer", "Description"};
+        DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
+        for(Claim c : reportedClaimList.getClaimList().values())
+        {
+            Vector<String> v = new Vector<String>();
+            v.add(""+c.getId());
+            v.add(c.getOwner().getName()+" "+c.getOwner().getSurname());
+            v.add(c.getDescription());
+            dtm.addRow(v);
+        }
+        tableReportedClaims.setModel(dtm);
+        return dtm;
+    }
+    private TableModel getClaimsWaitingFormsTableModel()
+    {
+        String columnNames[] = {"Id", "Customer", "Description"};
+        DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
+        for(Claim c : waitingClaimList.getClaimList().values())
+        {
+            Vector<String> v = new Vector<String>();
+            v.add(""+c.getId());
+            v.add(c.getOwner().getName()+" "+c.getOwner().getSurname());
+            v.add(c.getDescription());
+            dtm.addRow(v);
+        }
+        tableWaiting.setModel(dtm);
+        return dtm;
+    }
 
 
     
-    private class RowListener implements ListSelectionListener {
+    private class ReportedListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent event) {
         
@@ -342,7 +377,11 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                 return;
             }
           
-            Claim c = getClaimAtSelectedRow(reportedClaimList, tableReportedClaims);
+            int row = event.getLastIndex();
+            if(row <= 0 && reportedClaimList.getClaimList().isEmpty())
+                return;
+            int id = Integer.parseInt(tableReportedClaims.getModel().getValueAt(row, 0).toString());
+            Claim c = reportedClaimList.get(id);
             labelCustomerNameSurname.setText(c.getOwner().getName() + " " + c.getOwner().getSurname());
             labelDate.setText(sdf.format(c.getDateOfCrash().getTime()));
             labelDescription.setText(c.getDescription());
@@ -351,7 +390,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         }
    }
 
-    private class RowListener2 implements ListSelectionListener {
+    private class WaitingRowListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent event) {
         
@@ -378,56 +417,5 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         int row = jt.getSelectedRow();
         int id = Integer.parseInt(jt.getValueAt(row, 0).toString());
         return c.get(id);
-    }
-
-    class MyTableModel extends AbstractTableModel{
-
-        String columnNames[] = {"Id", "Customer", "Description"};
-        ClaimList claimList;
-
-        public MyTableModel(ClaimList claimList) {
-            super();
-            this.claimList = claimList;
-            
-        }
-
-        @Override
-        public int getRowCount() {
-            return claimList.getClaimList().keySet().size();
-        }
-
-        @Override
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        @Override
-        public String getColumnName(int columnIndex) {
-            return columnNames[columnIndex];
-        }
-
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            Object[] idArray = claimList.getClaimList().keySet().toArray();
-            Claim c = claimList.getClaimList().get(Integer.parseInt(idArray[rowIndex].toString()));
-            Object result;
-            switch (columnIndex) {
-                case 0:
-                    result = c.getId();
-                    break;
-                case 1:
-                    result = c.getOwner().getName() + " " + c.getOwner().getSurname();
-                    break;
-                case 2:
-                    result = c.getDescription();
-                    break;
-                default:
-                    result = null;
-            }
-            return result;
-        }
-
-
-
     }
 }
