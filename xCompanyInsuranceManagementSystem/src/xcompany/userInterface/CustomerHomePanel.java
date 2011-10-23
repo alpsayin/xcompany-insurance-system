@@ -194,6 +194,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         tableCurrentClaims.setModel(getCurrentClaimsTableModel());
         tableCurrentClaims.getSelectionModel().addListSelectionListener(new FormRowListener());
         tableCurrentClaims.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableCurrentClaims.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tableCurrentClaims);
 
         javax.swing.GroupLayout panelCurrentClaimDetailsLayout = new javax.swing.GroupLayout(panelCurrentClaimDetails);
@@ -233,6 +234,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         historyTable.setModel(getCurrentClaimsTableModel());
         historyTable.getSelectionModel().addListSelectionListener(new HistoryRowListener());
         historyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        historyTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(historyTable);
 
         claimInfoTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -274,6 +276,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         emailTable.setModel(getEmailsTableModel());
         emailTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());
+        emailTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(emailTable);
 
         jLabel1.setText("From:");

@@ -99,6 +99,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         tableAvailableClaims.getSelectionModel().addListSelectionListener(new AvailableRowListener());
         tableAvailableClaims.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableAvailableClaims.getTableHeader().setReorderingAllowed(false);
+        tableAvailableClaims.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableAvailableClaims);
 
         buttonTakeClaim.setText("Take Claim");
@@ -148,6 +149,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         tableTaken.setModel(getTakenClaimsTableModel());
         tableTaken.getSelectionModel().addListSelectionListener(new TakenRowListener());
         tableTaken.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tableTaken.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tableTaken);
 
         javax.swing.GroupLayout panelDetailsLayout = new javax.swing.GroupLayout(panelDetails);
@@ -222,8 +224,8 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
                 if (result){
                     System.out.println("Claim is assigned");
                     claimListAvailableToHandle.getClaimList().remove(id);
-                    tableAvailableClaims.setModel(new MyTableModel(claimListAvailableToHandle));
-                    
+                    getAvailableClaimsTableModel();
+                    getTakenClaimsTableModel();
                 }
             } catch (Exception ex) {
                 Logger.getLogger(ClaimHandlerPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -369,54 +371,5 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
             System.out.println("Row selected");
         }
-    }
-    class MyTableModel extends AbstractTableModel{
-
-        String columnNames[] = {"Id", "Customer", "Description"};
-        ClaimList claimList;
-
-        public MyTableModel(ClaimList claimList) {
-            super();
-            this.claimList = claimList;
-        }
-
-        @Override
-        public int getRowCount() {
-            return claimList.getClaimList().keySet().size();
-        }
-
-        @Override
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-        
-        @Override
-        public String getColumnName(int columnIndex) {
-            return columnNames[columnIndex];
-        }
-        
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            Object[] idArray = claimList.getClaimList().keySet().toArray();
-            Claim c = claimList.getClaimList().get(Integer.parseInt(idArray[rowIndex].toString()));
-            Object result;
-            switch (columnIndex) {
-                case 0:
-                    result = c.getId();
-                    break;
-                case 1:
-                    result = c.getOwner().getName() + " " + c.getOwner().getSurname();
-                    break;
-                case 2:
-                    result = c.getDescription();
-                    break;
-                default:
-                    result = null;
-            }
-            return result;
-        }
-        
-       
-
     }
 }

@@ -116,6 +116,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                 tableReportedClaims.setModel(getReportedClaimsTableModel());
                 tableReportedClaims.getSelectionModel().addListSelectionListener(new ReportedListener());
                 tableWaiting.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                tableWaiting.getTableHeader().setReorderingAllowed(false);
                 jScroll.setViewportView(tableReportedClaims);
 
                 jLabel1.setText("Customer:");
@@ -225,6 +226,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                 tableWaiting.setModel(getClaimsWaitingFormsTableModel());
                 tableWaiting.getSelectionModel().addListSelectionListener(new WaitingRowListener());
                 tableWaiting.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                tableWaiting.getTableHeader().setReorderingAllowed(false);
                 jScrollPane3.setViewportView(tableWaiting);
 
                 javax.swing.GroupLayout panelWaitingDetailsLayout = new javax.swing.GroupLayout(panelWaitingDetails);
