@@ -277,6 +277,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         emailTable.setModel(getEmailsTableModel());
         emailTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());
         emailTable.getTableHeader().setReorderingAllowed(false);
+        emailTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(emailTable);
 
         jLabel1.setText("From:");
@@ -480,7 +481,10 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             if(e.getValueIsAdjusting())
                 return;
             
-            int row = e.getFirstIndex();
+            int row = emailTable.getSelectedRow();
+            if(row<0 || row>=emailList.getEmailList().size())
+                return;
+            textTextArea.setEditable(true);
             Email email = emailList.getEmailList().get(row);
             fromLabel.setText(email.getFrom());
             toLabel.setText(email.getTo());
