@@ -189,7 +189,8 @@ public class FinancerPanel extends javax.swing.JPanel {
         try {
             Claim c = getClaimAtSelectedRow(claimListCurrent, tableApproved);
             cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentInProcess);
-            
+            claimListCurrent.getClaimList().remove(c.getId());
+
             getCurrentClaimsTableModel();
             getTakenClaimsTableModel();
         } catch (IOException ex) {
@@ -202,8 +203,9 @@ public class FinancerPanel extends javax.swing.JPanel {
 
     private void buttonPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPayActionPerformed
         try {
-            Claim c = getClaimAtSelectedRow(claimListCurrent, tableApproved);
+            Claim c = getClaimAtSelectedRow(claimListTaken, tableTaken);
             cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentComplete);
+            claimListTaken.getClaimList().remove(c.getId());
             
             getCurrentClaimsTableModel();
             getTakenClaimsTableModel();
