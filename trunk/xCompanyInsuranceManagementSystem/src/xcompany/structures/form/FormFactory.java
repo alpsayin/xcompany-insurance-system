@@ -4,11 +4,13 @@
  */
 package xcompany.structures.form;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Alp Sayin
  */
-public class FormFactory
+public class FormFactory implements Serializable
 {
     public static SimpleForm createSimpleFormInstance()
     {
