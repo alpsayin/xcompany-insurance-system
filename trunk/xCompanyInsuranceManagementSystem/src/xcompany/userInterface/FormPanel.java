@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,8 +22,8 @@ import javax.swing.JTextArea;
 import xcompany.control.DatabaseControl;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
-import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.Customer;
+import xcompany.structures.Email;
 import xcompany.structures.RegistrationHandler;
 import xcompany.structures.User;
 import xcompany.structures.form.Form;
@@ -142,6 +144,22 @@ public class FormPanel extends JPanel implements ActionListener
                 sendBackButton.setEnabled(false);
                 chp.getAvailableClaimsTableModel();
                 chp.getTakenClaimsTableModel();
+                
+                
+                LetterPane lp = new LetterPane(claim);
+                JDialog dialog = lp.createDialog(this, "Enter customized letter");
+                dialog.setVisible(true);
+                Object o = lp.getValue();
+                while(!o.equals("Send"))
+                {
+                    dialog.setVisible(true);
+                    o = lp.getValue();
+                }
+                String subject = "Decision of your claim dated "+claim.getDateOfCrash().get(Calendar.DATE)+"/"+claim.getDateOfCrash().get(Calendar.MONTH)+"/"+claim.getDateOfCrash().get(Calendar.YEAR);
+                Email email = new Email(claim.getClaimHandler().getEmail(), claim.getOwner().getEmail(), subject, lp.getText());
+                cl.getClaimList().get(claim.getId()).getEmailsList().add(email);
+                DatabaseControl.writeAllClaims(cl);
+                System.out.println(lp.getText());
             }
         }
         catch (IOException ex) 
@@ -150,6 +168,28 @@ public class FormPanel extends JPanel implements ActionListener
         } 
         catch (ClassNotFoundException ex) {
             Logger.getLogger(FormPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private class LetterPane extends JOptionPane
+    {
+        Claim claim;
+        JTextArea textArea;
+        String send;
+        Object[] myOptions = new Object[2];
+        public LetterPane(Claim c)
+        {
+            super("Enter customized decision letter", JOptionPane.QUESTION_MESSAGE);
+            this.claim = c;
+            textArea = new JTextArea(10, 20);
+            send = "Send";
+            myOptions[0] = textArea;
+            myOptions[1] = send;
+            super.setOptions(myOptions);
+            //super.setWantsInput(true);
+        }
+        private String getText()
+        {
+            return textArea.getText();
         }
     }
 }

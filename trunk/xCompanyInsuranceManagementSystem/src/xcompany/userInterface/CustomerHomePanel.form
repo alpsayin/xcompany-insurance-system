@@ -375,7 +375,7 @@
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    @Override public boolean isCellEditable(int row, int col)&#xa;    {&#xa;        return false;&#xa;    }&#xa;}"/>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="emailTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());&#xa;emailTable.getTableHeader().setReorderingAllowed(false);"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="emailTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());&#xa;emailTable.getTableHeader().setReorderingAllowed(false);&#xa;emailTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
