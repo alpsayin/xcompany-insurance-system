@@ -365,7 +365,12 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     private void jButton1SubmitClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1SubmitClaimActionPerformed
         try {
             Claim c = new Claim((Customer) user, textAreaDesc.getText(), calendarCrash.getCalendar());
-            cc.add(c);
+            if(cc.checkInsurance(c)){
+                cc.add(c);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Please renew your insurance from our agencies", "Insurance Expired or Exceeded", JOptionPane.ERROR_MESSAGE);
+            }
             
             claimListCurrent.add(c);
             getClaimHistoryTableModel();
