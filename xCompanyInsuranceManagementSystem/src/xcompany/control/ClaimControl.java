@@ -20,6 +20,7 @@ import xcompany.structures.Insurance;
 
 public class ClaimControl 
 {
+
     public boolean add(Claim c) throws IOException, ClassNotFoundException
     {
         ClaimList claimList = DatabaseControl.getAllClaims();
