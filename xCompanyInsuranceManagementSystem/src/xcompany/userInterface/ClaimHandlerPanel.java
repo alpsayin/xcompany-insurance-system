@@ -42,6 +42,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
     ClaimList claimListAvailableToHandle;
     ClaimList claimListTaken;
     
+    ClaimHandlerPanel me;
     /** Creates new form ClaimHandlerPanel */
     public ClaimHandlerPanel(User user) throws IOException, ClassNotFoundException {
 
@@ -52,7 +53,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
         initComponents();
 
-      
+        me = this;
 
 
     
@@ -94,7 +95,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(600, 450));
         setPreferredSize(new java.awt.Dimension(600, 450));
 
-        tableAvailableClaims.setModel(new MyTableModel(claimListAvailableToHandle));
+        tableAvailableClaims.setModel(getAvailableClaimsTableModel());
         tableAvailableClaims.getSelectionModel().addListSelectionListener(new AvailableRowListener());
         tableAvailableClaims.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableAvailableClaims.getTableHeader().setReorderingAllowed(false);
@@ -144,7 +145,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Available Claims", jPanel1);
 
-        tableTaken.setModel(new MyTableModel(claimListTaken));
+        tableTaken.setModel(getTakenClaimsTableModel());
         tableTaken.getSelectionModel().addListSelectionListener(new TakenRowListener());
         tableTaken.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableTaken);
@@ -336,8 +337,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
                 //selectedClaim = c;
                 
                 adviceLabel.setText(cc.getAdvice(c));
-                
-                FormPanel fp = new FormPanel(user, c,true, null);
+                FormPanel fp = new FormPanel(user, c, c.getStatus()==ClaimStatus.Assigned, me);
                 panelDetails.setLayout(new BorderLayout());
                 panelDetails.removeAll();
                 panelDetails.add(fp);

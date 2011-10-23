@@ -128,7 +128,7 @@ public class FormPanel extends JPanel implements ActionListener
             }
             else
             {
-
+                ClaimHandlerPanel chp = (ClaimHandlerPanel)parent;
                 if (e.getActionCommand().equals("Approve")) {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.ApprovedPendingPayment);
                     DatabaseControl.writeAllClaims(cl);
@@ -140,6 +140,8 @@ public class FormPanel extends JPanel implements ActionListener
                 JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
                 sendButton.setEnabled(false);
                 sendBackButton.setEnabled(false);
+                chp.getAvailableClaimsTableModel();
+                chp.getTakenClaimsTableModel();
             }
         }
         catch (IOException ex) 
