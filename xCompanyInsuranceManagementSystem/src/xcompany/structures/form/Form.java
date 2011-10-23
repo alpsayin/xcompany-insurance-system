@@ -2,6 +2,7 @@ package xcompany.structures.form;
 
 //  @ File Name : Form.java
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 //  @ Date : 11.10.2011
@@ -9,7 +10,7 @@ import java.util.HashMap;
 
 
 
-public abstract class Form 
+public abstract class Form  implements Serializable
 {
     private HashMap<String, String> fields;
     public abstract void initializeFields();
