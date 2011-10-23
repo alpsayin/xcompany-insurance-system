@@ -4,6 +4,7 @@
  */
 package xcompany.lists;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import xcompany.structures.Email;
 
@@ -11,7 +12,7 @@ import xcompany.structures.Email;
  *
  * @author Alp Sayin
  */
-public class EmailList
+public class EmailList implements Serializable
 {
     private ArrayList<Email> emailList;
     public EmailList()
