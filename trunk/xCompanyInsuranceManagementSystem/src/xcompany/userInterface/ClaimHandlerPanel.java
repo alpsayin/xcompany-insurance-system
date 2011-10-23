@@ -253,7 +253,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
                 Claim c = getClaimAtSelectedRow(claimListTaken,tableTaken );
                 //selectedClaim = c;
-                FormPanel fp = new FormPanel(user, c,true);
+                FormPanel fp = new FormPanel(user, c,true, null);
                 panelDetails.setLayout(new BorderLayout());
                 panelDetails.removeAll();
                 panelDetails.add(fp);
@@ -273,7 +273,7 @@ public class ClaimHandlerPanel extends javax.swing.JPanel {
 
             Claim c = getClaimAtSelectedRow(claimListAvailableToHandle, tableAvailableClaims);
             
-            FormPanel fp = new FormPanel(user, c,false);
+            FormPanel fp = new FormPanel(user, c,false, null);
             panelCurrentClaimDetails.setLayout(new BorderLayout());
             panelCurrentClaimDetails.removeAll();
             panelCurrentClaimDetails.add(fp);

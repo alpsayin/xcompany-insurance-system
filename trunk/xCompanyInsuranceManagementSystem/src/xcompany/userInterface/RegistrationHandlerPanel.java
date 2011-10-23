@@ -40,6 +40,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     ClaimList waitingClaimList;
     ClaimControl cc = new ClaimControl();
     User user;
+    RegistrationHandlerPanel me;
     /** Creates new form RegistrationHandlerPanel */
     public RegistrationHandlerPanel(User user) throws IOException, ClassNotFoundException {
         reportedClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.Reported);
@@ -55,6 +56,8 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         panelTop.add(topPanel);
         panelTop.revalidate();
         validate();
+        
+        me = this;
     }
 
     /** This method is called from within the constructor to
@@ -110,7 +113,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
                     .addGap(0, 49, Short.MAX_VALUE)
                 );
 
-                tableReportedClaims.setModel(getReportedClaimsTable());
+                tableReportedClaims.setModel(getReportedClaimsTableModel());
                 tableReportedClaims.getSelectionModel().addListSelectionListener(new ReportedListener());
                 tableWaiting.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 jScroll.setViewportView(tableReportedClaims);
@@ -302,7 +305,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             DatabaseControl.writeAllClaims(claimList);
 
             reportedClaimList.getClaimList().remove(id);
-            getReportedClaimsTable();
+            getReportedClaimsTableModel();
             getClaimsWaitingFormsTableModel();
 
         } catch (IOException ex) {
@@ -342,8 +345,9 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
     private javax.swing.JTable tableReportedClaims;
     private javax.swing.JTable tableWaiting;
     // End of variables declaration//GEN-END:variables
-    private TableModel getReportedClaimsTable()
+    public TableModel getReportedClaimsTableModel()
     {
+        updateReportedClaims();
         String columnNames[] = {"Id", "Customer", "Description"};
         DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
         for(Claim c : reportedClaimList.getClaimList().values())
@@ -357,8 +361,9 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         tableReportedClaims.setModel(dtm);
         return dtm;
     }
-    private TableModel getClaimsWaitingFormsTableModel()
+    public TableModel getClaimsWaitingFormsTableModel()
     {
+        updateWaitingClaims();
         String columnNames[] = {"Id", "Customer", "Description"};
         DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
         for(Claim c : waitingClaimList.getClaimList().values())
@@ -371,6 +376,28 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
         }
         tableWaiting.setModel(dtm);
         return dtm;
+    }
+    private void updateReportedClaims()
+    {
+        try
+        {
+            reportedClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.Reported);
+        }
+        catch(Exception e)
+        {
+        
+        }
+    }
+    private void updateWaitingClaims()
+    {
+        try
+        {
+            waitingClaimList = DatabaseControl.getClaimsByStatus(ClaimStatus.SentBack);
+        }
+        catch(Exception e)
+        {
+        
+        }
     }
 
 
@@ -386,7 +413,7 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             }
           
             int row = event.getLastIndex();
-            if(row <= 0 && reportedClaimList.getClaimList().isEmpty())
+            if(row >= reportedClaimList.getClaimList().size())
                 return;
             int id = Integer.parseInt(tableReportedClaims.getModel().getValueAt(row, 0).toString());
             Claim c = reportedClaimList.get(id);
@@ -407,16 +434,18 @@ public class RegistrationHandlerPanel extends javax.swing.JPanel {
             }
             else{
 
-                Claim c = getClaimAtSelectedRow(waitingClaimList,tableWaiting );
-                //selectedClaim = c;
-                FormPanel fp = new FormPanel(user, c,true);
-                panelWaitingDetails.setLayout(new BorderLayout());
-                panelWaitingDetails.removeAll();
-                panelWaitingDetails.add(fp);
-                panelWaitingDetails.revalidate();
-                validate();
+           if(event.getFirstIndex() >= waitingClaimList.getClaimList().size() || event.getFirstIndex()<0)
+               return;
+            Claim c = getClaimAtSelectedRow(waitingClaimList,tableWaiting );
+            //selectedClaim = c;
+            FormPanel fp = new FormPanel(user, c,true, me);
+            panelWaitingDetails.setLayout(new BorderLayout());
+            panelWaitingDetails.removeAll();
+            panelWaitingDetails.add(fp);
+            panelWaitingDetails.revalidate();
+            validate();
 
-                System.out.println("Row selected");
+            System.out.println("Row selected");
             }
         }
     }

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,11 +20,11 @@ import javax.swing.JTextArea;
 import xcompany.control.DatabaseControl;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
+import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.Customer;
 import xcompany.structures.RegistrationHandler;
 import xcompany.structures.User;
 import xcompany.structures.form.Form;
-import xcompany.structures.form.FormFactory;
 
 /**
  *
@@ -41,8 +40,10 @@ public class FormPanel extends JPanel implements ActionListener
     Claim claim;
     User user;
     boolean editable;
-    public FormPanel(User u, Claim c, boolean showButtons)
+    JPanel parent;
+    public FormPanel(User u, Claim c, boolean showButtons, JPanel chp)
     {
+        this.parent = chp;
         this.claim = c;
         this.user = u;
         if(user instanceof Customer)
@@ -90,6 +91,7 @@ public class FormPanel extends JPanel implements ActionListener
         try {
             ClaimList cl = DatabaseControl.getAllClaims();
             if (user instanceof Customer) {
+                CustomerHomePanel chp = ((CustomerHomePanel)parent);
                 for (int i = 0; i < fields.size(); i++) {
                     JLabel field = fields.get(i);
                     JTextArea area = values.get(i);
@@ -99,25 +101,30 @@ public class FormPanel extends JPanel implements ActionListener
                 cl.getClaimList().get(claim.getId()).setForm(claim.getForm());
                 cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.SentBack);
                 DatabaseControl.writeAllClaims(cl);
-                JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
                 sendButton.setEnabled(false);
+                chp.getCurrentClaimsTableModel();
+                JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
             }
             else if (user instanceof RegistrationHandler) 
             {
-
+                RegistrationHandlerPanel rhp = (RegistrationHandlerPanel)parent;
                 if (e.getActionCommand().equals("Approve")) {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.Registered);
                     DatabaseControl.writeAllClaims(cl);
+                    rhp.waitingClaimList.getClaimList().remove(claim.getId());
                 }
                 else 
                 {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.WaitingForms);
                     DatabaseControl.writeAllClaims(cl);
+                    rhp.waitingClaimList.getClaimList().remove(claim.getId());
 
                 }
                 JOptionPane.showMessageDialog(this, "Forms sent", "Forms sent", JOptionPane.INFORMATION_MESSAGE);
                 sendButton.setEnabled(false);
                 sendBackButton.setEnabled(false);
+                rhp.getReportedClaimsTableModel();
+                rhp.getClaimsWaitingFormsTableModel();
             }
             else
             {
