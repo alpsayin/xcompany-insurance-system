@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -97,12 +98,28 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         panelCurrentClaimDetails = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        historyTable = new javax.swing.JTable();
+        historyTable = new javax.swing.JTable(){
+            @Override public boolean isCellEditable(int row, int col)
+            {
+                return false;
+            }
+        };
         jScrollPane3 = new javax.swing.JScrollPane();
-        claimInfoTable = new javax.swing.JTable();
+        claimInfoTable = new javax.swing.JTable(){
+            @Override public boolean isCellEditable(int row, int col)
+            {
+                return false;
+            }
+        }
+        ;
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        emalTable = new javax.swing.JTable();
+        emailTable = new javax.swing.JTable(){
+            @Override public boolean isCellEditable(int row, int col)
+            {
+                return false;
+            }
+        };
         jLabel1 = new javax.swing.JLabel();
         fromLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -251,9 +268,9 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Claim History", jPanel3);
 
-        emalTable.setModel(getEmailsTableModel());
-        emalTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());
-        jScrollPane4.setViewportView(emalTable);
+        emailTable.setModel(getEmailsTableModel());
+        emailTable.getSelectionModel().addListSelectionListener(new EmailsRowListener());
+        jScrollPane4.setViewportView(emailTable);
 
         jLabel1.setText("From:");
 
@@ -350,6 +367,9 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             Claim c = new Claim((Customer) user, textAreaDesc.getText(), calendarCrash.getCalendar());
             cc.add(c);
             
+            claimListCurrent.add(c);
+            getClaimHistoryTableModel();
+            getCurrentClaimsTableModel();
 
 
         } catch (IOException ex) {
@@ -366,7 +386,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar calendarCrash;
     private javax.swing.JTable claimInfoTable;
-    private javax.swing.JTable emalTable;
+    private javax.swing.JTable emailTable;
     private javax.swing.JLabel fromLabel;
     private javax.swing.JTable historyTable;
     private javax.swing.JButton jButton1SubmitClaim;
@@ -440,7 +460,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
                 dtm.addRow(row);
             }
         }
-        emalTable.setModel(dtm);
+        emailTable.setModel(dtm);
         return dtm;
     }
     private class EmailsRowListener implements ListSelectionListener
