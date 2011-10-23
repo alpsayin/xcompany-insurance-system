@@ -23,4 +23,8 @@ public class GarageList implements Serializable
     {
         return garageList;
     }
+    public void setGarageList(ArrayList<Garage> garageList)
+    {
+        this.garageList = garageList;
+    }
 }

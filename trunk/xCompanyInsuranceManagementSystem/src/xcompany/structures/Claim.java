@@ -35,6 +35,7 @@ public class Claim implements Serializable
         this.id = generateId();
         this.status = ClaimStatus.Reported;
         
+        
     }
     public Claim(Customer owner, String description, Calendar dateOfCrash, int id)
     {
@@ -163,6 +164,6 @@ public class Claim implements Serializable
     }
     public enum ClaimStatus
     {
-        Reported, WaitingForms, Registered, Assigned, Rejected, ApprovedPendingPayment, ApprovedPaymentInProcess, ApprovedPaymentComplete
+        Reported, WaitingForms, SentBack, Registered, Assigned, Rejected, ApprovedPendingPayment, ApprovedPaymentInProcess, ApprovedPaymentComplete
     }
 }

@@ -22,6 +22,13 @@ public class Email  implements Serializable
         this.subject = "[email.subject]";
         this.text = "[email.text]";
     }
+    public Email(String from, String to, String subject, String text)
+    {
+        this.from = from;
+        this.to = to;
+        this.subject = subject;
+        this.text = text;
+    }
     public String getFrom()
     {
         return from;
