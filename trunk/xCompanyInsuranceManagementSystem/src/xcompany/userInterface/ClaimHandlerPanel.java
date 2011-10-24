@@ -24,7 +24,6 @@ import xcompany.control.DatabaseControl;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
 import xcompany.structures.User;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import xcompany.control.ClaimControl;

@@ -4,11 +4,7 @@ package xcompany.control;
 
 import java.io.IOException;
 import xcompany.lists.UserList;
-import xcompany.structures.Customer;
 import xcompany.structures.User;
-import xcompany.structures.Financer;
-import xcompany.structures.ClaimHandler;
-import xcompany.structures.RegistrationHandler;
 
 
 

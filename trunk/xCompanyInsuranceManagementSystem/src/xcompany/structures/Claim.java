@@ -4,7 +4,6 @@ package xcompany.structures;
 
 import java.io.Serializable;
 import xcompany.structures.form.Form;
-import java.util.ArrayList;
 import java.util.Calendar;
 import xcompany.control.DatabaseControl;
 import xcompany.lists.EmailList;

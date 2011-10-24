@@ -6,7 +6,6 @@ package xcompany.lists;
 
 import java.io.Serializable;
 import xcompany.structures.Claim;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

@@ -1,15 +1,9 @@
 package xcompany.userInterface;
 
-import java.awt.CardLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import xcompany.structures.User;
 
 /*
  * To change this template, choose Tools | Templates
