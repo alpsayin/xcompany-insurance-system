@@ -324,7 +324,7 @@
                               </Group>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextField2" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="textFieldGarageAddress" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="textFieldGarageEmail" linkSize="3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="textFieldGarageName" linkSize="3" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
                               </Group>
@@ -350,7 +350,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="textFieldGarageAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton2" min="-2" max="-2" attributes="0"/>
@@ -385,7 +385,7 @@
                 <Property name="text" type="java.lang.String" value="GarageEmail"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="textFieldGarageAddress">
               <Properties>
                 <Property name="text" type="java.lang.String" value="GarageAddress"/>
               </Properties>
