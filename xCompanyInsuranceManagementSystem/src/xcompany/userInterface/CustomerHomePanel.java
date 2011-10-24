@@ -321,7 +321,9 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         jLabel3.setText("Subject:");
 
         textTextArea.setColumns(20);
+        textTextArea.setLineWrap(true);
         textTextArea.setRows(5);
+        textTextArea.setWrapStyleWord(true);
         jScrollPane5.setViewportView(textTextArea);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -420,6 +422,10 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             }
             
             Claim c = new Claim((Customer) user, textAreaDesc.getText(), calendarCrash.getCalendar());
+            Garage g = garageList.getGarageList().get(garageComboBox.getSelectedIndex());
+            c.setGarage(g);
+            
+            c.setDamage(damage);
             if(cc.checkInsurance(c)){
                 cc.add(c);
             }
@@ -427,10 +433,6 @@ public class CustomerHomePanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Please renew your insurance from our agencies", "Insurance Expired or Exceeded", JOptionPane.ERROR_MESSAGE);
             }
             
-            Garage g = garageList.getGarageList().get(garageComboBox.getSelectedIndex());
-            c.setGarage(g);
-            
-            c.setDamage(damage);
             
             claimListCurrent.add(c);
             getCurrentClaimsTableModel();

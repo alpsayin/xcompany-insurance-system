@@ -3,6 +3,7 @@ package xcompany.control;
 //  @ File Name : ClaimControl.java
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xcompany.lists.ClaimList;
@@ -52,8 +53,8 @@ public class ClaimControl
         Email e = new Email();
         e.setFrom(c.getClaimHandler().getEmail());
         e.setTo(c.getOwner().getEmail());
-        e.setSubject("Claim Decision");
-        e.setText("Decision for your claim dated "+ c.getDateOfCrash()+" described as \""+ 
+        e.setSubject("Payment Complete");
+        e.setText("Payment for your claim dated "+ c.getDateOfCrash().get(Calendar.DATE)+"/"+c.getDateOfCrash().get(Calendar.MONTH)+"/"+c.getDateOfCrash().get(Calendar.YEAR) +" described as \""+ 
                 c.getDescription()+"\" is "+c.getStatus() + ". And the claim handler's message is: " + message );
         e.send();
         //c.getEmailsList().add(e);
@@ -106,7 +107,6 @@ public class ClaimControl
         if(claimList != null){
             if(claimList.get(c.getId()) != null){
                 claimList.get(c.getId()).setFinancer(f);
-                claimList.get(c.getId()).setStatus(ClaimStatus.ApprovedPendingPayment);
                 DatabaseControl.writeAllClaims(claimList);
                 return true;
              }
