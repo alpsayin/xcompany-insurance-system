@@ -80,7 +80,7 @@ public class AdminPanel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         textFieldGarageName = new javax.swing.JTextField();
         textFieldGarageEmail = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        textFieldGarageAddress = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         topPanel = new javax.swing.JPanel();
 
@@ -257,7 +257,7 @@ public class AdminPanel extends javax.swing.JPanel {
 
         textFieldGarageEmail.setText("GarageEmail");
 
-        jTextField2.setText("GarageAddress");
+        textFieldGarageAddress.setText("GarageAddress");
 
         jButton2.setText("Add Garage");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -281,13 +281,13 @@ public class AdminPanel extends javax.swing.JPanel {
                             .addComponent(jLabel11))
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldGarageAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldGarageEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldGarageName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(594, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField2, textFieldGarageEmail, textFieldGarageName});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textFieldGarageAddress, textFieldGarageEmail, textFieldGarageName});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +303,7 @@ public class AdminPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldGarageAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addContainerGap(237, Short.MAX_VALUE))
@@ -387,6 +387,7 @@ public class AdminPanel extends javax.swing.JPanel {
             }
             if(!exists){
                 gl.getGarageList().add(new Garage(textFieldGarageName.getText(), textFieldGarageEmail.getText()));
+                gl.getGarageList().get(gl.getGarageList().size()-1).setAddress(textFieldGarageAddress.getText());
                 DatabaseControl.writeAllGarages(gl);
                 JOptionPane.showMessageDialog(this, "Garage is added", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -423,9 +424,9 @@ public class AdminPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextArea textFieldAddress;
     private javax.swing.JTextField textFieldEmail;
+    private javax.swing.JTextField textFieldGarageAddress;
     private javax.swing.JTextField textFieldGarageEmail;
     private javax.swing.JTextField textFieldGarageName;
     private javax.swing.JTextField textFieldMaxAmount;
