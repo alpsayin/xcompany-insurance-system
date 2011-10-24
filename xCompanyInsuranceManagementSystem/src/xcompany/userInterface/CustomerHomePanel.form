@@ -86,7 +86,17 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="305" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="garageComboBox" pref="192" max="32767" attributes="0"/>
+                          <Component id="damageField" alignment="0" pref="192" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -95,16 +105,31 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2Description" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1Description" min="-2" pref="133" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="damageField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="garageComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2Description" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1Description" min="-2" pref="133" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2DateofCrash" min="-2" max="-2" attributes="0"/>
+                                  <Component id="calendarCrash" min="-2" pref="128" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton1SubmitClaim" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel2DateofCrash" min="-2" max="-2" attributes="0"/>
-                          <Component id="calendarCrash" min="-2" pref="128" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1SubmitClaim" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -148,6 +173,25 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.toedter.calendar.JCalendar(Locale.US)"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cost of Damage:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="damageField">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Garage"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="garageComboBox">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="getGarageComboBoxModel()" type="code"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

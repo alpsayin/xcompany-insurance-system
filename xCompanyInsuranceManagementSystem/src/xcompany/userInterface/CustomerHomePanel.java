@@ -24,6 +24,8 @@ import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -51,12 +53,16 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     
     Claim selectedClaim;
     
+    GarageList garageList;
+    
     CustomerHomePanel me;
     /** Creates new form CustomerHomePanel */
     public CustomerHomePanel(User user) throws IOException, ClassNotFoundException {
         this.user = user;
         
         claimListCurrent = DatabaseControl.getUserClaims(user.getUsername());
+        
+        garageList = DatabaseControl.getAllGarages();
         
         emailList = new EmailList();
         
@@ -90,6 +96,10 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         jLabel2DateofCrash = new javax.swing.JLabel();
         jButton1SubmitClaim = new javax.swing.JButton();
         calendarCrash = new com.toedter.calendar.JCalendar(Locale.US);
+        jLabel4 = new javax.swing.JLabel();
+        damageField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        garageComboBox = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCurrentClaims = new javax.swing.JTable()
@@ -154,6 +164,12 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setText("Cost of Damage:");
+
+        jLabel5.setText("Garage");
+
+        garageComboBox.setModel(getGarageComboBoxModel());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -171,21 +187,39 @@ public class CustomerHomePanel extends javax.swing.JPanel {
                             .addComponent(jLabel2DateofCrash, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(calendarCrash, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(garageComboBox, 0, 192, Short.MAX_VALUE)
+                    .addComponent(damageField, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2Description)
-                    .addComponent(jScrollPane1Description, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2DateofCrash)
-                    .addComponent(calendarCrash, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1SubmitClaim)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(damageField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(garageComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2Description)
+                            .addComponent(jScrollPane1Description, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2DateofCrash)
+                            .addComponent(calendarCrash, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1SubmitClaim)))
                 .addGap(114, 114, 114))
         );
 
@@ -372,6 +406,19 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
     private void jButton1SubmitClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1SubmitClaimActionPerformed
         try {
+            double damage = -1;
+            try
+            {
+                damage = Double.parseDouble(damageField.getText());
+                if(damage >= 0)
+                    throw new Exception();
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(this, "Please enter a real damage", "Incorrect Damage", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             Claim c = new Claim((Customer) user, textAreaDesc.getText(), calendarCrash.getCalendar());
             if(cc.checkInsurance(c)){
                 cc.add(c);
@@ -379,6 +426,11 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             else{
                 JOptionPane.showMessageDialog(this, "Please renew your insurance from our agencies", "Insurance Expired or Exceeded", JOptionPane.ERROR_MESSAGE);
             }
+            
+            Garage g = garageList.getGarageList().get(garageComboBox.getSelectedIndex());
+            c.setGarage(g);
+            
+            c.setDamage(damage);
             
             claimListCurrent.add(c);
             getCurrentClaimsTableModel();
@@ -399,8 +451,10 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar calendarCrash;
     private javax.swing.JTable claimInfoTable;
+    private javax.swing.JTextField damageField;
     private javax.swing.JTable emailTable;
     private javax.swing.JLabel fromLabel;
+    private javax.swing.JComboBox garageComboBox;
     private javax.swing.JTable historyTable;
     private javax.swing.JButton jButton1SubmitClaim;
     private javax.swing.JLabel jLabel1;
@@ -408,6 +462,8 @@ public class CustomerHomePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2DateofCrash;
     private javax.swing.JLabel jLabel2Description;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -473,6 +529,16 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         {
             e.printStackTrace();
         }
+    }
+    private ComboBoxModel getGarageComboBoxModel()
+    {
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        for(Garage g : garageList.getGarageList())
+        {
+            dcbm.addElement(g.getName());
+        }
+        garageComboBox.setModel(dcbm);
+        return dcbm;
     }
     private class EmailsRowListener implements ListSelectionListener
     {
