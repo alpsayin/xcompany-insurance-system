@@ -35,8 +35,9 @@ public class GaragePanel extends javax.swing.JPanel {
         claimListCurrent = DatabaseControl.getAllClaims();
         this.garage = garage;
         TopPanel tp = new TopPanel(garage.getName(), garage.getEmail(), garage.getAddress());
-        panelTop.add(tp);
+        
         initComponents();
+        panelTop.add(tp);
     }
 
     /** This method is called from within the constructor to
