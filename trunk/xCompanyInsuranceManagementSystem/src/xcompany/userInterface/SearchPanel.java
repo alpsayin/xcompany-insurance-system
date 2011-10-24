@@ -162,11 +162,10 @@ public class SearchPanel extends javax.swing.JPanel
         try
         {
             String s = searchField.getText();
-                System.out.println(s);
             searchResults = DatabaseControl.getAllClaims();
             ClaimList newSearchResults = new ClaimList();
             Object[] all = searchResults.getClaimList().values().toArray();
-            for(int i=0; i<newSearchResults.getClaimList().size(); i++)
+            for(int i=0; i<searchResults.getClaimList().size(); i++)
             {
                 Claim c = (Claim)all[i];
                 switch((SearchOption)typeComboBox.getSelectedItem())
