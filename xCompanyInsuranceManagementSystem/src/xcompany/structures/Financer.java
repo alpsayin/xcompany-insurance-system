@@ -2,10 +2,6 @@ package xcompany.structures;
 
 //  @ File Name : Financer.java
 
-import xcompany.lists.ClaimList;
-
-//  @ Date : 11.10.2011
-
 
 
 

@@ -27,7 +27,6 @@ import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
 import xcompany.structures.Claim.ClaimStatus;
 import xcompany.structures.Financer;
-import xcompany.structures.Garage;
 import xcompany.structures.User;
 
 /**

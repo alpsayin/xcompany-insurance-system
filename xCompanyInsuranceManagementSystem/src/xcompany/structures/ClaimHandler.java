@@ -2,13 +2,6 @@ package xcompany.structures;
 
 //  @ File Name : ClaimHandler.java
 
-import java.util.ArrayList;
-import xcompany.control.ClaimControl;
-import xcompany.lists.ClaimList;
-import xcompany.structures.Claim.ClaimStatus;
-
-//  @ Date : 11.10.2011
-
 
 
 
