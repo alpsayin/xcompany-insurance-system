@@ -11,7 +11,6 @@
 
 package xcompany.userInterface;
 
-import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import xcompany.control.AccountControl;
