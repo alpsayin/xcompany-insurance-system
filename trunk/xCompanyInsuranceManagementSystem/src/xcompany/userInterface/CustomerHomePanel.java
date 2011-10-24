@@ -410,7 +410,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             try
             {
                 damage = Double.parseDouble(damageField.getText());
-                if(damage >= 0)
+                if(damage <= 0)
                     throw new Exception();
             }
             catch(Exception e)
