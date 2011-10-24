@@ -11,6 +11,7 @@
 
 package xcompany.userInterface;
 
+import java.awt.BorderLayout;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import xcompany.control.DatabaseControl;
@@ -23,16 +24,16 @@ import xcompany.structures.*;
  */
 public class AdminPanel extends javax.swing.JPanel {
 
-    private double maxAmount;
-    private int maxNumRepairs;
-    private Calendar expiryDate;
-    
+       
     /** Creates new form AdminPanel */
     public AdminPanel() {
       
         initComponents();
-        TopPanel tp = new TopPanel("Admin", "","");
+        TopPanel tp = new TopPanel("XCompany", "Insurance System","Admin");
+        topPanel.setLayout(new BorderLayout());
         topPanel.add(tp);
+        topPanel.revalidate();
+        validate();
         
         
     }
@@ -139,16 +140,16 @@ public class AdminPanel extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                     .addComponent(textFieldPass, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addComponent(textFieldSurname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                    .addComponent(textFieldName, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(textFieldUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(textFieldSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textFieldName, textFieldPass, textFieldSurname, textFieldUserName});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, textFieldEmail, textFieldName, textFieldPass, textFieldSurname, textFieldUserName});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,9 +180,8 @@ public class AdminPanel extends javax.swing.JPanel {
                             .addComponent(jLabel8)
                             .addComponent(textFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addGap(82, 82, 82)))
-                .addContainerGap())
+                        .addComponent(jLabel9)))
+                .addGap(41, 41, 41))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {textFieldName, textFieldPass, textFieldSurname, textFieldUserName});
@@ -235,11 +235,11 @@ public class AdminPanel extends javax.swing.JPanel {
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 647, Short.MAX_VALUE)
+            .addGap(0, 737, Short.MAX_VALUE)
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
+            .addGap(0, 54, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -258,9 +258,9 @@ public class AdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -272,7 +272,11 @@ public class AdminPanel extends javax.swing.JPanel {
                 Customer c = new Customer(textFieldName.getText(),textFieldSurname.getText(),textFieldUserName.getText(),
                     textFieldEmail.getText(),textFieldPass.getText(),textFieldAddress.getText());
                 c.setInsurance(new Insurance(doubletextFieldMaxAmount, intmaxNumRepairs,calendar.getCalendar()));
-                DatabaseControl.addUser(c);
+                boolean added = DatabaseControl.addUser(c);
+                if(added)
+                    JOptionPane.showMessageDialog(this, c.getUsername()+" is added", "User is added", JOptionPane.INFORMATION_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(this, "User is not added, it may already exist", "Sıkıntı", JOptionPane.ERROR_MESSAGE);
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(this, "Please enter number", "False Max Amount", JOptionPane.ERROR_MESSAGE);
