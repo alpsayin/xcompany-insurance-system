@@ -1,10 +1,14 @@
 package xcompany.userInterface;
 
 import java.awt.CardLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import xcompany.structures.User;
 
 /*
@@ -66,6 +70,26 @@ public class MainJFrame extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try
+                {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                }
+                catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch (InstantiationException ex)
+                {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch (IllegalAccessException ex)
+                {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch (UnsupportedLookAndFeelException ex)
+                {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new MainJFrame().setVisible(true);
                 
             }

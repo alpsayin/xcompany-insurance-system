@@ -69,6 +69,11 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel2.setText("Password:");
 
         textFieldPassword.setName(""); // NOI18N
+        textFieldPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldPasswordActionPerformed(evt);
+            }
+        });
 
         buttonLogin.setText("Login");
         buttonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +139,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void textFieldUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldUserNameActionPerformed
-        // TODO add your handling code here:
+        buttonLoginActionPerformed(evt);
     }//GEN-LAST:event_textFieldUserNameActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
@@ -179,6 +184,11 @@ public class LoginPanel extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_buttonLoginActionPerformed
+
+    private void textFieldPasswordActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_textFieldPasswordActionPerformed
+    {//GEN-HEADEREND:event_textFieldPasswordActionPerformed
+        buttonLoginActionPerformed(evt);
+    }//GEN-LAST:event_textFieldPasswordActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
