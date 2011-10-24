@@ -38,16 +38,17 @@ public class FinancerPanel extends javax.swing.JPanel {
 
     User user;
     ClaimControl cc = new ClaimControl();
-    ClaimList cl, claimListCurrent = new ClaimList();
+    ClaimList cl, claimListApproved;
     ClaimList claimListTaken = new ClaimList();
     
     /** Creates new form FinancerPanel */
     public FinancerPanel(User user) throws IOException, ClassNotFoundException {
         this.user = user;
+        claimListApproved = new ClaimList();
         cl = DatabaseControl.getAllClaims();
         for(Claim c:cl.getClaimList().values()){
             if( c.getStatus().equals(ClaimStatus.ApprovedPendingPayment))
-                claimListCurrent.getClaimList().put(c.getId(), c);
+                claimListApproved.getClaimList().put(c.getId(), c);
             else if( c.getStatus().equals(ClaimStatus.ApprovedPaymentInProcess))
                 claimListTaken.getClaimList().put(c.getId(), c);
         }
@@ -90,7 +91,7 @@ public class FinancerPanel extends javax.swing.JPanel {
             }
         });
 
-        tableApproved.setModel(getCurrentClaimsTableModel());
+        tableApproved.setModel(getApprovedClaimsTableModel());
         jScrollPane3.setViewportView(tableApproved);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -119,7 +120,7 @@ public class FinancerPanel extends javax.swing.JPanel {
         tableTaken.setModel(getTakenClaimsTableModel());
         jScrollPane4.setViewportView(tableTaken);
 
-        buttonPay.setText("Pay");
+        buttonPay.setText("Complete Payment");
         buttonPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPayActionPerformed(evt);
@@ -187,11 +188,11 @@ public class FinancerPanel extends javax.swing.JPanel {
 
     private void buttonTakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeActionPerformed
         try {
-            Claim c = getClaimAtSelectedRow(claimListCurrent, tableApproved);
+            Claim c = getClaimAtSelectedRow(claimListApproved, tableApproved);
             cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentInProcess);
-            claimListCurrent.getClaimList().remove(c.getId());
+            claimListApproved.getClaimList().remove(c.getId());
 
-            getCurrentClaimsTableModel();
+            getApprovedClaimsTableModel();
             getTakenClaimsTableModel();
         } catch (IOException ex) {
             Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,7 +208,7 @@ public class FinancerPanel extends javax.swing.JPanel {
             cc.changeStatus(c.getId(), ClaimStatus.ApprovedPaymentComplete);
             claimListTaken.getClaimList().remove(c.getId());
             
-            getCurrentClaimsTableModel();
+            getApprovedClaimsTableModel();
             getTakenClaimsTableModel();
         } catch (IOException ex) {
             Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -222,8 +223,6 @@ public class FinancerPanel extends javax.swing.JPanel {
     private javax.swing.JButton buttonTake;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -231,11 +230,12 @@ public class FinancerPanel extends javax.swing.JPanel {
     private javax.swing.JTable tableApproved;
     private javax.swing.JTable tableTaken;
     // End of variables declaration//GEN-END:variables
- private TableModel getCurrentClaimsTableModel()
+ private TableModel getApprovedClaimsTableModel()
     {
+        updateApprovedClaims();
         String columnNames[] = {"Id", "Customer", "Payment", "Date","Description", "Garage", "Status" };
         DefaultTableModel dtm = new DefaultTableModel(columnNames,0);
-        for(Claim c : claimListCurrent.getClaimList().values())
+        for(Claim c : claimListApproved.getClaimList().values())
         {
             Vector<String> row = new Vector<String>();
             row.add(""+c.getId());
@@ -253,6 +253,7 @@ public class FinancerPanel extends javax.swing.JPanel {
     }
   private TableModel getTakenClaimsTableModel()
     {
+        updateTakenClaims();
         String columnNames[] = {"Id", "Customer", "Payment", "Date","Description", "Garage", "Status" };
         DefaultTableModel dtm = new DefaultTableModel(columnNames,0);
         for(Claim c : claimListTaken.getClaimList().values())
@@ -276,6 +277,14 @@ public class FinancerPanel extends javax.swing.JPanel {
         int row = jt.getSelectedRow();
         int id = Integer.parseInt(jt.getValueAt(row, 0).toString());
         return c.get(id);
+    }
+    private void updateApprovedClaims()
+    {
+        
+    }
+    private void updateTakenClaims()
+    {
+        
     }
 
 }
