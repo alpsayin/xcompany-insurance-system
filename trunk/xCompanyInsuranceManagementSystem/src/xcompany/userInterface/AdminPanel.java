@@ -272,7 +272,9 @@ public class AdminPanel extends javax.swing.JPanel {
                 Customer c = new Customer(textFieldName.getText(),textFieldSurname.getText(),textFieldUserName.getText(),
                     textFieldEmail.getText(),textFieldPass.getText(),textFieldAddress.getText());
                 c.setInsurance(new Insurance(doubletextFieldMaxAmount, intmaxNumRepairs,calendar.getCalendar()));
+                c.setPassword(textFieldPass.getText());
                 boolean added = DatabaseControl.addUser(c);
+
                 if(added)
                     JOptionPane.showMessageDialog(this, c.getUsername()+" is added", "User is added", JOptionPane.INFORMATION_MESSAGE);
                 else
