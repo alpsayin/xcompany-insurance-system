@@ -234,6 +234,8 @@ public class FinancerPanel extends javax.swing.JPanel {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jTabbedPane1.add("Search", new SearchPanel());
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonTakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTakeActionPerformed
@@ -303,6 +305,23 @@ public class FinancerPanel extends javax.swing.JPanel {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
             row.add( sdf.format(c.getDateOfCrash().getTime()));
             row.add(c.getDescription());
+//            if(c.getGarage()==null)
+//            {
+//                try
+//                {
+//                    c.setGarage(DatabaseControl.getAllGarages().getGarageList().get(0));
+//                    cl.get(c.getId()).setGarage(c.getGarage());
+//                    DatabaseControl.writeAllClaims(cl);
+//                }
+//                catch (IOException ex)
+//                {
+//                    Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                catch (ClassNotFoundException ex)
+//                {
+//                    Logger.getLogger(FinancerPanel.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
             row.add(c.getGarage().getName() + " " + c.getGarage().getEmail());
             row.add(c.getStatus().toString());
             dtm.addRow(row);
