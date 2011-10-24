@@ -136,8 +136,18 @@ public class FormPanel extends JPanel implements ActionListener
                 ClaimHandlerPanel chp = (ClaimHandlerPanel)parent;
                 if (e.getActionCommand().equals("Approve")) {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.ApprovedPendingPayment);
+                    
+                    Email mail = new Email();
+                    mail.setFrom(claim.getClaimHandler().getEmail());
+                    mail.setTo(claim.getGarage().getEmail()+", "+claim.getOwner().getEmail());
+                    mail.setSubject("Repair Order");
+                    mail.setText("Repairs for claim from "+claim.getOwner().getName()+" "+claim.getOwner().getSurname()+" regarding the damages dated "+ claim.getDateOfCrash().get(Calendar.DATE)+"/"+claim.getDateOfCrash().get(Calendar.MONTH)+"/"+claim.getDateOfCrash().get(Calendar.YEAR) +" should be started.");
+                    mail.send();
+                    cl.getClaimList().get(claim.getId()).getEmailsList().add(mail);
+                    
                     DatabaseControl.writeAllClaims(cl);
-                    cc.notifyGarage(claim);
+                    
+//                   cc.notifyGarage(claim);
                 }
                 else {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.Rejected);
