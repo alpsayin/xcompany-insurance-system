@@ -151,7 +151,11 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
         jLabel2Description.setText("Description:");
 
+        jScrollPane1Description.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1Description.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         textAreaDesc.setColumns(20);
+        textAreaDesc.setLineWrap(true);
         textAreaDesc.setRows(5);
         jScrollPane1Description.setViewportView(textAreaDesc);
 
@@ -165,6 +169,12 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         });
 
         jLabel4.setText("Cost of Damage:");
+
+        damageField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                damageFieldActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Garage");
 
@@ -271,6 +281,8 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         historyTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(historyTable);
 
+        jPanel3.add(jScrollPane1);
+
         claimInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -285,26 +297,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
         historyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(claimInfoTable);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel3.add(jScrollPane3);
 
         jTabbedPane1.addTab("Claim History", jPanel3);
 
@@ -451,6 +444,10 @@ public class CustomerHomePanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_jButton1SubmitClaimActionPerformed
+
+    private void damageFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_damageFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_damageFieldActionPerformed
 
   
 
