@@ -435,6 +435,7 @@ public class CustomerHomePanel extends javax.swing.JPanel {
             getCurrentClaimsTableModel();
 
             textAreaDesc.setText("");
+            damageField.setText("");
             JOptionPane.showMessageDialog(this, "Submitted", "Submitted new claim", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(CustomerHomePanel.class.getName()).log(Level.SEVERE, null, ex);
