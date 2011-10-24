@@ -518,7 +518,6 @@ public class CustomerHomePanel extends javax.swing.JPanel {
                 Vector<String> row = new Vector<String>();
                 row.add(e.getFrom());
                 row.add(e.getTo());
-                System.out.println(e.getTo());
                 row.add(e.getSubject());
                 dtm.addRow(row);
             }
