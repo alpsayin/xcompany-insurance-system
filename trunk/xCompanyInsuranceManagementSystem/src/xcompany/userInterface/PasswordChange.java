@@ -38,15 +38,6 @@ public class PasswordChange extends javax.swing.JPanel {
         jPasswordFieldNewPassM = new javax.swing.JPasswordField();
         jButtonChangePassMandatory = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jPanelVoluntaryChangePass = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jPasswordFieldCurrentPassV = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
-        jPasswordFieldNewPassV = new javax.swing.JPasswordField();
-        jPasswordFieldConfirmNewPass = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        jButtonChangePassVoluntary = new javax.swing.JButton();
 
         jLabel2.setText("Current Password");
 
@@ -63,37 +54,38 @@ public class PasswordChange extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Mandatory Password Change");
+        jLabel7.setText("Password Change");
 
         javax.swing.GroupLayout jPanelMandatoryChangePassLayout = new javax.swing.GroupLayout(jPanelMandatoryChangePass);
         jPanelMandatoryChangePass.setLayout(jPanelMandatoryChangePassLayout);
         jPanelMandatoryChangePassLayout.setHorizontalGroup(
             jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMandatoryChangePassLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordFieldNewPassM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordFieldCurrentPassM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(87, 87, 87))
-            .addGroup(jPanelMandatoryChangePassLayout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addComponent(jButtonChangePassMandatory)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
             .addGroup(jPanelMandatoryChangePassLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel7)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMandatoryChangePassLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addContainerGap())
+                    .addGroup(jPanelMandatoryChangePassLayout.createSequentialGroup()
+                        .addGroup(jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addGroup(jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPasswordFieldNewPassM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordFieldCurrentPassM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(97, 97, 97))))
         );
         jPanelMandatoryChangePassLayout.setVerticalGroup(
             jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMandatoryChangePassLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel7)
-                .addGap(67, 67, 67)
+                .addGap(54, 54, 54)
                 .addGroup(jPanelMandatoryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jPasswordFieldCurrentPassM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -103,96 +95,18 @@ public class PasswordChange extends javax.swing.JPanel {
                     .addComponent(jPasswordFieldNewPassM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addComponent(jButtonChangePassMandatory)
-                .addContainerGap(69, Short.MAX_VALUE))
-        );
-
-        jLabel1.setText("Voluntary Password Change");
-
-        jLabel4.setText("Current Password");
-
-        jPasswordFieldCurrentPassV.setText("jPasswordField1");
-
-        jLabel5.setText("New Password");
-
-        jPasswordFieldNewPassV.setText("jPasswordField1");
-
-        jPasswordFieldConfirmNewPass.setText("jPasswordField1");
-
-        jLabel6.setText("Confirm New Password");
-
-        jButtonChangePassVoluntary.setText("Change Password");
-
-        javax.swing.GroupLayout jPanelVoluntaryChangePassLayout = new javax.swing.GroupLayout(jPanelVoluntaryChangePass);
-        jPanelVoluntaryChangePass.setLayout(jPanelVoluntaryChangePassLayout);
-        jPanelVoluntaryChangePassLayout.setHorizontalGroup(
-            jPanelVoluntaryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(259, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanelVoluntaryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                        .addComponent(jPasswordFieldConfirmNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                        .addComponent(jPasswordFieldNewPassV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
-                        .addComponent(jPasswordFieldCurrentPassV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jButtonChangePassVoluntary)
-                .addContainerGap(110, Short.MAX_VALUE))
-        );
-        jPanelVoluntaryChangePassLayout.setVerticalGroup(
-            jPanelVoluntaryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelVoluntaryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPasswordFieldCurrentPassV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelVoluntaryChangePassLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel4)))
-                .addGap(34, 34, 34)
-                .addGroup(jPanelVoluntaryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jPasswordFieldNewPassV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanelVoluntaryChangePassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordFieldConfirmNewPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(36, 36, 36)
-                .addComponent(jButtonChangePassVoluntary)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jPanelMandatoryChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanelVoluntaryChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+            .addComponent(jPanelMandatoryChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelVoluntaryChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelMandatoryChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+            .addComponent(jPanelMandatoryChangePass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -203,21 +117,12 @@ public class PasswordChange extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonChangePassMandatory;
-    private javax.swing.JButton jButtonChangePassVoluntary;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelMandatoryChangePass;
-    private javax.swing.JPanel jPanelVoluntaryChangePass;
-    private javax.swing.JPasswordField jPasswordFieldConfirmNewPass;
     private javax.swing.JPasswordField jPasswordFieldCurrentPassM;
-    private javax.swing.JPasswordField jPasswordFieldCurrentPassV;
     private javax.swing.JPasswordField jPasswordFieldNewPassM;
-    private javax.swing.JPasswordField jPasswordFieldNewPassV;
     // End of variables declaration//GEN-END:variables
 
 }
