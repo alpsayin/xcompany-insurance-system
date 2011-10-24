@@ -88,6 +88,11 @@ public class SearchPanel extends javax.swing.JPanel
         jLabel1.setText("Search by:");
 
         typeComboBox.setModel(getResultsComboBoxModel());
+        typeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                typeComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Search for:");
 
@@ -179,7 +184,7 @@ public class SearchPanel extends javax.swing.JPanel
                             newSearchResults.add(c);
                         break;
                     case Damage_Interval:
-                        double damage = Double.parseDouble(s);
+                        double damage = c.getDamage();
                         double damage1 = Double.parseDouble(s.split("-")[0]);
                         double damage2 = Double.parseDouble(s.split("-")[1]);
                         if(damage1 <= damage2)
@@ -306,6 +311,16 @@ public class SearchPanel extends javax.swing.JPanel
             Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void typeComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_typeComboBoxActionPerformed
+    {//GEN-HEADEREND:event_typeComboBoxActionPerformed
+        switch((SearchOption)typeComboBox.getSelectedItem())
+        {
+            case Damage_Interval: searchField.setText("0-2000"); break;
+            case Date_Interval: searchField.setText("1/1/1970-24/10/2011"); break;
+                default: break;
+        }
+    }//GEN-LAST:event_typeComboBoxActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearButton;
