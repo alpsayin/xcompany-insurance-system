@@ -68,13 +68,13 @@ public class ClaimControl
         }
         return false;
     }
-    private boolean notifyGarage(Claim c) throws IOException, ClassNotFoundException
+    public boolean notifyGarage(Claim c) throws IOException, ClassNotFoundException
     {
         Email e = new Email();
         e.setFrom(c.getClaimHandler().getEmail());
-        e.setTo(c.getGarage().getEmail());
+        e.setTo(c.getGarage().getEmail()+", "+c.getOwner().getEmail());
         e.setSubject("Repair Order");
-        e.setText("Repairs for claim from "+c.getOwner().getName()+" "+c.getOwner().getSurname()+" regarding the damages dated "+c.getDateOfCrash()+" should be started.");
+        e.setText("Repairs for claim from "+c.getOwner().getName()+" "+c.getOwner().getSurname()+" regarding the damages dated "+ c.getDateOfCrash().get(Calendar.DATE)+"/"+c.getDateOfCrash().get(Calendar.MONTH)+"/"+c.getDateOfCrash().get(Calendar.YEAR) +" should be started.");
         e.send();
         
         //c.getEmailsList().add(e);
@@ -165,7 +165,7 @@ public class ClaimControl
             if(maxDamage)
                 str = "Maximum damage exceeded, ";
             if(maxClaims)
-                str += "Maximim claims exceeded, ";
+                str += "Maximum claims exceeded, ";
             
             if(maxDamage || maxClaims)
                 str += " Advice: NO";

@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import xcompany.control.ClaimControl;
 import xcompany.control.DatabaseControl;
 import xcompany.lists.ClaimList;
 import xcompany.structures.Claim;
@@ -43,11 +44,13 @@ public class FormPanel extends JPanel implements ActionListener
     User user;
     boolean editable;
     JPanel parent;
+    ClaimControl cc;
     public FormPanel(User u, Claim c, boolean showButtons, JPanel chp)
     {
         this.parent = chp;
         this.claim = c;
         this.user = u;
+        this.cc= new ClaimControl();
         if(user instanceof Customer)
         {
             sendButton = new JButton("Send");
@@ -128,12 +131,13 @@ public class FormPanel extends JPanel implements ActionListener
                 rhp.getReportedClaimsTableModel();
                 rhp.getClaimsWaitingFormsTableModel();
             }
-            else
+            else //ClaimHandler
             {
                 ClaimHandlerPanel chp = (ClaimHandlerPanel)parent;
                 if (e.getActionCommand().equals("Approve")) {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.ApprovedPendingPayment);
                     DatabaseControl.writeAllClaims(cl);
+                    cc.notifyGarage(claim);
                 }
                 else {
                     cl.getClaimList().get(claim.getId()).setStatus(Claim.ClaimStatus.Rejected);
