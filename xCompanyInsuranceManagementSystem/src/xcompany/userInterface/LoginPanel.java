@@ -125,7 +125,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {textFieldPassword, textFieldUserName});
 
-        jPanel1.setBounds(330, 240, 199, 113);
+        jPanel1.setBounds(310, 230, 199, 113);
         jLayeredPane1.add(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/xcompany/img/xCompLogo.jpg"))); // NOI18N
